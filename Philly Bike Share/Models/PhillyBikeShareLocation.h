@@ -10,15 +10,28 @@
 
 @interface PhillyBikeShareLocation : NSObject
 
-@property (strong, nonatomic) NSNumber *kioskId;
+@property (nonatomic) NSInteger kioskId;
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 @property (strong, nonatomic) NSString *addressStreet;
 @property (strong, nonatomic) NSString *addressCity;
+@property (strong , nonatomic) NSString *addressState;
 @property (strong, nonatomic) NSString *addressZipCode;
-@property (strong, nonatomic) NSNumber *bikesAvailable;
-@property (strong, nonatomic) NSNumber *docksAvailable;
-@property (strong, nonatomic) NSNumber *totalDocs;
+@property (nonatomic) NSInteger bikesAvailable;
+@property (nonatomic) NSInteger docksAvailable;
+@property (nonatomic) NSInteger totalDocs;
+
+- (instancetype) initWithKioskId:(NSInteger)kioskId
+                         andName:(NSString *)name
+                     andLatitude:(float)latitude
+                    andLongtiude:(float)longitude
+                andAddressStreet:(NSString *)addressStreet
+                  andAddressCity:(NSString *)addressCity
+                 andAddressState:(NSString *)addressState
+                andAddresZipCode:(NSString *)addressZipCode
+               andBikesAvailable:(NSInteger)bikesAvailable
+               andDocksAvailable:(NSInteger)docksAvailable
+                   andTotalDocks:(NSInteger)totalDocs;
 
 @end
