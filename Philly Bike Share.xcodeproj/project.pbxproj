@@ -39,6 +39,7 @@
 		2D192E991B112B180002EB0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D192E9A1B112B180002EB0D /* Philly_Bike_ShareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Philly_Bike_ShareTests.m; sourceTree = "<group>"; };
 		2D192EAA1B1231E20002EB0D /* PhillyBikeSharePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhillyBikeSharePrefixHeader.pch; path = Common/PhillyBikeSharePrefixHeader.pch; sourceTree = "<group>"; };
+		2D4688B51B12377400293A09 /* PhillyBikeShareNetworkCommandProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareNetworkCommandProtocol.h; path = "Managers & Helpers/Networking/PhillyBikeShareNetworkCommandProtocol.h"; sourceTree = "<group>"; };
 		4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Philly Bike Share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA9DBB8754381674E9BF027 /* Pods-Philly Bike Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Philly Bike Share.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share.debug.xcconfig"; sourceTree = "<group>"; };
 		B25ABDC59BBA56BBABCCB414 /* Pods-Philly Bike Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Philly Bike Share.release.xcconfig"; path = "Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		2D192EA71B12314E0002EB0D /* Managers & Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2D4688B61B12377A00293A09 /* Networking */,
 			);
 			name = "Managers & Helpers";
 			sourceTree = "<group>";
@@ -169,6 +171,14 @@
 				2D192EAA1B1231E20002EB0D /* PhillyBikeSharePrefixHeader.pch */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		2D4688B61B12377A00293A09 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				2D4688B51B12377400293A09 /* PhillyBikeShareNetworkCommandProtocol.h */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		A6900DFFF5F389F079AE999C /* Frameworks */ = {
