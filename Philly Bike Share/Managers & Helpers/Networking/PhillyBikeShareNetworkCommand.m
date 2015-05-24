@@ -67,6 +67,9 @@
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [manager setRequestSerializer:requestSerializer];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        //Needed because the API doesn't technically return JSON data.
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/plain"];
     } else {
         AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
