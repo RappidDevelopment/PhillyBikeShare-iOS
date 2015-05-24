@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23647F8F8EF06A39E0D53163 /* libPods-Philly Bike Share.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */; };
 		2D192E811B112B170002EB0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E801B112B170002EB0D /* main.m */; };
 		2D192E841B112B170002EB0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E831B112B170002EB0D /* AppDelegate.m */; };
-		2D192E871B112B180002EB0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E861B112B180002EB0D /* ViewController.m */; };
 		2D192E8A1B112B180002EB0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D192E881B112B180002EB0D /* Main.storyboard */; };
 		2D192E8C1B112B180002EB0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D192E8B1B112B180002EB0D /* Images.xcassets */; };
 		2D192E8F1B112B180002EB0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D192E8D1B112B180002EB0D /* LaunchScreen.xib */; };
 		2D192E9B1B112B180002EB0D /* Philly_Bike_ShareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E9A1B112B180002EB0D /* Philly_Bike_ShareTests.m */; };
+		2D4688B91B1237FD00293A09 /* PhillyBikeShareNetworkCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688B81B1237FD00293A09 /* PhillyBikeShareNetworkCommand.m */; };
+		2D4688BD1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */; };
+		2D4688C01B1244FC00293A09 /* PhillyBikeShareLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */; };
+		2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +36,25 @@
 		2D192E801B112B170002EB0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2D192E821B112B170002EB0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2D192E831B112B170002EB0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2D192E851B112B170002EB0D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2D192E861B112B180002EB0D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2D192E891B112B180002EB0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D192E8B1B112B180002EB0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2D192E8E1B112B180002EB0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2D192E941B112B180002EB0D /* Philly Bike ShareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Philly Bike ShareTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D192E991B112B180002EB0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D192E9A1B112B180002EB0D /* Philly_Bike_ShareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Philly_Bike_ShareTests.m; sourceTree = "<group>"; };
+		2D192EAA1B1231E20002EB0D /* PhillyBikeSharePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhillyBikeSharePrefixHeader.pch; path = Common/PhillyBikeSharePrefixHeader.pch; sourceTree = "<group>"; };
+		2D4688B51B12377400293A09 /* PhillyBikeShareNetworkCommandProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareNetworkCommandProtocol.h; path = "Managers & Helpers/Networking/PhillyBikeShareNetworkCommandProtocol.h"; sourceTree = "<group>"; };
+		2D4688B71B1237FD00293A09 /* PhillyBikeShareNetworkCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareNetworkCommand.h; path = "Managers & Helpers/Networking/PhillyBikeShareNetworkCommand.h"; sourceTree = "<group>"; };
+		2D4688B81B1237FD00293A09 /* PhillyBikeShareNetworkCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareNetworkCommand.m; path = "Managers & Helpers/Networking/PhillyBikeShareNetworkCommand.m"; sourceTree = "<group>"; };
+		2D4688BB1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareGetAllDataCommand.h; path = "Managers & Helpers/Networking/Commands/PhillyBikeShareGetAllDataCommand.h"; sourceTree = "<group>"; };
+		2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareGetAllDataCommand.m; path = "Managers & Helpers/Networking/Commands/PhillyBikeShareGetAllDataCommand.m"; sourceTree = "<group>"; };
+		2D4688BE1B1244FC00293A09 /* PhillyBikeShareLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareLocation.h; path = Models/PhillyBikeShareLocation.h; sourceTree = "<group>"; };
+		2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocation.m; path = Models/PhillyBikeShareLocation.m; sourceTree = "<group>"; };
+		2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareLocationManager.h; path = "Managers & Helpers/PhillyBikeShareLocationManager.h"; sourceTree = "<group>"; };
+		2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocationManager.m; path = "Managers & Helpers/PhillyBikeShareLocationManager.m"; sourceTree = "<group>"; };
+		4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Philly Bike Share.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AA9DBB8754381674E9BF027 /* Pods-Philly Bike Share.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Philly Bike Share.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share.debug.xcconfig"; sourceTree = "<group>"; };
+		B25ABDC59BBA56BBABCCB414 /* Pods-Philly Bike Share.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Philly Bike Share.release.xcconfig"; path = "Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23647F8F8EF06A39E0D53163 /* libPods-Philly Bike Share.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +82,8 @@
 				2D192E7D1B112B170002EB0D /* Philly Bike Share */,
 				2D192E971B112B180002EB0D /* Philly Bike ShareTests */,
 				2D192E7C1B112B170002EB0D /* Products */,
+				DEB81FD0ADEA9B8FE8AC56FA /* Pods */,
+				A6900DFFF5F389F079AE999C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,13 +99,12 @@
 		2D192E7D1B112B170002EB0D /* Philly Bike Share */ = {
 			isa = PBXGroup;
 			children = (
-				2D192E821B112B170002EB0D /* AppDelegate.h */,
-				2D192E831B112B170002EB0D /* AppDelegate.m */,
-				2D192E851B112B170002EB0D /* ViewController.h */,
-				2D192E861B112B180002EB0D /* ViewController.m */,
-				2D192E881B112B180002EB0D /* Main.storyboard */,
-				2D192E8B1B112B180002EB0D /* Images.xcassets */,
-				2D192E8D1B112B180002EB0D /* LaunchScreen.xib */,
+				2D192EA91B12316F0002EB0D /* Common */,
+				2D192EA81B1231570002EB0D /* Models */,
+				2D192EA71B12314E0002EB0D /* Managers & Helpers */,
+				2D192EA61B1231470002EB0D /* Views */,
+				2D192EA51B1231420002EB0D /* Controllers */,
+				2D192EA41B1231300002EB0D /* Assets */,
 				2D192E7E1B112B170002EB0D /* Supporting Files */,
 			);
 			path = "Philly Bike Share";
@@ -96,6 +113,8 @@
 		2D192E7E1B112B170002EB0D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2D192E821B112B170002EB0D /* AppDelegate.h */,
+				2D192E831B112B170002EB0D /* AppDelegate.m */,
 				2D192E7F1B112B170002EB0D /* Info.plist */,
 				2D192E801B112B170002EB0D /* main.m */,
 			);
@@ -119,6 +138,94 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2D192EA41B1231300002EB0D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2D192E8B1B112B180002EB0D /* Images.xcassets */,
+				2D192E8D1B112B180002EB0D /* LaunchScreen.xib */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		2D192EA51B1231420002EB0D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2D192EA61B1231470002EB0D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2D192E881B112B180002EB0D /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2D192EA71B12314E0002EB0D /* Managers & Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2D4688B61B12377A00293A09 /* Networking */,
+				2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */,
+				2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */,
+			);
+			name = "Managers & Helpers";
+			sourceTree = "<group>";
+		};
+		2D192EA81B1231570002EB0D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2D4688BE1B1244FC00293A09 /* PhillyBikeShareLocation.h */,
+				2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2D192EA91B12316F0002EB0D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				2D192EAA1B1231E20002EB0D /* PhillyBikeSharePrefixHeader.pch */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		2D4688B61B12377A00293A09 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				2D4688BA1B123A9B00293A09 /* Commands */,
+				2D4688B51B12377400293A09 /* PhillyBikeShareNetworkCommandProtocol.h */,
+				2D4688B71B1237FD00293A09 /* PhillyBikeShareNetworkCommand.h */,
+				2D4688B81B1237FD00293A09 /* PhillyBikeShareNetworkCommand.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		2D4688BA1B123A9B00293A09 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				2D4688BB1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.h */,
+				2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */,
+			);
+			name = Commands;
+			sourceTree = "<group>";
+		};
+		A6900DFFF5F389F079AE999C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEB81FD0ADEA9B8FE8AC56FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8AA9DBB8754381674E9BF027 /* Pods-Philly Bike Share.debug.xcconfig */,
+				B25ABDC59BBA56BBABCCB414 /* Pods-Philly Bike Share.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +233,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D192E9E1B112B180002EB0D /* Build configuration list for PBXNativeTarget "Philly Bike Share" */;
 			buildPhases = (
+				2EA0D3729700DB27C3A78FAD /* Check Pods Manifest.lock */,
 				2D192E771B112B170002EB0D /* Sources */,
 				2D192E781B112B170002EB0D /* Frameworks */,
 				2D192E791B112B170002EB0D /* Resources */,
+				59C3EFE43E0B17339A54F3EE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,14 +323,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2EA0D3729700DB27C3A78FAD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		59C3EFE43E0B17339A54F3EE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2D192E771B112B170002EB0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D192E871B112B180002EB0D /* ViewController.m in Sources */,
 				2D192E841B112B170002EB0D /* AppDelegate.m in Sources */,
+				2D4688C01B1244FC00293A09 /* PhillyBikeShareLocation.m in Sources */,
+				2D4688B91B1237FD00293A09 /* PhillyBikeShareNetworkCommand.m in Sources */,
 				2D192E811B112B170002EB0D /* main.m in Sources */,
+				2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */,
+				2D4688BD1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,9 +492,13 @@
 		};
 		2D192E9F1B112B180002EB0D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AA9DBB8754381674E9BF027 /* Pods-Philly Bike Share.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Philly Bike Share/Common/PhillyBikeSharePrefixHeader.pch";
 				INFOPLIST_FILE = "Philly Bike Share/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -357,9 +506,13 @@
 		};
 		2D192EA01B112B180002EB0D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B25ABDC59BBA56BBABCCB414 /* Pods-Philly Bike Share.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Philly Bike Share/Common/PhillyBikeSharePrefixHeader.pch";
 				INFOPLIST_FILE = "Philly Bike Share/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -418,6 +571,7 @@
 				2D192EA01B112B180002EB0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2D192EA11B112B180002EB0D /* Build configuration list for PBXNativeTarget "Philly Bike ShareTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +580,7 @@
 				2D192EA31B112B180002EB0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
