@@ -286,6 +286,7 @@
 				TargetAttributes = {
 					2D192E7A1B112B170002EB0D = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 847HEBY8WT;
 					};
 					2D192E931B112B180002EB0D = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -505,6 +506,7 @@
 			baseConfigurationReference = 8AA9DBB8754381674E9BF027 /* Pods-Philly Bike Share.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Philly Bike Share/Common/PhillyBikeSharePrefixHeader.pch";
 				INFOPLIST_FILE = "Philly Bike Share/Info.plist";
@@ -519,6 +521,7 @@
 			baseConfigurationReference = B25ABDC59BBA56BBABCCB414 /* Pods-Philly Bike Share.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Philly Bike Share/Common/PhillyBikeSharePrefixHeader.pch";
 				INFOPLIST_FILE = "Philly Bike Share/Info.plist";

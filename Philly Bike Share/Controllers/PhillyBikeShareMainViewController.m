@@ -7,8 +7,13 @@
 //
 
 #import "PhillyBikeShareMainViewController.h"
+@import CoreLocation;
 
-@interface PhillyBikeShareMainViewController ()
+@interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate>
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
+- (void)checkForLocationServices;
 
 @end
 
@@ -16,12 +21,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
+    
+    [self.locationManager requestWhenInUseAuthorization];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActiveNotficationHeard:)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [self checkForLocationServices];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
+}
+
+# pragma mark - Location Manager Delegate Methods
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    DLog(@"%@", [locations lastObject]);
+    [self.locationManager stopUpdatingLocation];
+}
+
+# pragma mark - Location helper methods
+
+- (void)checkForLocationServices {
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Location services are turned off"
+                                                        message:@"To give the best possible user experiences, you must enable location services for this application in Settings."
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Settings", @"Cancel", nil];
+    
+    if (status == kCLAuthorizationStatusDenied) {
+        [alertView show];
+    } else {
+        [self.locationManager startUpdatingLocation];
+    }
+}
+
+- (void)applicationDidBecomeActiveNotficationHeard:(NSNotification *)notification {
+    [self checkForLocationServices];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // Send the user to the Settings for this app
+        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:settingsURL];
+    } else {
+        [alertView dismissWithClickedButtonIndex:1 animated:YES];
+    }
 }
 
 /*
