@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPRequestOperation.h>
+
+/**
+ * Block definitions
+ */
+typedef void (^AFHTTPRequestOperationSuccessBlock) (AFHTTPRequestOperation *operation, id responseObject);
+typedef void (^AFHTTPRequestOperationFailureBlock) (AFHTTPRequestOperation *operation, NSError *error);
 
 @protocol PhillyBikeShareNetworkCommandProtocol <NSObject>
 
