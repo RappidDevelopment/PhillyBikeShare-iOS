@@ -94,4 +94,15 @@
     [getAllDataCommand execute];
 }
 
+- (id)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId {
+    
+    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
+        if (location.kioskId == phillyBikeShareLocationId) {
+            return location;
+        }
+    }
+    
+    return nil;
+}
+
 @end

@@ -18,4 +18,6 @@ typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
 - (void)fetchAllLocationsWithSuccessBlock:(PhillyBikeShareSuccessBlock)successBlock
                      andFailureBlock:(PhillyBikeShareFailureBlock)failureBlock;
 
+- (id)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId;
+
 @end
