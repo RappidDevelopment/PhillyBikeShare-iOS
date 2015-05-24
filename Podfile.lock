@@ -55,16 +55,13 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - libextobjc (= 0.4.1)
-  - SWRevealViewController (~> 2.3)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
 COCOAPODS: 0.37.1
