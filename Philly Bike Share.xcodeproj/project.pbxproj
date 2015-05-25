@@ -18,6 +18,11 @@
 		2D4688BD1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */; };
 		2D4688C01B1244FC00293A09 /* PhillyBikeShareLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */; };
 		2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */; };
+		2D5182F11B137F7B005232D1 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182EC1B137DD4005232D1 /* Montserrat-Black.otf */; };
+		2D5182F21B137F7B005232D1 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182ED1B137DD4005232D1 /* Montserrat-Bold.otf */; };
+		2D5182F31B137F7B005232D1 /* Montserrat-Hairline.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182EE1B137DD4005232D1 /* Montserrat-Hairline.otf */; };
+		2D5182F41B137F7B005232D1 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182EF1B137DD4005232D1 /* Montserrat-Light.otf */; };
+		2D5182F51B137F7B005232D1 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182F01B137DD4005232D1 /* Montserrat-Regular.otf */; };
 		2D5D653B1B1379D700DA23B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5D653A1B1379D700DA23B3 /* MapKit.framework */; };
 		2DF251031B126B2600E76946 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF251021B126B2600E76946 /* CoreLocation.framework */; };
 		2DF251061B126BBB00E76946 /* PhillyBikeShareMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF251051B126BBB00E76946 /* PhillyBikeShareMainViewController.m */; };
@@ -55,6 +60,11 @@
 		2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocation.m; path = Models/PhillyBikeShareLocation.m; sourceTree = "<group>"; };
 		2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareLocationManager.h; path = "Managers & Helpers/PhillyBikeShareLocationManager.h"; sourceTree = "<group>"; };
 		2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocationManager.m; path = "Managers & Helpers/PhillyBikeShareLocationManager.m"; sourceTree = "<group>"; };
+		2D5182EC1B137DD4005232D1 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Black.otf"; path = "Assets/Resources/Montserrat-Black.otf"; sourceTree = "<group>"; };
+		2D5182ED1B137DD4005232D1 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "Assets/Resources/Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		2D5182EE1B137DD4005232D1 /* Montserrat-Hairline.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Hairline.otf"; path = "Assets/Resources/Montserrat-Hairline.otf"; sourceTree = "<group>"; };
+		2D5182EF1B137DD4005232D1 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Light.otf"; path = "Assets/Resources/Montserrat-Light.otf"; sourceTree = "<group>"; };
+		2D5182F01B137DD4005232D1 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.otf"; path = "Assets/Resources/Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		2D5D653A1B1379D700DA23B3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2DF251021B126B2600E76946 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2DF251041B126BBB00E76946 /* PhillyBikeShareMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareMainViewController.h; path = Controllers/PhillyBikeShareMainViewController.h; sourceTree = "<group>"; };
@@ -224,6 +234,11 @@
 		2D5182EB1B137B1F005232D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D5182EC1B137DD4005232D1 /* Montserrat-Black.otf */,
+				2D5182ED1B137DD4005232D1 /* Montserrat-Bold.otf */,
+				2D5182EE1B137DD4005232D1 /* Montserrat-Hairline.otf */,
+				2D5182EF1B137DD4005232D1 /* Montserrat-Light.otf */,
+				2D5182F01B137DD4005232D1 /* Montserrat-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -330,6 +345,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5182F11B137F7B005232D1 /* Montserrat-Black.otf in Resources */,
+				2D5182F21B137F7B005232D1 /* Montserrat-Bold.otf in Resources */,
+				2D5182F31B137F7B005232D1 /* Montserrat-Hairline.otf in Resources */,
+				2D5182F41B137F7B005232D1 /* Montserrat-Light.otf in Resources */,
+				2D5182F51B137F7B005232D1 /* Montserrat-Regular.otf in Resources */,
 				2D192E8A1B112B180002EB0D /* Main.storyboard in Resources */,
 				2D192E8F1B112B180002EB0D /* LaunchScreen.xib in Resources */,
 				2D192E8C1B112B180002EB0D /* Images.xcassets in Resources */,

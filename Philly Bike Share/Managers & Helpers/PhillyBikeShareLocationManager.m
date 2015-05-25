@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
+#import <libextobjc/EXTScope.h>
 #import "PhillyBikeShareLocationManager.h"
-#import "PhillyBikeShareLocation.h"
 #import "PhillyBikeShareGetAllDataCommand.h"
 
 @interface PhillyBikeShareLocationManager()
@@ -50,8 +50,9 @@
 - (void)fetchAllLocationsWithSuccessBlock:(PhillyBikeShareSuccessBlock)successBlock
                      andFailureBlock:(PhillyBikeShareFailureBlock)failureBlock {
     
+    @weakify(self);
     PhillyBikeShareGetAllDataCommand *getAllDataCommand = [[PhillyBikeShareGetAllDataCommand alloc]initWithSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        @strongify(self);
         NSArray *locations = [responseObject objectForKey:@"features"];
         NSMutableArray *mutablePhillyBikeShareLocations = [NSMutableArray array];
         
@@ -62,8 +63,8 @@
             
             NSInteger kioskId = [[properties objectForKey:@"kioskId"]intValue];
             NSString *name = [properties objectForKey:@"name"];
-            float latitude = [[coordinates objectAtIndex:0]floatValue];
-            float longitude = [[coordinates objectAtIndex:1]floatValue];
+            float longitude = [[coordinates objectAtIndex:0]floatValue];
+            float latitude = [[coordinates objectAtIndex:1]floatValue];
             NSString *addressStreet = [properties objectForKey:@"addressStreet"];
             NSString *addressState = [properties objectForKey:@"addressState"];
             NSString *addressCity = [properties objectForKey:@"addressCity"];
@@ -72,15 +73,7 @@
             NSInteger docksAvailable = [[properties objectForKey:@"docksAvailable"]intValue];
             NSInteger totalDocks = [[properties objectForKey:@"totalDocks"]intValue];
             
-            PhillyBikeShareLocation *phillyBikeShareLocation = [[PhillyBikeShareLocation alloc]initWithKioskId:kioskId
-                                                                                                       andName:name
-                                                                                                   andLatitude:latitude
-                                                                                                  andLongtiude:longitude andAddressStreet:addressStreet andAddressCity:addressCity
-                                                                                               andAddressState:addressState
-                                                                                            andAddresZipCode:addressZipCode
-                                                                                             andBikesAvailable:bikesAvailable
-                                                                                             andDocksAvailable:docksAvailable
-                                                                                                 andTotalDocks:totalDocks];
+            PhillyBikeShareLocation *phillyBikeShareLocation = [[PhillyBikeShareLocation alloc]initWithKioskId:kioskId andName:name andLatitude:latitude andLongtiude:longitude andAddressStreet:addressStreet andAddressCity:addressCity andAddressState:addressState andAddresZipCode:addressZipCode andBikesAvailable:bikesAvailable andDocksAvailable:docksAvailable andTotalDocks:totalDocks];
             
             [mutablePhillyBikeShareLocations addObject:phillyBikeShareLocation];
         }
@@ -103,6 +96,31 @@
     }
     
     return nil;
+}
+
+- (void)fetchClosestBikeShareStationToLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareClosestStationAndDistanceBlock)nextBlock {
+    CLLocation *userLocation = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
+    PhillyBikeShareLocation *closestLocation = [[PhillyBikeShareLocation alloc]init];
+    CLLocationDistance closestDistance = -1;
+    
+    for (PhillyBikeShareLocation *station in self.phillyBikeShareLocations) {
+        CLLocation *stationLocation = [[CLLocation alloc]initWithLatitude:station.latitude longitude:station.longitude];
+        CLLocationDistance distanceBetweenUserandStation = [userLocation distanceFromLocation:stationLocation];
+        double distanceInMiles = distanceBetweenUserandStation/1609.344;
+        
+        if (closestDistance < 0) {
+            closestDistance = distanceInMiles;
+            closestLocation = station;
+        } else {
+            
+            if (distanceInMiles < closestDistance) {
+                closestLocation = station;
+                closestDistance = distanceInMiles;
+            }
+        }
+    }
+    
+    nextBlock(closestLocation, closestDistance);
 }
 
 @end

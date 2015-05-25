@@ -3,6 +3,11 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Philly Bike Share Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -16,25 +21,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRb-4Z-w80" userLabel="Header View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRb-4Z-w80" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="seL-Oa-Abi">
-                                        <rect key="frame" x="0.0" y="209" width="600" height="7"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seL-Oa-Abi" userLabel="Stripe View">
+                                        <rect key="frame" x="0.0" y="211" width="600" height="5"/>
                                         <color key="backgroundColor" red="0.16078431372549021" green="0.17254901960784313" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="xKy-HZ-hnf"/>
+                                        </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o">
-                                        <rect key="frame" x="279" y="97" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o" userLabel="Header Location Label">
+                                        <rect key="frame" x="239" y="81" width="122" height="53"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="44"/>
                                         <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.59999999999999998" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="seL-Oa-Abi" secondAttribute="trailing" id="6qw-h6-Auw"/>
+                                    <constraint firstItem="seL-Oa-Abi" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" id="PNt-9F-CvQ"/>
+                                    <constraint firstAttribute="centerX" secondItem="ufO-Dn-39o" secondAttribute="centerX" id="aHn-ZB-DfX"/>
+                                    <constraint firstAttribute="centerY" secondItem="ufO-Dn-39o" secondAttribute="centerY" id="b1G-Pd-OEx"/>
+                                    <constraint firstAttribute="bottom" secondItem="seL-Oa-Abi" secondAttribute="bottom" id="c3Z-eH-Xkh"/>
+                                    <constraint firstAttribute="height" constant="216" id="d7a-KH-IrX"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VRb-4Z-w80" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MWI-5R-zDY"/>
+                            <constraint firstItem="VRb-4Z-w80" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e6l-q8-hpc"/>
+                            <constraint firstAttribute="trailing" secondItem="VRb-4Z-w80" secondAttribute="trailing" id="vZS-EX-r3t"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="headerLocationLabel" destination="ufO-Dn-39o" id="Cpl-Pu-fLt"/>
+                        <outlet property="headerView" destination="VRb-4Z-w80" id="bk7-ce-Rrp"/>
+                        <outlet property="headerViewHeight" destination="d7a-KH-IrX" id="7mS-wH-SmU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
