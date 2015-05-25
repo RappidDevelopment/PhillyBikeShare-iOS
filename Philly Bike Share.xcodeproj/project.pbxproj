@@ -18,6 +18,7 @@
 		2D4688BD1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */; };
 		2D4688C01B1244FC00293A09 /* PhillyBikeShareLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */; };
 		2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */; };
+		2D5D653B1B1379D700DA23B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5D653A1B1379D700DA23B3 /* MapKit.framework */; };
 		2DF251031B126B2600E76946 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF251021B126B2600E76946 /* CoreLocation.framework */; };
 		2DF251061B126BBB00E76946 /* PhillyBikeShareMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF251051B126BBB00E76946 /* PhillyBikeShareMainViewController.m */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		2D4688BF1B1244FC00293A09 /* PhillyBikeShareLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocation.m; path = Models/PhillyBikeShareLocation.m; sourceTree = "<group>"; };
 		2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareLocationManager.h; path = "Managers & Helpers/PhillyBikeShareLocationManager.h"; sourceTree = "<group>"; };
 		2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocationManager.m; path = "Managers & Helpers/PhillyBikeShareLocationManager.m"; sourceTree = "<group>"; };
+		2D5D653A1B1379D700DA23B3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2DF251021B126B2600E76946 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2DF251041B126BBB00E76946 /* PhillyBikeShareMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareMainViewController.h; path = Controllers/PhillyBikeShareMainViewController.h; sourceTree = "<group>"; };
 		2DF251051B126BBB00E76946 /* PhillyBikeShareMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareMainViewController.m; path = Controllers/PhillyBikeShareMainViewController.m; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5D653B1B1379D700DA23B3 /* MapKit.framework in Frameworks */,
 				2DF251031B126B2600E76946 /* CoreLocation.framework in Frameworks */,
 				23647F8F8EF06A39E0D53163 /* libPods-Philly Bike Share.a in Frameworks */,
 			);
@@ -220,6 +223,7 @@
 		A6900DFFF5F389F079AE999C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2D5D653A1B1379D700DA23B3 /* MapKit.framework */,
 				2DF251021B126B2600E76946 /* CoreLocation.framework */,
 				4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */,
 			);
