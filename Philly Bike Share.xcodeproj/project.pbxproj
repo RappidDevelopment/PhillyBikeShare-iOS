@@ -150,6 +150,7 @@
 		2D192EA41B1231300002EB0D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2D5182EB1B137B1F005232D1 /* Resources */,
 				2D192E8B1B112B180002EB0D /* Images.xcassets */,
 				2D192E8D1B112B180002EB0D /* LaunchScreen.xib */,
 			);
@@ -218,6 +219,13 @@
 				2D4688BC1B123ADB00293A09 /* PhillyBikeShareGetAllDataCommand.m */,
 			);
 			name = Commands;
+			sourceTree = "<group>";
+		};
+		2D5182EB1B137B1F005232D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		A6900DFFF5F389F079AE999C /* Frameworks */ = {
