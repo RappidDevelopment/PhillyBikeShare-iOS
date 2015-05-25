@@ -52,8 +52,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActiveNotficationHeard:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
-    
-    //[self checkForLocationServices];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -106,7 +104,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
-        // Send the user to the Settings for this app
+        // Send the user to the Settings for this app to work.
         NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         [[UIApplication sharedApplication] openURL:settingsURL];
     }
