@@ -21,10 +21,21 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLocationLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UIView *bikeView;
+@property (weak, nonatomic) IBOutlet UIView *docksView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bikeViewWidth;
+@property (weak, nonatomic) IBOutlet UILabel *milesAwayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfBikesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberOfDocksLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *docksLabel;
 
 
 - (void)checkForLocationServices;
-- (void)calculateHeaderViewHeight;
+- (void)calculateConstraints;
 - (void)pinLocaitonsToMapView;
 - (void)setupViewBasedOnUsersCurrentLocation;
 
@@ -39,9 +50,13 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     self.headerLocationLabel.font = MontserratBold(44);
-    [self calculateHeaderViewHeight];
+    self.loadingLabel.font = MontserratBold(16);
+    [self calculateConstraints];
     
-    //TODO: Start animating spinner.
+    self.headerLocationLabel.hidden = YES;
+    self.bikeView.hidden = YES;
+    self.docksView.hidden = YES;
+    self.milesAwayLabel.hidden = YES;
     
     [self.view layoutIfNeeded];
 }
@@ -118,8 +133,9 @@
 
 #pragma mark - helper methods.
 
-- (void)calculateHeaderViewHeight {
+- (void)calculateConstraints {
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
+    self.bikeViewWidth.constant = floor(ScreenWidth/2);
 }
 
 - (void)setupViewBasedOnUsersCurrentLocation {
@@ -129,11 +145,23 @@
     DLog(@"%f", self.distanceAwayFromClosestStation);
     
     if (self.distanceAwayFromClosestStation > 25.0f) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia Area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
     
-    self.headerLocationLabel.text = self.cloestBikeShareLocation.name;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.headerLocationLabel.text = self.cloestBikeShareLocation.name;
+        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.cloestBikeShareLocation.bikesAvailable];
+        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.cloestBikeShareLocation.docksAvailable];
+        
+        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.distanceAwayFromClosestStation];
+        
+        self.headerLocationLabel.hidden = NO;
+        self.loadingView.hidden = YES;
+        self.bikeView.hidden = NO;
+        self.docksView.hidden = NO;
+        self.milesAwayLabel.hidden = NO;
+    }];
     
     return;
 }
@@ -141,10 +169,6 @@
 - (void)pinLocaitonsToMapView {
     //TODO:
     
-    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
-        DLog(@"%@", location.name);
-    }
-
     return;
 }
 
