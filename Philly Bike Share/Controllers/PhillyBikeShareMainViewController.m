@@ -33,7 +33,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *docksLabel;
 
-
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
 - (void)pinLocaitonsToMapView;
@@ -139,10 +138,6 @@
 }
 
 - (void)setupViewBasedOnUsersCurrentLocation {
-    //TODO:
-    DLog(@"%@", self.usersCurrentLocation);
-    DLog(@"%@", self.cloestBikeShareLocation.name);
-    DLog(@"%f", self.distanceAwayFromClosestStation);
     
     if (self.distanceAwayFromClosestStation > 25.0f) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -162,8 +157,6 @@
         self.docksView.hidden = NO;
         self.milesAwayLabel.hidden = NO;
     }];
-    
-    return;
 }
 
 - (void)pinLocaitonsToMapView {
