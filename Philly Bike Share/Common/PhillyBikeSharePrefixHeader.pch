@@ -92,4 +92,11 @@
 #define HEXCOLOR(c)                         [UIColor colorWithRed:((c>>16)&0xFF)/255.0 green:((c>>8)&0xFF)/255.0 blue:(c&0xFF)/255.0 alpha:1.0];
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+//Fonts
+#define MontserratBlack(s) [UIFont fontWithName:@"Montserrat-Black" size:s]
+#define MontserratBold(s) [UIFont fontWithName:@"Montserrat-Bold" size:s]
+#define MontserratHariline(s) [UIFont fontWithName:@"Montserrat-Hairline" size:s]
+#define MontserratLight(s) [UIFont fontWithName:@"Montserrat-Light" size:s]
+#define MontserratRegular(s) [UIFont fontWithName:@"Montserrat-Regular" size:s]
+
 #endif
