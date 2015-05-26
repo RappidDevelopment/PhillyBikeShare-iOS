@@ -17,6 +17,7 @@
 @property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (strong, nonatomic) NSTimer *updateLocationAndData;
+@property (nonatomic) NSInteger currentPlace;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLocationLabel;
@@ -32,7 +33,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfDocksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *docksLabel;
-@property (weak, nonatomic) IBOutlet UIPageControl *headerPageControl;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -69,6 +69,8 @@
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.headerView addGestureRecognizer:swipeRight];
     [self.footerView addGestureRecognizer:swipeRight];
+    
+    self.currentPlace = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -164,20 +166,25 @@
     [self checkForLocationServices];
 }
 
-- (IBAction)pageControlValueChanged:(id)sender {
-    self.activeBikeShareLocation = [self.phillyBikeShareLocations objectAtIndex:self.headerPageControl.currentPage];
-}
-
-- (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser
-{
+- (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser {
     
-    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight){
-        self.headerPageControl.currentPage -=1;
-    } else if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionLeft) {
-        self.headerPageControl.currentPage +=1;
+    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionLeft){
+        
+        if (self.currentPlace == self.phillyBikeShareLocations.count - 1) {
+            self.currentPlace = 0;
+        } else {
+            self.currentPlace++;
+        }
+        self.activeBikeShareLocation = [self.phillyBikeShareLocations objectAtIndex:self.currentPlace];
+    } else if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight) {
+        
+        if (self.currentPlace == 0) {
+            self.currentPlace = self.phillyBikeShareLocations.count - 1;
+        } else {
+            self.currentPlace--;
+        }
+        self.activeBikeShareLocation = [self.phillyBikeShareLocations objectAtIndex:self.currentPlace];
     }
-    
-    [self pageControlValueChanged:self];
 }
 
 - (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {

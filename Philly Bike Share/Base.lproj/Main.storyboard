@@ -13,6 +13,7 @@
             <string>Montserrat-Bold</string>
             <string>Montserrat-Bold</string>
             <string>Montserrat-Bold</string>
+            <string>Montserrat-Bold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -44,18 +45,9 @@
                                         <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="wEL-W7-sne">
-                                        <rect key="frame" x="265" y="171" width="71" height="37"/>
-                                        <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="currentPageIndicatorTintColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="pageControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8Pa-Fh-aB1"/>
-                                        </connections>
-                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.59999999999999998" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="seL-Oa-Abi" firstAttribute="top" secondItem="wEL-W7-sne" secondAttribute="bottom" constant="3" id="5c1-ZP-k2n"/>
                                     <constraint firstAttribute="trailing" secondItem="seL-Oa-Abi" secondAttribute="trailing" id="6qw-h6-Auw"/>
                                     <constraint firstItem="ufO-Dn-39o" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" constant="8" id="FiS-xG-b2K"/>
                                     <constraint firstItem="ufO-Dn-39o" firstAttribute="top" secondItem="VRb-4Z-w80" secondAttribute="top" constant="20" id="L1g-el-oJ1"/>
@@ -65,7 +57,6 @@
                                     <constraint firstAttribute="centerX" secondItem="ufO-Dn-39o" secondAttribute="centerX" id="aHn-ZB-DfX"/>
                                     <constraint firstAttribute="bottom" secondItem="seL-Oa-Abi" secondAttribute="bottom" id="c3Z-eH-Xkh"/>
                                     <constraint firstAttribute="height" constant="216" id="d7a-KH-IrX"/>
-                                    <constraint firstAttribute="centerX" secondItem="wEL-W7-sne" secondAttribute="centerX" id="fgZ-Ib-4Wk"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sp-no-NOq" userLabel="Loading View">
@@ -76,7 +67,7 @@
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-Jf-pxI">
-                                        <rect key="frame" x="17" y="62" width="66" height="19.5"/>
+                                        <rect key="frame" x="17" y="62" width="66" height="20"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -165,6 +156,17 @@
                                             <constraint firstAttribute="centerX" secondItem="xQW-AM-amj" secondAttribute="centerX" id="v7w-Wc-kBi"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8">
+                                        <rect key="frame" x="8" y="178" width="66" height="30"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                                        <state key="normal" title="Full Map">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fullMapButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydc-Hs-GUl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.59999999999999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -172,6 +174,8 @@
                                     <constraint firstItem="L9P-Hq-eGY" firstAttribute="width" secondItem="yHF-ba-0aF" secondAttribute="width" id="0tt-2B-axw"/>
                                     <constraint firstAttribute="centerY" secondItem="L9P-Hq-eGY" secondAttribute="centerY" id="Ak7-rP-Kf0"/>
                                     <constraint firstItem="yHF-ba-0aF" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" id="D6s-b1-auo"/>
+                                    <constraint firstAttribute="bottom" secondItem="QDw-6m-5N8" secondAttribute="bottom" constant="8" id="Eqb-0U-WEm"/>
+                                    <constraint firstItem="QDw-6m-5N8" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" constant="8" id="Fde-eV-oMI"/>
                                     <constraint firstAttribute="trailing" secondItem="WEk-dW-Kz0" secondAttribute="trailing" id="GYd-dl-VID"/>
                                     <constraint firstItem="BHY-o8-WUL" firstAttribute="top" secondItem="WEk-dW-Kz0" secondAttribute="bottom" constant="20" id="Mer-q0-1yw"/>
                                     <constraint firstItem="WEk-dW-Kz0" firstAttribute="top" secondItem="oFe-fV-zIK" secondAttribute="top" id="Vds-eE-l5V"/>
@@ -207,8 +211,8 @@
                         <outlet property="docksLabel" destination="27Q-l7-fgZ" id="0xw-Ia-gDF"/>
                         <outlet property="docksView" destination="L9P-Hq-eGY" id="vr7-wv-rYo"/>
                         <outlet property="footerView" destination="oFe-fV-zIK" id="EfG-UV-j2t"/>
+                        <outlet property="fullMapButton" destination="QDw-6m-5N8" id="ImO-gB-5qu"/>
                         <outlet property="headerLocationLabel" destination="ufO-Dn-39o" id="Cpl-Pu-fLt"/>
-                        <outlet property="headerPageControl" destination="wEL-W7-sne" id="8oP-eb-Hph"/>
                         <outlet property="headerView" destination="VRb-4Z-w80" id="bk7-ce-Rrp"/>
                         <outlet property="headerViewHeight" destination="d7a-KH-IrX" id="7mS-wH-SmU"/>
                         <outlet property="loadingLabel" destination="kKe-Jf-pxI" id="Xco-mp-l6z"/>
