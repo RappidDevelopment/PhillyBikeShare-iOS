@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Bold.otf">
@@ -201,14 +200,8 @@
                             <constraint firstAttribute="centerY" secondItem="4Sp-no-NOq" secondAttribute="centerY" id="W6j-oa-SW3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oFe-fV-zIK" secondAttribute="bottom" id="afi-ed-QtH"/>
                             <constraint firstItem="VRb-4Z-w80" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e6l-q8-hpc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oFe-fV-zIK" secondAttribute="trailing" id="gAc-8y-TFu"/>
                             <constraint firstAttribute="trailing" secondItem="VRb-4Z-w80" secondAttribute="trailing" id="vZS-EX-r3t"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="gAc-8y-TFu"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="bikeView" destination="yHF-ba-0aF" id="kv1-AM-SVe"/>
