@@ -33,6 +33,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfDocksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *docksLabel;
+@property (weak, nonatomic) IBOutlet UIButton *fullMapButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *milesAwayCenterYConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *milesAwayTopSpaceConstraint;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -51,12 +54,14 @@
     [self.locationManager requestWhenInUseAuthorization];
     self.headerLocationLabel.font = MontserratBold(44);
     self.loadingLabel.font = MontserratBold(16);
+    self.milesAwayLabel.font = MontserratBold(24);
     [self calculateConstraints];
     
     self.headerLocationLabel.hidden = YES;
     self.bikeView.hidden = YES;
     self.docksView.hidden = YES;
     self.milesAwayLabel.hidden = YES;
+    self.fullMapButton.hidden = YES;
     
     [self.view layoutIfNeeded];
     
@@ -71,6 +76,10 @@
     [self.footerView addGestureRecognizer:swipeRight];
     
     self.currentPlace = 0;
+    
+    if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+        [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -218,6 +227,7 @@
         self.bikeView.hidden = NO;
         self.docksView.hidden = NO;
         self.milesAwayLabel.hidden = NO;
+        self.fullMapButton.hidden = NO;
     }];
 }
 
@@ -225,6 +235,57 @@
     //TODO:
     
     return;
+}
+
+- (IBAction)fullMapButtonPressed:(id)sender {
+    
+    if (self.fullMapButton.selected == NO) {
+        self.fullMapButton.selected = YES;
+        self.fullMapButton.backgroundColor = RDBlueishGrey;
+        
+        self.bikeView.hidden = YES;
+        self.docksView.hidden = YES;
+        self.headerViewHeight.constant = 64;
+        self.headerLocationLabel.font = MontserratBold(24);
+        
+        if ([self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
+            [self.footerView removeConstraint:self.milesAwayTopSpaceConstraint];
+        }
+        
+        if (![self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+            [self.footerView addConstraint:self.milesAwayCenterYConstraint];
+        }
+        
+        [UIView animateWithDuration:1.0f
+                         animations:^{
+                             [self.view layoutIfNeeded];
+                         }
+                         completion:nil];
+        
+    } else {
+        self.fullMapButton.selected = NO;
+        self.fullMapButton.backgroundColor = [UIColor clearColor];
+        
+        self.headerViewHeight.constant = floor(ScreenHeight / 3);
+        self.headerLocationLabel.font = MontserratBold(44);
+        
+        
+        if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+            [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
+        }
+        
+        if (![self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
+            [self.footerView addConstraint:self.self.milesAwayTopSpaceConstraint];
+        }
+        
+        [UIView animateWithDuration:1.0f
+                         animations:^{
+                             [self.view layoutIfNeeded];
+                         } completion:^(BOOL finished) {
+                             self.bikeView.hidden = NO;
+                             self.docksView.hidden = NO;
+                         }];
+    }
 }
 
 /*

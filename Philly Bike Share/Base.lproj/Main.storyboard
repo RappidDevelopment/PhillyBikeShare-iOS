@@ -103,7 +103,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bikes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJN-I0-ltk">
-                                                <rect key="frame" x="125" y="68" width="50" height="22"/>
+                                                <rect key="frame" x="126" y="69" width="50" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -125,12 +125,6 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".33 Miles Away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHY-o8-WUL">
-                                        <rect key="frame" x="212" y="25" width="176" height="29"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="24"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9P-Hq-eGY" userLabel="Docks View">
                                         <rect key="frame" x="300" y="58" width="300" height="100"/>
                                         <subviews>
@@ -141,7 +135,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Docks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l7-fgZ">
-                                                <rect key="frame" x="122" y="68" width="56" height="22"/>
+                                                <rect key="frame" x="122" y="69" width="56" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -156,17 +150,28 @@
                                             <constraint firstAttribute="centerX" secondItem="xQW-AM-amj" secondAttribute="centerX" id="v7w-Wc-kBi"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8">
                                         <rect key="frame" x="8" y="178" width="66" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Full Map">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="fullMapButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydc-Hs-GUl"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".33 Miles Away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHY-o8-WUL">
+                                        <rect key="frame" x="213" y="25" width="176" height="29"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.59999999999999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -177,8 +182,9 @@
                                     <constraint firstAttribute="bottom" secondItem="QDw-6m-5N8" secondAttribute="bottom" constant="8" id="Eqb-0U-WEm"/>
                                     <constraint firstItem="QDw-6m-5N8" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" constant="8" id="Fde-eV-oMI"/>
                                     <constraint firstAttribute="trailing" secondItem="WEk-dW-Kz0" secondAttribute="trailing" id="GYd-dl-VID"/>
-                                    <constraint firstItem="BHY-o8-WUL" firstAttribute="top" secondItem="WEk-dW-Kz0" secondAttribute="bottom" constant="20" id="Mer-q0-1yw"/>
+                                    <constraint firstItem="BHY-o8-WUL" firstAttribute="top" secondItem="WEk-dW-Kz0" secondAttribute="bottom" constant="20" id="MGP-Ag-fEk"/>
                                     <constraint firstItem="WEk-dW-Kz0" firstAttribute="top" secondItem="oFe-fV-zIK" secondAttribute="top" id="Vds-eE-l5V"/>
+                                    <constraint firstAttribute="centerY" secondItem="BHY-o8-WUL" secondAttribute="centerY" priority="250" id="ho8-iU-mVm"/>
                                     <constraint firstItem="WEk-dW-Kz0" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" id="lTW-Km-eQo"/>
                                     <constraint firstAttribute="trailing" secondItem="L9P-Hq-eGY" secondAttribute="trailing" id="qP2-9r-1fo"/>
                                     <constraint firstAttribute="centerY" secondItem="yHF-ba-0aF" secondAttribute="centerY" id="xVs-Nb-FQj"/>
@@ -217,7 +223,9 @@
                         <outlet property="headerViewHeight" destination="d7a-KH-IrX" id="7mS-wH-SmU"/>
                         <outlet property="loadingLabel" destination="kKe-Jf-pxI" id="Xco-mp-l6z"/>
                         <outlet property="loadingView" destination="4Sp-no-NOq" id="67V-AW-7dU"/>
+                        <outlet property="milesAwayCenterYConstraint" destination="ho8-iU-mVm" id="zC5-6H-PH3"/>
                         <outlet property="milesAwayLabel" destination="BHY-o8-WUL" id="9Ws-VQ-KJC"/>
+                        <outlet property="milesAwayTopSpaceConstraint" destination="MGP-Ag-fEk" id="fEX-3R-gZJ"/>
                         <outlet property="numberOfBikesLabel" destination="air-kr-5Gw" id="xXj-UN-44B"/>
                         <outlet property="numberOfDocksLabel" destination="xQW-AM-amj" id="oO9-yl-1pl"/>
                     </connections>

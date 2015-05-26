@@ -99,4 +99,8 @@
 #define MontserratLight(s) [UIFont fontWithName:@"Montserrat-Light" size:s]
 #define MontserratRegular(s) [UIFont fontWithName:@"Montserrat-Regular" size:s]
 
+//Colors
+#define RDLightBlue UIColorFromRGB(0x3497db)
+#define RDBlueishGrey UIColorFromRGB(0x363b47)
+
 #endif
