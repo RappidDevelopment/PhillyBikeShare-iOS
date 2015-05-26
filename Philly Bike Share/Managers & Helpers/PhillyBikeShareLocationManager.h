@@ -11,7 +11,6 @@
 @import CoreLocation;
 
 typedef void (^PhillyBikeShareSuccessBlock) (NSArray *locations);
-typedef void (^PhillyBikeShareClosestStationAndDistanceBlock) (PhillyBikeShareLocation *location, CLLocationDistance distance);
 typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
 
 @interface PhillyBikeShareLocationManager : NSObject
@@ -23,6 +22,6 @@ typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
 
 - (PhillyBikeShareLocation *)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId;
 
-- (void)fetchClosestBikeShareStationToLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareClosestStationAndDistanceBlock)nextBlock;
+- (void)sortLocationsBasedOnUsersLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareSuccessBlock)nextBlock;
 
 @end

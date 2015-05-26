@@ -98,29 +98,21 @@
     return nil;
 }
 
-- (void)fetchClosestBikeShareStationToLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareClosestStationAndDistanceBlock)nextBlock {
+- (void)sortLocationsBasedOnUsersLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareSuccessBlock)nextBlock {
     CLLocation *userLocation = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
-    PhillyBikeShareLocation *closestLocation = [[PhillyBikeShareLocation alloc]init];
-    CLLocationDistance closestDistance = -1;
     
-    for (PhillyBikeShareLocation *station in self.phillyBikeShareLocations) {
+    NSMutableArray *stations = [NSMutableArray arrayWithArray:self.phillyBikeShareLocations];
+    
+    for (PhillyBikeShareLocation *station in stations) {
         CLLocation *stationLocation = [[CLLocation alloc]initWithLatitude:station.latitude longitude:station.longitude];
         CLLocationDistance distanceBetweenUserandStation = [userLocation distanceFromLocation:stationLocation];
         double distanceInMiles = distanceBetweenUserandStation/1609.344;
-        
-        if (closestDistance < 0) {
-            closestDistance = distanceInMiles;
-            closestLocation = station;
-        } else {
-            
-            if (distanceInMiles < closestDistance) {
-                closestLocation = station;
-                closestDistance = distanceInMiles;
-            }
-        }
+        station.distanceFromUser = distanceInMiles;
     }
     
-    nextBlock(closestLocation, closestDistance);
+    [stations sortUsingDescriptors: [NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"distanceFromUser" ascending:YES],nil]];
+    self.phillyBikeShareLocations = stations;
+    nextBlock(self.phillyBikeShareLocations);
 }
 
 @end

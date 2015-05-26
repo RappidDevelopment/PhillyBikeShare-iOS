@@ -14,9 +14,9 @@
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *usersCurrentLocation;
-@property (strong, nonatomic) PhillyBikeShareLocation *cloestBikeShareLocation;
-@property (nonatomic) CLLocationDistance distanceAwayFromClosestStation;
+@property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
+@property (strong, nonatomic) NSTimer *updateLocationAndData;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLocationLabel;
@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfDocksLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *docksLabel;
+@property (weak, nonatomic) IBOutlet UIPageControl *headerPageControl;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -58,10 +59,26 @@
     self.milesAwayLabel.hidden = YES;
     
     [self.view layoutIfNeeded];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.headerView addGestureRecognizer:swipeLeft];
+    [self.footerView addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.headerView addGestureRecognizer:swipeRight];
+    [self.footerView addGestureRecognizer:swipeRight];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.updateLocationAndData = [NSTimer scheduledTimerWithTimeInterval:60
+                                                                  target:self
+                                                                selector:@selector(handleUpdateTimer:)
+                                                                userInfo:nil
+                                                                 repeats:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActiveNotficationHeard:)
@@ -71,6 +88,10 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    if (self.updateLocationAndData) {
+        [self.updateLocationAndData invalidate];
+        self.updateLocationAndData = nil;
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
@@ -79,8 +100,8 @@
 # pragma mark - Location Manager Delegate Methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    [self.locationManager stopUpdatingLocation];
     self.usersCurrentLocation = [locations lastObject];
+    [self.locationManager stopUpdatingLocation];
     
     @weakify(self);
     [[PhillyBikeShareLocationManager sharedInstance]fetchAllLocationsWithSuccessBlock:^(NSArray *locations) {
@@ -88,10 +109,11 @@
         self.phillyBikeShareLocations = locations;
         [self pinLocaitonsToMapView];
         @weakify(self);
-        [[PhillyBikeShareLocationManager sharedInstance]fetchClosestBikeShareStationToLatitude:self.usersCurrentLocation.coordinate.latitude andLongitude:self.usersCurrentLocation.coordinate.longitude withNextBlock:^(PhillyBikeShareLocation *location, CLLocationDistance distance) {
+        [[PhillyBikeShareLocationManager sharedInstance]sortLocationsBasedOnUsersLatitude:self.usersCurrentLocation.coordinate.latitude andLongitude:self.usersCurrentLocation.coordinate.longitude withNextBlock:^(NSArray *sortedLocations) {
             @strongify(self);
-            self.cloestBikeShareLocation = location;
-            self.distanceAwayFromClosestStation = distance;
+            PhillyBikeShareLocation *closestLocation = [sortedLocations firstObject];
+            self.activeBikeShareLocation = closestLocation;
+            self.phillyBikeShareLocations = sortedLocations;
             [self setupViewBasedOnUsersCurrentLocation];
         }];
     } andFailureBlock:^(NSError *error) {
@@ -137,19 +159,52 @@
     self.bikeViewWidth.constant = floor(ScreenWidth/2);
 }
 
+-(void)handleUpdateTimer:(id)sender {
+    DLog(@"Timer Fired");
+    [self checkForLocationServices];
+}
+
+- (IBAction)pageControlValueChanged:(id)sender {
+    self.activeBikeShareLocation = [self.phillyBikeShareLocations objectAtIndex:self.headerPageControl.currentPage];
+}
+
+- (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser
+{
+    
+    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight){
+        self.headerPageControl.currentPage -=1;
+    } else if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionLeft) {
+        self.headerPageControl.currentPage +=1;
+    }
+    
+    [self pageControlValueChanged:self];
+}
+
+- (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
+    _activeBikeShareLocation = activeBikeShareLocation;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.headerLocationLabel.text = self.activeBikeShareLocation.name;
+        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
+        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.docksAvailable];
+        
+        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.activeBikeShareLocation.distanceFromUser];
+    }];
+}
+
 - (void)setupViewBasedOnUsersCurrentLocation {
     
-    if (self.distanceAwayFromClosestStation > 25.0f) {
+    if (self.activeBikeShareLocation.distanceFromUser > 25.0f) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.headerLocationLabel.text = self.cloestBikeShareLocation.name;
-        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.cloestBikeShareLocation.bikesAvailable];
-        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.cloestBikeShareLocation.docksAvailable];
+        self.headerLocationLabel.text = self.activeBikeShareLocation.name;
+        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
+        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.docksAvailable];
         
-        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.distanceAwayFromClosestStation];
+        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.activeBikeShareLocation.distanceFromUser];
         
         self.headerLocationLabel.hidden = NO;
         self.loadingView.hidden = YES;

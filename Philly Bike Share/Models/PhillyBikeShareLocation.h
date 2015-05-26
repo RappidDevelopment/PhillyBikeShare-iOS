@@ -21,6 +21,7 @@
 @property (nonatomic) NSInteger bikesAvailable;
 @property (nonatomic) NSInteger docksAvailable;
 @property (nonatomic) NSInteger totalDocs;
+@property (nonatomic) float distanceFromUser;
 
 - (instancetype) initWithKioskId:(NSInteger)kioskId
                          andName:(NSString *)name

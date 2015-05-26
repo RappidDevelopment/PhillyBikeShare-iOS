@@ -38,21 +38,34 @@
                                             <constraint firstAttribute="height" constant="5" id="xKy-HZ-hnf"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o" userLabel="Header Location Label">
-                                        <rect key="frame" x="239" y="81" width="122" height="53"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o" userLabel="Header Location Label">
+                                        <rect key="frame" x="8" y="20" width="584" height="183"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="44"/>
                                         <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="wEL-W7-sne">
+                                        <rect key="frame" x="265" y="171" width="71" height="37"/>
+                                        <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="currentPageIndicatorTintColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="pageControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8Pa-Fh-aB1"/>
+                                        </connections>
+                                    </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.59999999999999998" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="seL-Oa-Abi" firstAttribute="top" secondItem="wEL-W7-sne" secondAttribute="bottom" constant="3" id="5c1-ZP-k2n"/>
                                     <constraint firstAttribute="trailing" secondItem="seL-Oa-Abi" secondAttribute="trailing" id="6qw-h6-Auw"/>
+                                    <constraint firstItem="ufO-Dn-39o" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" constant="8" id="FiS-xG-b2K"/>
+                                    <constraint firstItem="ufO-Dn-39o" firstAttribute="top" secondItem="VRb-4Z-w80" secondAttribute="top" constant="20" id="L1g-el-oJ1"/>
                                     <constraint firstItem="seL-Oa-Abi" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" id="PNt-9F-CvQ"/>
+                                    <constraint firstItem="seL-Oa-Abi" firstAttribute="top" secondItem="ufO-Dn-39o" secondAttribute="bottom" constant="8" id="VYl-lT-rdy"/>
+                                    <constraint firstAttribute="trailing" secondItem="ufO-Dn-39o" secondAttribute="trailing" constant="8" id="WZV-gH-0v0"/>
                                     <constraint firstAttribute="centerX" secondItem="ufO-Dn-39o" secondAttribute="centerX" id="aHn-ZB-DfX"/>
-                                    <constraint firstAttribute="centerY" secondItem="ufO-Dn-39o" secondAttribute="centerY" id="b1G-Pd-OEx"/>
                                     <constraint firstAttribute="bottom" secondItem="seL-Oa-Abi" secondAttribute="bottom" id="c3Z-eH-Xkh"/>
                                     <constraint firstAttribute="height" constant="216" id="d7a-KH-IrX"/>
+                                    <constraint firstAttribute="centerX" secondItem="wEL-W7-sne" secondAttribute="centerX" id="fgZ-Ib-4Wk"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sp-no-NOq" userLabel="Loading View">
@@ -93,13 +106,13 @@
                                         <rect key="frame" x="0.0" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="air-kr-5Gw">
-                                                <rect key="frame" x="139" y="20" width="23" height="43.5"/>
+                                                <rect key="frame" x="139" y="20" width="23" height="44"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bikes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJN-I0-ltk">
-                                                <rect key="frame" x="125" y="68" width="49.5" height="22"/>
+                                                <rect key="frame" x="125" y="68" width="50" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -131,7 +144,7 @@
                                         <rect key="frame" x="300" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQW-AM-amj">
-                                                <rect key="frame" x="138" y="20" width="23" height="43.5"/>
+                                                <rect key="frame" x="138" y="20" width="23" height="44"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -195,6 +208,7 @@
                         <outlet property="docksView" destination="L9P-Hq-eGY" id="vr7-wv-rYo"/>
                         <outlet property="footerView" destination="oFe-fV-zIK" id="EfG-UV-j2t"/>
                         <outlet property="headerLocationLabel" destination="ufO-Dn-39o" id="Cpl-Pu-fLt"/>
+                        <outlet property="headerPageControl" destination="wEL-W7-sne" id="8oP-eb-Hph"/>
                         <outlet property="headerView" destination="VRb-4Z-w80" id="bk7-ce-Rrp"/>
                         <outlet property="headerViewHeight" destination="d7a-KH-IrX" id="7mS-wH-SmU"/>
                         <outlet property="loadingLabel" destination="kKe-Jf-pxI" id="Xco-mp-l6z"/>

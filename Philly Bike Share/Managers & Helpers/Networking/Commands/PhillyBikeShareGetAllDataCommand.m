@@ -38,12 +38,14 @@
     NSString *method = @"GET";
     
     PhillyBikeShareNetworkCommand *command = [[PhillyBikeShareNetworkCommand alloc] initWithUrl:url andMethod:method andJsonRequest:YES andParameters:nil andSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        HideNetworkActivityIndicator();
         self.successHandler(operation, responseObject);
     } andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        HideNetworkActivityIndicator();
         self.failureHandler(operation, error);
     }];
     
+    ShowNetworkActivityIndicator();
     [command execute];
 }
 
