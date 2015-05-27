@@ -9,8 +9,9 @@
 #import <libextobjc/EXTScope.h>
 #import "PhillyBikeShareMainViewController.h"
 #import "PhillyBikeShareLocationManager.h"
+@import MapKit;
 
-@interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate>
+@interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *usersCurrentLocation;
@@ -28,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bikeView;
 @property (weak, nonatomic) IBOutlet UIView *docksView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bikeViewWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bikeViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *milesAwayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfBikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numberOfDocksLabel;
@@ -36,15 +38,22 @@
 @property (weak, nonatomic) IBOutlet UIButton *fullMapButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *milesAwayCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *milesAwayTopSpaceConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapCenterYConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapBottomSpaceConstraint;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
 - (void)pinLocaitonsToMapView;
 - (void)setupViewBasedOnUsersCurrentLocation;
+- (void)revealFullMapView;
+- (void)hideFullMapView;
 
 @end
 
-@implementation PhillyBikeShareMainViewController
+@implementation PhillyBikeShareMainViewController {
+    int _bikeViewInitialHeight;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +61,7 @@
     self.locationManager = [[CLLocationManager alloc]init];
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
-    self.headerLocationLabel.font = MontserratBold(44);
+    self.headerLocationLabel.font = MontserratBold(48);
     self.loadingLabel.font = MontserratBold(16);
     self.milesAwayLabel.font = MontserratBold(24);
     [self calculateConstraints];
@@ -63,23 +72,31 @@
     self.milesAwayLabel.hidden = YES;
     self.fullMapButton.hidden = YES;
     
-    [self.view layoutIfNeeded];
-    
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.headerView addGestureRecognizer:swipeLeft];
-    [self.footerView addGestureRecognizer:swipeLeft];
-    
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.headerView addGestureRecognizer:swipeRight];
-    [self.footerView addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:swipeLeft];
     
     self.currentPlace = 0;
     
     if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
         [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
     }
+    
+    if ([self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
+        [self.footerView removeConstraint:self.fullMapCenterYConstraint];
+    }
+    
+    _bikeViewInitialHeight = self.bikeViewHeight.constant;
+    self.bikeView.clipsToBounds = YES;
+    self.docksView.clipsToBounds = YES;
+    
+    self.mapView.mapType = MKMapTypeStandard;
+    [self.mapView setShowsUserLocation:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -215,6 +232,22 @@
         [alertView show];
     }
     
+    MKMapRect zoomRect = MKMapRectNull;
+    
+    for (int i = 0; i < 5; i++) {
+    
+        MKPointAnnotation *annotation = [self.mapView.annotations objectAtIndex:i];
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
+        
+        if (MKMapRectIsNull(zoomRect)) {
+            zoomRect = pointRect;
+        } else {
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+    }
+    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+    
     [UIView animateWithDuration:0.5 animations:^{
         self.headerLocationLabel.text = self.activeBikeShareLocation.name;
         self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
@@ -232,9 +265,16 @@
 }
 
 - (void)pinLocaitonsToMapView {
-    //TODO:
     
-    return;
+    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+        [annotation setCoordinate:locationCoordinate];
+        [annotation setTitle:location.name];
+        [annotation setSubtitle:location.addressStreet];
+        [self.mapView addAnnotation:annotation];
+    }
+    
 }
 
 - (IBAction)fullMapButtonPressed:(id)sender {
@@ -242,50 +282,101 @@
     if (self.fullMapButton.selected == NO) {
         self.fullMapButton.selected = YES;
         self.fullMapButton.backgroundColor = RDBlueishGrey;
-        
-        self.bikeView.hidden = YES;
-        self.docksView.hidden = YES;
-        self.headerViewHeight.constant = 64;
-        self.headerLocationLabel.font = MontserratBold(24);
-        
-        if ([self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
-            [self.footerView removeConstraint:self.milesAwayTopSpaceConstraint];
-        }
-        
-        if (![self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
-            [self.footerView addConstraint:self.milesAwayCenterYConstraint];
-        }
-        
-        [UIView animateWithDuration:1.0f
-                         animations:^{
-                             [self.view layoutIfNeeded];
-                         }
-                         completion:nil];
+        [self revealFullMapView];
         
     } else {
         self.fullMapButton.selected = NO;
         self.fullMapButton.backgroundColor = [UIColor clearColor];
-        
-        self.headerViewHeight.constant = floor(ScreenHeight / 3);
-        self.headerLocationLabel.font = MontserratBold(44);
-        
-        
-        if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
-            [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
-        }
-        
-        if (![self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
-            [self.footerView addConstraint:self.self.milesAwayTopSpaceConstraint];
-        }
-        
-        [UIView animateWithDuration:1.0f
-                         animations:^{
-                             [self.view layoutIfNeeded];
-                         } completion:^(BOOL finished) {
-                             self.bikeView.hidden = NO;
-                             self.docksView.hidden = NO;
-                         }];
+        [self hideFullMapView];
     }
+}
+
+- (void)revealFullMapView {
+    
+    self.bikeViewHeight.constant = 0;
+    self.headerViewHeight.constant = 64;
+    self.headerLocationLabel.font = MontserratBold(24);
+    self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 2, 2);
+    
+    if ([self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
+        [self.footerView removeConstraint:self.milesAwayTopSpaceConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+        [self.footerView addConstraint:self.milesAwayCenterYConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.fullMapBottomSpaceConstraint]) {
+        [self.footerView removeConstraint:self.fullMapBottomSpaceConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
+        [self.footerView addConstraint:self.fullMapCenterYConstraint];
+    }
+    
+    MKMapRect zoomRect = MKMapRectNull;
+    
+    for (id <MKAnnotation> annotation in self.mapView.annotations) {
+        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
+        
+        if (MKMapRectIsNull(zoomRect)) {
+            zoomRect = pointRect;
+        } else {
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+    }
+    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+    
+    [UIView animateWithDuration:1.0f
+                     animations:^{
+                         self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, .5, .5);
+                         [self.view layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         self.headerLocationLabel.font = MontserratBold(24);
+                         self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
+                         [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
+                     }
+    ];
+    
+    
+}
+
+- (void)hideFullMapView {
+    
+    self.headerViewHeight.constant = floor(ScreenHeight / 3);
+    self.headerLocationLabel.font = MontserratBold(48);
+    self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 0.5, 0.5);
+    
+    self.bikeViewHeight.constant = _bikeViewInitialHeight;
+    
+    if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+        [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.milesAwayTopSpaceConstraint]) {
+        [self.footerView addConstraint:self.self.milesAwayTopSpaceConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
+        [self.footerView removeConstraint:self.fullMapCenterYConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.fullMapBottomSpaceConstraint]) {
+        [self.footerView addConstraint:self.self.fullMapBottomSpaceConstraint];
+    }
+    
+    [UIView animateWithDuration:1.0f
+                     animations:^{
+                         self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 2, 2);
+                         [self.view layoutIfNeeded];
+                     } completion:^(BOOL finished) {
+                         self.headerLocationLabel.font = MontserratBold(48);
+                         self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
+                         [self setupViewBasedOnUsersCurrentLocation];
+                     }
+     ];
+
 }
 
 /*
