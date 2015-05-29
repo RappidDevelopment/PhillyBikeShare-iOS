@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PhillyBikeShareLocation.h"
+@import CoreLocation;
 
 typedef void (^PhillyBikeShareSuccessBlock) (NSArray *locations);
 typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
@@ -18,6 +20,8 @@ typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
 - (void)fetchAllLocationsWithSuccessBlock:(PhillyBikeShareSuccessBlock)successBlock
                      andFailureBlock:(PhillyBikeShareFailureBlock)failureBlock;
 
-- (id)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId;
+- (PhillyBikeShareLocation *)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId;
+
+- (void)sortLocationsBasedOnUsersLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareSuccessBlock)nextBlock;
 
 @end
