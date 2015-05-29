@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (strong, nonatomic) NSTimer *updateLocationAndData;
 @property (nonatomic) NSInteger currentPlace;
+@property (nonatomic) CGPoint lastTranslation;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLocationLabel;
@@ -48,11 +49,14 @@
 - (void)setupViewBasedOnUsersCurrentLocation;
 - (void)revealFullMapView;
 - (void)hideFullMapView;
+- (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset;
+
 
 @end
 
 @implementation PhillyBikeShareMainViewController {
     int _bikeViewInitialHeight;
+    BOOL _displayedOutOfAreaWarning;
 }
 
 - (void)viewDidLoad {
@@ -79,6 +83,14 @@
     [self.view addGestureRecognizer:swipeRight];
     [self.view addGestureRecognizer:swipeLeft];
     
+    UIPanGestureRecognizer *revealFullMapViewPanGestureRecognizer =
+    [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleRevealFullMapViewPan:)];
+    [self.footerView addGestureRecognizer:revealFullMapViewPanGestureRecognizer];
+    
+    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
+    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeRight];
+    
     self.currentPlace = 0;
     
     if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
@@ -96,7 +108,8 @@
     self.mapView.mapType = MKMapTypeStandard;
     [self.mapView setShowsUserLocation:YES];
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    [self.mapView setCenterCoordinate:self.mapView.userLocation.location.coordinate animated:YES];
+    
+    _displayedOutOfAreaWarning = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -142,7 +155,9 @@
             PhillyBikeShareLocation *closestLocation = [sortedLocations firstObject];
             self.activeBikeShareLocation = closestLocation;
             self.phillyBikeShareLocations = sortedLocations;
-            [self setupViewBasedOnUsersCurrentLocation];
+            if (!self.fullMapButton.selected) {
+                [self setupViewBasedOnUsersCurrentLocation];
+            }
         }];
     } andFailureBlock:^(NSError *error) {
         UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Error Fetching Bike Share Data" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -188,7 +203,6 @@
 }
 
 -(void)handleUpdateTimer:(id)sender {
-    DLog(@"Timer Fired");
     [self checkForLocationServices];
 }
 
@@ -213,6 +227,39 @@
     }
 }
 
+- (void)handleRevealFullMapViewPan:(UIPanGestureRecognizer *)panRecognizer {
+    CGPoint translation = [panRecognizer translationInView:self.view];
+    
+    CGPoint delta;
+    
+    switch (panRecognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            self.lastTranslation = delta = [panRecognizer translationInView:self.view];
+            [self moveFooterAndHeaderViewByxOffset:-delta.x];
+            break;
+            
+        case UIGestureRecognizerStateChanged:
+            // On state changed: calculate the difference between the translation and our
+            // previous translation.
+            delta = CGPointApplyAffineTransform([panRecognizer translationInView:self.view], CGAffineTransformMakeTranslation(-self.lastTranslation.x, -self.lastTranslation.y));
+            self.lastTranslation = [panRecognizer translationInView:self.view];
+            [self moveFooterAndHeaderViewByxOffset:-delta.y];
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+            if (translation.y < 0) {
+                [self hideFullMapView];
+            } else {
+                [self revealFullMapView];
+            }
+            break;
+            
+        default:
+            break;
+
+    }
+}
+
 - (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
     _activeBikeShareLocation = activeBikeShareLocation;
     
@@ -228,25 +275,18 @@
 - (void)setupViewBasedOnUsersCurrentLocation {
     
     if (self.activeBikeShareLocation.distanceFromUser > 25.0f) {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-    }
-    
-    MKMapRect zoomRect = MKMapRectNull;
-    
-    for (int i = 0; i < 5; i++) {
-    
-        MKPointAnnotation *annotation = [self.mapView.annotations objectAtIndex:i];
-        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
-        
-        if (MKMapRectIsNull(zoomRect)) {
-            zoomRect = pointRect;
-        } else {
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        if (!_displayedOutOfAreaWarning) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            _displayedOutOfAreaWarning = YES;
         }
     }
-    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+    
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
+    
+    double distance = [self.usersCurrentLocation distanceFromLocation:location];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.headerLocationLabel.text = self.activeBikeShareLocation.name;
@@ -292,7 +332,7 @@
 }
 
 - (void)revealFullMapView {
-    
+    self.fullMapButton.selected = YES;
     self.bikeViewHeight.constant = 0;
     self.headerViewHeight.constant = 64;
     self.headerLocationLabel.font = MontserratBold(24);
@@ -314,28 +354,19 @@
         [self.footerView addConstraint:self.fullMapCenterYConstraint];
     }
     
-    MKMapRect zoomRect = MKMapRectNull;
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
     
-    for (id <MKAnnotation> annotation in self.mapView.annotations) {
-        MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
-        MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
-        
-        if (MKMapRectIsNull(zoomRect)) {
-            zoomRect = pointRect;
-        } else {
-            zoomRect = MKMapRectUnion(zoomRect, pointRect);
-        }
-    }
-    [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(10, 10, 10, 10) animated:YES];
+    double distance = [self.usersCurrentLocation distanceFromLocation:location];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
     
-    [UIView animateWithDuration:1.0f
+    [UIView animateWithDuration:0.5f
                      animations:^{
                          self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, .5, .5);
                          [self.view layoutIfNeeded];
                      } completion:^(BOOL finished) {
                          self.headerLocationLabel.font = MontserratBold(24);
                          self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
-                         [self.mapView setVisibleMapRect:zoomRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
                      }
     ];
     
@@ -344,6 +375,7 @@
 
 - (void)hideFullMapView {
     
+    self.fullMapButton.selected = NO;
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
     self.headerLocationLabel.font = MontserratBold(48);
     self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 0.5, 0.5);
@@ -366,7 +398,7 @@
         [self.footerView addConstraint:self.self.fullMapBottomSpaceConstraint];
     }
     
-    [UIView animateWithDuration:1.0f
+    [UIView animateWithDuration:0.5f
                      animations:^{
                          self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 2, 2);
                          [self.view layoutIfNeeded];
@@ -377,6 +409,14 @@
                      }
      ];
 
+}
+
+- (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset {
+    CGFloat currentHeight = self.headerViewHeight.constant;
+    currentHeight += xOffset;
+    self.bikeViewHeight.constant = (currentHeight < (ScreenHeight / 3)/1.5) ? 0 : _bikeViewInitialHeight;
+    self.headerViewHeight.constant = (currentHeight > (ScreenHeight / 3)) ? ScreenHeight / 3 : currentHeight;
+    [self.view layoutIfNeeded];
 }
 
 /*
