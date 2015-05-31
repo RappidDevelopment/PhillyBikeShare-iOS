@@ -89,6 +89,7 @@
     self.milesAwayLabel.hidden = YES;
     self.fullMapButton.hidden = YES;
     self.timerLabel.hidden = YES;
+    self.startRideButton.hidden = YES;
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -143,6 +144,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActiveNotficationHeard:)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackgroundNotficationHeard:)
+                                                 name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -155,12 +159,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
-}
-
-- (void)dealloc {
-    if ([self.rideTimer isValid]) {
-        [self.rideTimer invalidate];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
 }
 
 # pragma mark - Location Manager Delegate Methods
@@ -245,6 +246,27 @@
 
 - (void)applicationDidBecomeActiveNotficationHeard:(NSNotification *)notification {
     [self checkForLocationServices];
+    if ([self.rideTimer isValid]) {
+        [self.rideTimer invalidate];
+        NSDate *timeOpen = [NSDate date];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDate *timeStopped = [defaults objectForKey:@"timeStopped"];
+        NSTimeInterval secondsPassed = [timeOpen timeIntervalSinceDate:timeStopped];
+        
+        if ((_secondsLeft - secondsPassed) > 0) {
+            _secondsLeft = _hours = _minutes = _seconds = _secondsLeft - secondsPassed;
+            [self countdownTimer];
+        }
+    }
+}
+
+- (void)applicationDidEnterBackgroundNotficationHeard:(NSNotification *)notification {
+    if ([self.rideTimer isValid]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:_secondsLeft forKey:@"secondsLeft"];
+        [defaults setObject:[NSDate date] forKey:@"timeStopped"];
+        [defaults synchronize];
+    }
 }
 
 #pragma mark - helper methods.
@@ -264,8 +286,6 @@
 }
 
 - (void)countdownTimer {
-    _secondsLeft = _hours = _minutes = _seconds = 1800;
-    
     if ([self.rideTimer isValid]) {
         [self.rideTimer invalidate];
     }
@@ -389,6 +409,7 @@
         self.docksView.hidden = NO;
         self.milesAwayLabel.hidden = NO;
         self.fullMapButton.hidden = NO;
+        self.startRideButton.hidden = NO;
     }];
 }
 
@@ -417,6 +438,8 @@
         }];
     } else {
         self.headerLabelBottomSpaceConstraint.constant = 36;
+        _secondsLeft = _hours = _minutes = _seconds = 1800;
+        self.timerLabel.text = @"30:00";
         [UIView animateWithDuration:0.25 animations:^{
             [self.startRideButton setTitle:@"Stop Ride" forState:UIControlStateNormal];
             self.timerLabel.hidden = NO;
