@@ -42,6 +42,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapBottomSpaceConstraint;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *swipeRightArrow;
+@property (weak, nonatomic) IBOutlet UIButton *swipeLeftArrow;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowWidth;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -50,7 +54,6 @@
 - (void)revealFullMapView;
 - (void)hideFullMapView;
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset;
-
 
 @end
 
@@ -316,6 +319,19 @@
     }
     
 }
+
+- (IBAction)swipeLeftArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self swipe:swipeLeft];
+}
+
+- (IBAction)swipeRightArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self swipe:swipeRight];
+}
+
 
 - (IBAction)fullMapButtonPressed:(id)sender {
     
