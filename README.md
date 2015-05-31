@@ -1,4 +1,4 @@
-# [Ride Philly](https://github.com/RappidDevelopment/PhillyBikeShare-iOS)
+# Ride Philly
 
 Ride Philly is a free iOS application that helps you locate the closest Indego docking station and how many bikes and open docks are available.
 
