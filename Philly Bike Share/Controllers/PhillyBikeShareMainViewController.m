@@ -249,7 +249,7 @@
 
 - (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser {
     
-    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionLeft){
+    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight){
         
         if (self.currentPlace == self.phillyBikeShareLocations.count - 1) {
             self.currentPlace = 0;
@@ -257,7 +257,7 @@
             self.currentPlace++;
         }
         self.activeBikeShareLocation = [self.phillyBikeShareLocations objectAtIndex:self.currentPlace];
-    } else if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight) {
+    } else if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionLeft) {
         
         if (self.currentPlace == 0) {
             self.currentPlace = self.phillyBikeShareLocations.count - 1;
@@ -370,13 +370,13 @@
 
 - (IBAction)swipeLeftArrow:(id)sender {
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self swipe:swipeLeft];
 }
 
 - (IBAction)swipeRightArrow:(id)sender {
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]init];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self swipe:swipeRight];
 }
 
