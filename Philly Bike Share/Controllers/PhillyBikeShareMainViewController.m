@@ -191,10 +191,37 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if (buttonIndex == 0) {
         // Send the user to the Settings for this app to work.
         NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         [[UIApplication sharedApplication] openURL:settingsURL];
+    }
+    
+    if (buttonIndex == 1) {
+        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(self.activeBikeShareLocation.latitude, self.activeBikeShareLocation.longitude);
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:locationCoordinate addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:self.activeBikeShareLocation.name];
+        NSDictionary *options = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
+        [mapItem openInMapsWithLaunchOptions:options];
+    }
+}
+
+#pragma mark - Map View Delegate Methods
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    MKPointAnnotation *annotation = [view annotation];
+    
+    for (int i = 0; i < self.phillyBikeShareLocations.count; i++) {
+        PhillyBikeShareLocation *location = [self.phillyBikeShareLocations objectAtIndex:i];
+        
+        if (location.latitude == annotation.coordinate.latitude) {
+            if (![self.activeBikeShareLocation isEqual:location]) {
+                self.activeBikeShareLocation = location;
+                self.currentPlace = i;
+            }
+        }
     }
 }
 
@@ -205,6 +232,11 @@
 }
 
 #pragma mark - helper methods.
+
+- (void)buttonTapped:(UIButton *)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Open in Maps" message:@"Would you like to see this locaiton in Apple Maps?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    [alert show];
+}
 
 - (void)calculateConstraints {
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
@@ -238,7 +270,6 @@
 
 - (void)handleRevealFullMapViewPan:(UIPanGestureRecognizer *)panRecognizer {
     CGPoint translation = [panRecognizer translationInView:self.view];
-    
     CGPoint delta;
     
     switch (panRecognizer.state) {
@@ -265,20 +296,32 @@
             
         default:
             break;
-
     }
 }
 
 - (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
     _activeBikeShareLocation = activeBikeShareLocation;
     
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
+    double distance = [self.usersCurrentLocation distanceFromLocation:location];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
+    //[_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
+    
+    for (MKPointAnnotation *annotaiton in self.mapView.annotations) {
+        if (annotaiton.coordinate.latitude == self.activeBikeShareLocation.latitude) {
+            [self.mapView selectAnnotation:annotaiton animated:YES];
+        }
+    }
+    
     [UIView animateWithDuration:0.5 animations:^{
-        self.headerLocationLabel.text = self.activeBikeShareLocation.name;
-        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
-        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.docksAvailable];
+        self.headerLocationLabel.text = _activeBikeShareLocation.name;
+        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)_activeBikeShareLocation.bikesAvailable];
+        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)_activeBikeShareLocation.docksAvailable];
         
-        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.activeBikeShareLocation.distanceFromUser];
+        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", _activeBikeShareLocation.distanceFromUser];
     }];
+    
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
 - (void)setupViewBasedOnUsersCurrentLocation {
@@ -292,10 +335,9 @@
     }
     
     CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
-    
     double distance = [self.usersCurrentLocation distanceFromLocation:location];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:NO];
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
     
     [UIView animateWithDuration:0.5 animations:^{
         self.headerLocationLabel.text = self.activeBikeShareLocation.name;
@@ -401,7 +443,6 @@
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
     self.headerLocationLabel.font = MontserratBold(48);
     self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 0.5, 0.5);
-    
     self.bikeViewHeight.constant = _bikeViewInitialHeight;
     
     if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
@@ -440,15 +481,5 @@
     self.headerViewHeight.constant = (currentHeight > (ScreenHeight / 3)) ? ScreenHeight / 3 : currentHeight;
     [self.view layoutIfNeeded];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
