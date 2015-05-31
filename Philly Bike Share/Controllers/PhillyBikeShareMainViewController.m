@@ -11,6 +11,8 @@
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;
 
+#define iPhone4Width 320
+
 @interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -42,6 +44,10 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapBottomSpaceConstraint;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIButton *swipeRightArrow;
+@property (weak, nonatomic) IBOutlet UIButton *swipeLeftArrow;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowWidth;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -50,7 +56,6 @@
 - (void)revealFullMapView;
 - (void)hideFullMapView;
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset;
-
 
 @end
 
@@ -101,6 +106,10 @@
         [self.footerView removeConstraint:self.fullMapCenterYConstraint];
     }
     
+    //Handle iPhone 4 case.
+    if (ScreenHeight == 480.0f) {
+        self.milesAwayTopSpaceConstraint.constant = 8;
+    }
     _bikeViewInitialHeight = self.bikeViewHeight.constant;
     self.bikeView.clipsToBounds = YES;
     self.docksView.clipsToBounds = YES;
@@ -316,6 +325,19 @@
     }
     
 }
+
+- (IBAction)swipeLeftArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionRight;
+    [self swipe:swipeLeft];
+}
+
+- (IBAction)swipeRightArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self swipe:swipeRight];
+}
+
 
 - (IBAction)fullMapButtonPressed:(id)sender {
     
