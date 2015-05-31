@@ -11,6 +11,8 @@
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;
 
+#define iPhone4Width 320
+
 @interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -104,6 +106,10 @@
         [self.footerView removeConstraint:self.fullMapCenterYConstraint];
     }
     
+    //Handle iPhone 4 case.
+    if (ScreenHeight == 480.0f) {
+        self.milesAwayTopSpaceConstraint.constant = 8;
+    }
     _bikeViewInitialHeight = self.bikeViewHeight.constant;
     self.bikeView.clipsToBounds = YES;
     self.docksView.clipsToBounds = YES;
