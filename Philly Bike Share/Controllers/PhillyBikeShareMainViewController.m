@@ -20,6 +20,7 @@
 @property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (strong, nonatomic) NSTimer *updateLocationAndData;
+@property (strong, nonatomic) NSTimer *rideTimer;
 @property (nonatomic) NSInteger currentPlace;
 @property (nonatomic) CGPoint lastTranslation;
 
@@ -48,6 +49,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *swipeLeftArrow;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *arrowWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerLabelBottomSpaceConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *startRideButton;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -56,12 +60,16 @@
 - (void)revealFullMapView;
 - (void)hideFullMapView;
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset;
+- (void)updateCounter:(NSTimer *)rideTiemr;
+- (void)countdownTimer;
 
 @end
 
 @implementation PhillyBikeShareMainViewController {
     int _bikeViewInitialHeight;
+    int _headerLabelBottomSpaceInitalValue;
     BOOL _displayedOutOfAreaWarning;
+    int _secondsLeft, _hours, _minutes, _seconds;
 }
 
 - (void)viewDidLoad {
@@ -80,6 +88,7 @@
     self.docksView.hidden = YES;
     self.milesAwayLabel.hidden = YES;
     self.fullMapButton.hidden = YES;
+    self.timerLabel.hidden = YES;
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -119,6 +128,7 @@
     [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     
     _displayedOutOfAreaWarning = NO;
+    _headerLabelBottomSpaceInitalValue = self.headerLabelBottomSpaceConstraint.constant;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,6 +155,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
+}
+
+- (void)dealloc {
+    if ([self.rideTimer isValid]) {
+        [self.rideTimer invalidate];
+    }
 }
 
 # pragma mark - Location Manager Delegate Methods
@@ -243,8 +259,30 @@
     self.bikeViewWidth.constant = floor(ScreenWidth/2);
 }
 
--(void)handleUpdateTimer:(id)sender {
+- (void)handleUpdateTimer:(id)sender {
     [self checkForLocationServices];
+}
+
+- (void)countdownTimer {
+    _secondsLeft = _hours = _minutes = _seconds = 1800;
+    
+    if ([self.rideTimer isValid]) {
+        [self.rideTimer invalidate];
+    }
+    self.rideTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+}
+
+- (void)updateCounter:(NSTimer *)theTimer {
+    if(_secondsLeft > 0){
+        _secondsLeft -- ;
+        _hours = _secondsLeft / 3600;
+        _minutes = (_secondsLeft % 3600) / 60;
+        _seconds = (_secondsLeft %3600) % 60;
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", _minutes, _seconds];
+    }
+    else {
+        [self.rideTimer invalidate];
+    }
 }
 
 - (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser {
@@ -305,7 +343,6 @@
     CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
     double distance = [self.usersCurrentLocation distanceFromLocation:location];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
-    //[_mapView setRegion:[_mapView regionThatFits:region] animated:YES];
     
     for (MKPointAnnotation *annotaiton in self.mapView.annotations) {
         if (annotaiton.coordinate.latitude == self.activeBikeShareLocation.latitude) {
@@ -368,6 +405,27 @@
     
 }
 
+- (IBAction)startRideButtonPressed:(id)sender {
+    
+    if ([self.rideTimer isValid]) {
+        self.headerLabelBottomSpaceConstraint.constant = _headerLabelBottomSpaceInitalValue;
+        [self.rideTimer invalidate];
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.startRideButton setTitle:@"Start Ride" forState:UIControlStateNormal];
+            self.timerLabel.hidden = YES;
+            [self.view layoutIfNeeded];
+        }];
+    } else {
+        self.headerLabelBottomSpaceConstraint.constant = 36;
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.startRideButton setTitle:@"Stop Ride" forState:UIControlStateNormal];
+            self.timerLabel.hidden = NO;
+            [self countdownTimer];
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
+
 - (IBAction)swipeLeftArrow:(id)sender {
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -396,7 +454,10 @@
 }
 
 - (void)revealFullMapView {
-    self.fullMapButton.selected = YES;
+    self.fullMapButton.backgroundColor = RDBlueishGrey;
+    self.startRideButton.hidden = YES;
+    self.timerLabel.hidden = YES;
+    self.headerLabelBottomSpaceConstraint.constant = 8;
     self.bikeViewHeight.constant = 0;
     self.headerViewHeight.constant = 64;
     self.headerLocationLabel.font = MontserratBold(24);
@@ -438,8 +499,10 @@
 }
 
 - (void)hideFullMapView {
-    
-    self.fullMapButton.selected = NO;
+    self.fullMapButton.backgroundColor = [UIColor clearColor];
+    self.timerLabel.hidden = ([self.rideTimer isValid]) ? NO : YES;
+    self.startRideButton.hidden = NO;
+    self.headerLabelBottomSpaceConstraint.constant = ([self.rideTimer isValid]) ? 36 : _headerLabelBottomSpaceInitalValue;
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
     self.headerLocationLabel.font = MontserratBold(48);
     self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 0.5, 0.5);
