@@ -19,6 +19,7 @@
 @property (strong, nonatomic) CLLocation *usersCurrentLocation;
 @property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
+@property (strong, nonatomic) UIAlertView *needLocationAlertView;
 @property (strong, nonatomic) NSTimer *updateLocationAndData;
 @property (strong, nonatomic) NSTimer *rideTimer;
 @property (nonatomic) NSInteger currentPlace;
@@ -195,13 +196,13 @@
 
 - (void)checkForLocationServices {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Location services are turned off" message:@"To give the best possible user experiences, you must enable location services for this application in Settings."
+    self.needLocationAlertView = [[UIAlertView alloc] initWithTitle:@"Location services are turned off" message:@"To give the best possible user experiences, you must enable location services for this application in Settings."
                                                        delegate:self
                                               cancelButtonTitle:nil
                                               otherButtonTitles:@"Settings", nil];
     
     if (status == kCLAuthorizationStatusDenied) {
-        [alertView show];
+        [self.needLocationAlertView show];
     } else {
         [self.locationManager startUpdatingLocation];
     }
@@ -209,19 +210,12 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 0) {
-        // Send the user to the Settings for this app to work.
-        NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:settingsURL];
-    }
-    
-    if (buttonIndex == 1) {
-        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(self.activeBikeShareLocation.latitude, self.activeBikeShareLocation.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:locationCoordinate addressDictionary:nil];
-        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-        [mapItem setName:self.activeBikeShareLocation.name];
-        NSDictionary *options = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving};
-        [mapItem openInMapsWithLaunchOptions:options];
+    if ([alertView isEqual:self.needLocationAlertView]) {
+        if (buttonIndex == 0) {
+            // Send the user to the Settings for this app to work.
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL];
+        }
     }
 }
 
@@ -270,11 +264,6 @@
 }
 
 #pragma mark - helper methods.
-
-- (void)buttonTapped:(UIButton *)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Open in Maps" message:@"Would you like to see this locaiton in Apple Maps?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    [alert show];
-}
 
 - (void)calculateConstraints {
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
@@ -366,7 +355,7 @@
     
     for (MKPointAnnotation *annotaiton in self.mapView.annotations) {
         if (annotaiton.coordinate.latitude == self.activeBikeShareLocation.latitude) {
-            [self.mapView selectAnnotation:annotaiton animated:YES];
+            [self.mapView selectAnnotation:annotaiton animated:NO];
         }
     }
     
@@ -565,6 +554,7 @@
     currentHeight += xOffset;
     self.bikeViewHeight.constant = (currentHeight < (ScreenHeight / 3)/1.5) ? 0 : _bikeViewInitialHeight;
     self.headerViewHeight.constant = (currentHeight > (ScreenHeight / 3)) ? ScreenHeight / 3 : currentHeight;
+    self.startRideButton.hidden = (currentHeight > ScreenHeight / 3 / 1.5) ? NO : YES;
     [self.view layoutIfNeeded];
 }
 
