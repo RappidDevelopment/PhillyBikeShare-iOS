@@ -11,7 +11,7 @@
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;
 
-#define iPhone4Width 320
+#define iPhone4Height 480.0
 
 @interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -118,7 +118,7 @@
     }
     
     //Handle iPhone 4 case.
-    if (ScreenHeight == 480.0f) {
+    if (ScreenHeight == iPhone4Height) {
         self.milesAwayTopSpaceConstraint.constant = 8;
     }
     _bikeViewInitialHeight = self.bikeViewHeight.constant;
@@ -220,7 +220,7 @@
 }
 
 #pragma mark - Map View Delegate Methods
-
+/*
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     MKPointAnnotation *annotation = [view annotation];
     
@@ -234,7 +234,7 @@
             }
         }
     }
-}
+}*/
 
 #pragma mark - Notfication Center Handlers
 
@@ -296,7 +296,7 @@
 
 - (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser {
     
-    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight){
+    if ([swipeRecogniser direction] == UISwipeGestureRecognizerDirectionRight) {
         
         if (self.currentPlace == self.phillyBikeShareLocations.count - 1) {
             self.currentPlace = 0;
@@ -429,8 +429,8 @@
         self.headerLabelBottomSpaceConstraint.constant = 36;
         _secondsLeft = _hours = _minutes = _seconds = 1800;
         self.timerLabel.text = @"30:00";
+        [self.startRideButton setTitle:@"Stop Ride" forState:UIControlStateNormal];
         [UIView animateWithDuration:0.25 animations:^{
-            [self.startRideButton setTitle:@"Stop Ride" forState:UIControlStateNormal];
             self.timerLabel.hidden = NO;
             [self countdownTimer];
             [self.view layoutIfNeeded];
