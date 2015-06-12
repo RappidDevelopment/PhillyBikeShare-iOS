@@ -20,7 +20,7 @@
 @property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (strong, nonatomic) UIAlertView *needLocationAlertView;
-@property (strong, nonatomic) NSTimer *updateLocationAndData;
+@property (strong, nonatomic) NSTimer *updateLocationAndBikeShareDataTimer;
 @property (strong, nonatomic) NSTimer *rideTimer;
 @property (nonatomic) NSInteger currentPlace;
 @property (nonatomic) CGPoint lastTranslation;
@@ -61,8 +61,14 @@
 - (void)revealFullMapView;
 - (void)hideFullMapView;
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset;
-- (void)updateCounter:(NSTimer *)rideTiemr;
-- (void)countdownTimer;
+- (void)updateRideTimer:(NSTimer *)rideTiemr;
+- (void)startRideCountdownTimer;
+- (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser;
+- (void)handleRevealFullMapViewPan:(UIPanGestureRecognizer *)panRecognizer;
+- (IBAction)swipeLeftArrow:(id)sender;
+- (IBAction)swipeRightArrow:(id)sender;
+- (IBAction)startRideButtonPressed:(id)sender;
+- (IBAction)fullMapButtonPressed:(id)sender;
 
 @end
 
@@ -72,6 +78,8 @@
     BOOL _displayedOutOfAreaWarning;
     int _secondsLeft, _hours, _minutes, _seconds;
 }
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -136,11 +144,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.updateLocationAndData = [NSTimer scheduledTimerWithTimeInterval:60
-                                                                  target:self
-                                                                selector:@selector(handleUpdateTimer:)
-                                                                userInfo:nil
-                                                                 repeats:YES];
+    self.updateLocationAndBikeShareDataTimer = [NSTimer scheduledTimerWithTimeInterval:60
+                                                                                target:self
+                                                                              selector:@selector(handleUpdateLocationAndBikeShareDataTimer:)
+                                                                              userInfo:nil
+                                                                               repeats:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActiveNotficationHeard:)
@@ -153,9 +161,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if (self.updateLocationAndData) {
-        [self.updateLocationAndData invalidate];
-        self.updateLocationAndData = nil;
+    if (self.updateLocationAndBikeShareDataTimer) {
+        [self.updateLocationAndBikeShareDataTimer invalidate];
+        self.updateLocationAndBikeShareDataTimer = nil;
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
@@ -165,7 +173,7 @@
                                                   object:nil];
 }
 
-# pragma mark - Location Manager Delegate Methods
+# pragma mark - Location Manager Delegate Method
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     self.usersCurrentLocation = [locations lastObject];
@@ -192,14 +200,14 @@
     }];
 }
 
-# pragma mark - Location helper methods
+# pragma mark - Location Helper Methods
 
 - (void)checkForLocationServices {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     self.needLocationAlertView = [[UIAlertView alloc] initWithTitle:@"Location services are turned off" message:@"To give the best possible user experiences, you must enable location services for this application in Settings."
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"Settings", nil];
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"Settings", nil];
     
     if (status == kCLAuthorizationStatusDenied) {
         [self.needLocationAlertView show];
@@ -208,15 +216,49 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)setupViewBasedOnUsersCurrentLocation {
     
-    if ([alertView isEqual:self.needLocationAlertView]) {
-        if (buttonIndex == 0) {
-            // Send the user to the Settings for this app to work.
-            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:settingsURL];
+    if (self.activeBikeShareLocation.distanceFromUser > 25.0f) {
+        if (!_displayedOutOfAreaWarning) {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            _displayedOutOfAreaWarning = YES;
         }
     }
+    
+    CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
+    double distance = [self.usersCurrentLocation distanceFromLocation:location];
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
+    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.headerLocationLabel.text = self.activeBikeShareLocation.name;
+        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
+        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.docksAvailable];
+        
+        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.activeBikeShareLocation.distanceFromUser];
+        
+        self.headerLocationLabel.hidden = NO;
+        self.loadingView.hidden = YES;
+        self.bikeView.hidden = NO;
+        self.docksView.hidden = NO;
+        self.milesAwayLabel.hidden = NO;
+        self.fullMapButton.hidden = NO;
+        self.startRideButton.hidden = NO;
+    }];
+}
+
+- (void)pinLocaitonsToMapView {
+    
+    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
+        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+        [annotation setCoordinate:locationCoordinate];
+        [annotation setTitle:location.name];
+        [annotation setSubtitle:location.addressStreet];
+        [self.mapView addAnnotation:annotation];
+    }
+    
 }
 
 #pragma mark - Map View Delegate Methods
@@ -249,7 +291,7 @@
         
         if ((_secondsLeft - secondsPassed) > 0) {
             _secondsLeft = _hours = _minutes = _seconds = _secondsLeft - secondsPassed;
-            [self countdownTimer];
+            [self startRideCountdownTimer];
         }
     }
 }
@@ -263,25 +305,33 @@
     }
 }
 
-#pragma mark - helper methods.
+#pragma mark - Alert View Delegate
 
-- (void)calculateConstraints {
-    self.headerViewHeight.constant = floor(ScreenHeight / 3);
-    self.bikeViewWidth.constant = floor(ScreenWidth/2);
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if ([alertView isEqual:self.needLocationAlertView]) {
+        if (buttonIndex == 0) {
+            // Send the user to the Settings for this app to work.
+            NSURL *settingsURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:settingsURL];
+        }
+    }
 }
 
-- (void)handleUpdateTimer:(id)sender {
+#pragma mark - NSTimer Handlers
+
+- (void)handleUpdateLocationAndBikeShareDataTimer:(id)sender {
     [self checkForLocationServices];
 }
 
-- (void)countdownTimer {
+- (void)startRideCountdownTimer {
     if ([self.rideTimer isValid]) {
         [self.rideTimer invalidate];
     }
-    self.rideTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
+    self.rideTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateRideTimer:) userInfo:nil repeats:YES];
 }
 
-- (void)updateCounter:(NSTimer *)theTimer {
+- (void)updateRideTimer:(NSTimer *)theTimer {
     if(_secondsLeft > 0){
         _secondsLeft -- ;
         _hours = _secondsLeft / 3600;
@@ -293,6 +343,8 @@
         [self.rideTimer invalidate];
     }
 }
+
+#pragma mark - Gesture Recognizers
 
 - (void)swipe:(UISwipeGestureRecognizer *)swipeRecogniser {
     
@@ -346,6 +398,20 @@
     }
 }
 
+- (IBAction)swipeLeftArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self swipe:swipeLeft];
+}
+
+- (IBAction)swipeRightArrow:(id)sender {
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]init];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self swipe:swipeRight];
+}
+
+#pragma mark - Override Methods
+
 - (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
     _activeBikeShareLocation = activeBikeShareLocation;
     
@@ -370,50 +436,7 @@
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
-- (void)setupViewBasedOnUsersCurrentLocation {
-    
-    if (self.activeBikeShareLocation.distanceFromUser > 25.0f) {
-        if (!_displayedOutOfAreaWarning) {
-            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
-            _displayedOutOfAreaWarning = YES;
-        }
-    }
-    
-    CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
-    double distance = [self.usersCurrentLocation distanceFromLocation:location];
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(self.usersCurrentLocation.coordinate, 2 * distance, 2 * distance);
-    [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.headerLocationLabel.text = self.activeBikeShareLocation.name;
-        self.numberOfBikesLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.bikesAvailable];
-        self.numberOfDocksLabel.text = [NSString stringWithFormat:@"%ld", (long)self.activeBikeShareLocation.docksAvailable];
-        
-        self.milesAwayLabel.text = [NSString stringWithFormat:@"%.2f miles away", self.activeBikeShareLocation.distanceFromUser];
-        
-        self.headerLocationLabel.hidden = NO;
-        self.loadingView.hidden = YES;
-        self.bikeView.hidden = NO;
-        self.docksView.hidden = NO;
-        self.milesAwayLabel.hidden = NO;
-        self.fullMapButton.hidden = NO;
-        self.startRideButton.hidden = NO;
-    }];
-}
-
-- (void)pinLocaitonsToMapView {
-    
-    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
-        MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
-        CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-        [annotation setCoordinate:locationCoordinate];
-        [annotation setTitle:location.name];
-        [annotation setSubtitle:location.addressStreet];
-        [self.mapView addAnnotation:annotation];
-    }
-    
-}
+#pragma mark - Button Click Events
 
 - (IBAction)startRideButtonPressed:(id)sender {
     
@@ -432,24 +455,11 @@
         [self.startRideButton setTitle:@"Stop Ride" forState:UIControlStateNormal];
         [UIView animateWithDuration:0.25 animations:^{
             self.timerLabel.hidden = NO;
-            [self countdownTimer];
+            [self startRideCountdownTimer];
             [self.view layoutIfNeeded];
         }];
     }
 }
-
-- (IBAction)swipeLeftArrow:(id)sender {
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]init];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self swipe:swipeLeft];
-}
-
-- (IBAction)swipeRightArrow:(id)sender {
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc]init];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [self swipe:swipeRight];
-}
-
 
 - (IBAction)fullMapButtonPressed:(id)sender {
     
@@ -464,6 +474,8 @@
         [self hideFullMapView];
     }
 }
+
+#pragma mark - View Animations
 
 - (void)revealFullMapView {
     self.fullMapButton.backgroundColor = RDBlueishGrey;
@@ -505,7 +517,7 @@
                          self.headerLocationLabel.font = MontserratBold(24);
                          self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
                      }
-    ];
+     ];
     
     
 }
@@ -546,7 +558,7 @@
                          [self setupViewBasedOnUsersCurrentLocation];
                      }
      ];
-
+    
 }
 
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset {
@@ -556,6 +568,11 @@
     self.headerViewHeight.constant = (currentHeight > (ScreenHeight / 3)) ? ScreenHeight / 3 : currentHeight;
     self.startRideButton.hidden = (currentHeight > ScreenHeight / 3 / 1.5) ? NO : YES;
     [self.view layoutIfNeeded];
+}
+
+- (void)calculateConstraints {
+    self.headerViewHeight.constant = floor(ScreenHeight / 3);
+    self.bikeViewWidth.constant = floor(ScreenWidth/2);
 }
 
 @end
