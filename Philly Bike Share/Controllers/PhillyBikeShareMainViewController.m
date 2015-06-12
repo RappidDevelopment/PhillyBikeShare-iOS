@@ -220,7 +220,7 @@
 }
 
 #pragma mark - Map View Delegate Methods
-/*
+
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     MKPointAnnotation *annotation = [view annotation];
     
@@ -234,7 +234,7 @@
             }
         }
     }
-}*/
+}
 
 #pragma mark - Notfication Center Handlers
 
