@@ -87,17 +87,6 @@
     [getAllDataCommand execute];
 }
 
-- (id)getPhillyBikeShareLocationById:(NSInteger)phillyBikeShareLocationId {
-    
-    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
-        if (location.kioskId == phillyBikeShareLocationId) {
-            return location;
-        }
-    }
-    
-    return nil;
-}
-
 - (void)sortLocationsBasedOnUsersLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareSuccessBlock)nextBlock {
     CLLocation *userLocation = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
     
