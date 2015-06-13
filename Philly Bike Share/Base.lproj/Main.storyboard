@@ -86,7 +86,7 @@
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-Jf-pxI">
-                                        <rect key="frame" x="17" y="62" width="66" height="19.5"/>
+                                        <rect key="frame" x="17" y="62" width="66" height="20"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -260,6 +260,7 @@
                                     <constraint firstAttribute="centerX" secondItem="4rC-yE-iK6" secondAttribute="centerX" id="eku-Zl-RaA"/>
                                     <constraint firstAttribute="centerY" secondItem="BHY-o8-WUL" secondAttribute="centerY" priority="250" id="ho8-iU-mVm"/>
                                     <constraint firstItem="WEk-dW-Kz0" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" id="lTW-Km-eQo"/>
+                                    <constraint firstAttribute="centerY" secondItem="VYP-fw-mzZ" secondAttribute="centerY" priority="250" id="nmd-tQ-Ds1"/>
                                     <constraint firstItem="fyD-0J-hVz" firstAttribute="width" secondItem="MN3-MU-V4U" secondAttribute="width" id="oOK-dK-VWU"/>
                                     <constraint firstItem="QDw-6m-5N8" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" constant="8" id="oZO-kQ-BDI"/>
                                     <constraint firstAttribute="trailing" secondItem="L9P-Hq-eGY" secondAttribute="trailing" id="qP2-9r-1fo"/>
@@ -370,6 +371,8 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                         <outlet property="aboutBikeShareButton" destination="rKi-ZD-2jl" id="pmQ-qh-XLV"/>
                         <outlet property="aboutBlurView" destination="spi-YI-9mC" id="VbX-Ea-JFR"/>
                         <outlet property="aboutButton" destination="VYP-fw-mzZ" id="DOC-12-NgW"/>
+                        <outlet property="aboutButtonBottomSpaceConstraint" destination="8oM-Na-sUF" id="UPZ-bA-Rjj"/>
+                        <outlet property="aboutButtonYConstraint" destination="nmd-tQ-Ds1" id="cLP-rX-xZC"/>
                         <outlet property="aboutGitHubRepoButton" destination="9ID-j2-9ID" id="sCn-1i-6jA"/>
                         <outlet property="arrowHeight" destination="9vd-wD-sk0" id="GgB-qc-cBQ"/>
                         <outlet property="arrowWidth" destination="V2N-vg-2rc" id="4PG-Xp-DTx"/>

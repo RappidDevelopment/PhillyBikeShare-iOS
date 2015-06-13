@@ -50,6 +50,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *milesAwayTopSpaceConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapCenterYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapBottomSpaceConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutButtonYConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutButtonBottomSpaceConstraint;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *swipeRightArrow;
 @property (weak, nonatomic) IBOutlet UIButton *swipeLeftArrow;
@@ -157,6 +159,10 @@
     
     if ([self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
         [self.footerView removeConstraint:self.fullMapCenterYConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.aboutButtonYConstraint]) {
+        [self.footerView removeConstraint:self.aboutButtonYConstraint];
     }
     
     //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
@@ -617,6 +623,14 @@
         [self.footerView addConstraint:self.fullMapCenterYConstraint];
     }
     
+    if ([self.footerView.constraints containsObject:self.aboutButtonBottomSpaceConstraint]) {
+        [self.footerView removeConstraint:self.aboutButtonBottomSpaceConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.aboutButtonYConstraint]) {
+        [self.footerView addConstraint:self.aboutButtonYConstraint];
+    }
+    
     CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];
     
     double distance = [self.usersCurrentLocation distanceFromLocation:location];
@@ -660,6 +674,14 @@
     
     if (![self.footerView.constraints containsObject:self.fullMapBottomSpaceConstraint]) {
         [self.footerView addConstraint:self.self.fullMapBottomSpaceConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.aboutButtonYConstraint]) {
+        [self.footerView removeConstraint:self.aboutButtonYConstraint];
+    }
+    
+    if (![self.footerView.constraints containsObject:self.aboutButtonBottomSpaceConstraint]) {
+        [self.footerView addConstraint:self.self.aboutButtonBottomSpaceConstraint];
     }
     
     [UIView animateWithDuration:0.5f
