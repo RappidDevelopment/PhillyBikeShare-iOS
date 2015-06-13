@@ -169,8 +169,9 @@
     //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
     if (IS_IPHONE_5) {
         self.milesAwayTopSpaceConstraint.constant = 8;
-        
+    } else if (IS_IPHONE_4_OR_LESS) {
         // We just won't appeal to iPhone 4 users;
+        self.milesAwayTopSpaceConstraint.constant = 8;
         if (IS_IPHONE_4_OR_LESS) {
             self.rappidButton.hidden = YES;
         }
