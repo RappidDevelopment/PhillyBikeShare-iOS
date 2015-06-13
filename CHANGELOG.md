@@ -1,5 +1,35 @@
 # Change Log
 
+## [v1.0.0-rc.1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0-rc.1) (2015-06-13)
+
+[Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-beta.2...v1.0.0-rc.1)
+
+**Implemented enhancements:**
+
+- Change product name in app to Bike Philly [\#27](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/27)
+
+- Create ReadMe.md file [\#25](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/25)
+
+- As a user, I can see some general info about the app and the bike share program [\#14](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/14)
+
+- As a user, I can start a timer, so that I know how much time I have left before I need to dock my bike.  [\#12](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/12)
+
+**Fixed bugs:**
+
+- Swipe gestures are backwards [\#19](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/19)
+
+**Merged pull requests:**
+
+- Feature/\#14 [\#29](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/29) ([MattMorgis](https://github.com/MattMorgis))
+
+- Updated name to Bike Philly [\#28](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/28) ([MattMorgis](https://github.com/MattMorgis))
+
+- Feature/\#25 [\#26](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/26) ([MattMorgis](https://github.com/MattMorgis))
+
+- Feature/\#12 [\#22](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/22) ([MattMorgis](https://github.com/MattMorgis))
+
+- This fixes the swipe gestures [\#21](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/21) ([MattMorgis](https://github.com/MattMorgis))
+
 ## [v1.0.0-beta.2](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0-beta.2) (2015-05-31)
 
 [Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-beta.1...v1.0.0-beta.2)
