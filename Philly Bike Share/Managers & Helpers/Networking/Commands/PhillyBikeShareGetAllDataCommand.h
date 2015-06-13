@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "PhillyBikeShareNetworkCommandProtocol.h"
 
+/*!
+ * @discussion The network command to fetch all PhillyBikeShareLocation data.
+ *
+ *
+ */
 @interface PhillyBikeShareGetAllDataCommand : NSObject <PhillyBikeShareNetworkCommandProtocol>
 
 - (instancetype)initWithSuccessBlock:(AFHTTPRequestOperationSuccessBlock)success

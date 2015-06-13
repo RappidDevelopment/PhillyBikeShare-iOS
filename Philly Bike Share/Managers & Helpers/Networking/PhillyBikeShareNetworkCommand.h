@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "PhillyBikeShareNetworkCommandProtocol.h"
 
+/*!
+ * @discussion This class handles the heavy lifting and configuration
+ * of making networking calls to the PhillyBikeShare API.
+ *
+ */
 @interface PhillyBikeShareNetworkCommand : NSObject <PhillyBikeShareNetworkCommandProtocol>
 
 - (instancetype)initWithUrl:(NSString *)url
