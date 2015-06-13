@@ -11,7 +11,8 @@
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;
 
-#define iPhone4Height 480.0
+#define IS_IPHONE_4_OR_LESS (ScreenHeight < 568)
+#define IS_IPHONE_5 (ScreenHeight == 568.0)
 
 @interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
@@ -166,10 +167,13 @@
     }
     
     //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
-    if (ScreenHeight == iPhone4Height) {
+    if (IS_IPHONE_5) {
         self.milesAwayTopSpaceConstraint.constant = 8;
+        
         // We just won't appeal to iPhone 4 users;
-        self.rappidButton.hidden = YES;
+        if (IS_IPHONE_4_OR_LESS) {
+            self.rappidButton.hidden = YES;
+        }
     }
     
     // Save these so we can animate back to it later.
