@@ -25,8 +25,7 @@
 @property (strong, nonatomic) NSTimer *rideTimer;
 @property (nonatomic) NSInteger currentPlace;
 @property (nonatomic) CGPoint lastTranslation;
-
-//View Outlets
+// View Outlets
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLocationLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeight;
@@ -43,7 +42,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bikesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *docksLabel;
 @property (weak, nonatomic) IBOutlet UIButton *fullMapButton;
-
 // These are strong because I remove and add them during animations.
 // This controller needs a strong reference because
 // when they were weak and I added them back to the view they were
@@ -60,6 +58,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerLabelBottomSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *startRideButton;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *aboutBlurView;
+@property (weak, nonatomic) IBOutlet UIButton *aboutButton;
+@property (weak, nonatomic) IBOutlet UIButton *aboutGitHubRepoButton;
+@property (weak, nonatomic) IBOutlet UIButton *aboutBikeShareButton;
+@property (weak, nonatomic) IBOutlet UIButton *rappidButton;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -76,6 +79,10 @@
 - (IBAction)swipeRightArrow:(id)sender;
 - (IBAction)startRideButtonPressed:(id)sender;
 - (IBAction)fullMapButtonPressed:(id)sender;
+- (IBAction)aboutButtonPressed:(id)sender;
+- (IBAction)githubRepoButtonPressed:(id)sender;
+- (IBAction)bikeShareButtonPressed:(id)sender;
+- (IBAction)rappidButtonPressed:(id)sender;
 
 @end
 
@@ -114,6 +121,10 @@
     self.fullMapButton.hidden = YES;
     self.timerLabel.hidden = YES;
     self.startRideButton.hidden = YES;
+    self.aboutButton.hidden = YES;
+    
+    //Using alpha so I can animate the blur.
+    self.aboutBlurView.alpha = 0;
     
     // Add swipe and pan gestures to the footer view.
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
@@ -126,6 +137,10 @@
     [self.footerView addGestureRecognizer:swipeRight];
     [self.footerView addGestureRecognizer:swipeLeft];
     [self.footerView addGestureRecognizer:revealFullMapViewPanGestureRecognizer];
+    
+    // Add a tap gesture to the about blur view.
+    UITapGestureRecognizer *aboutTapGestureRecognzier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aboutBlurViewTapped:)];
+    [self.aboutBlurView addGestureRecognizer:aboutTapGestureRecognzier];
     
     // This sets the pan gesture as the priority. Without they were getting all messed up.
     [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
@@ -147,6 +162,8 @@
     //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
     if (ScreenHeight == iPhone4Height) {
         self.milesAwayTopSpaceConstraint.constant = 8;
+        // We just won't appeal to iPhone 4 users;
+        self.rappidButton.hidden = YES;
     }
     
     // Save these so we can animate back to it later.
@@ -191,7 +208,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    //Invalidate the update timer.
+    // Invalidate the update timer.
     if (self.updateLocationAndBikeShareDataTimer) {
         [self.updateLocationAndBikeShareDataTimer invalidate];
         self.updateLocationAndBikeShareDataTimer = nil;
@@ -290,6 +307,7 @@
         self.milesAwayLabel.hidden = NO;
         self.fullMapButton.hidden = NO;
         self.startRideButton.hidden = NO;
+        self.aboutButton.hidden = NO;
     }];
 }
 
@@ -477,6 +495,13 @@
     }
 }
 
+- (void)aboutBlurViewTapped:(UITapGestureRecognizer *)tapRecognizer {
+    
+    [UIView animateWithDuration:0.3 animations: ^ {
+        self.aboutBlurView.alpha = (self.aboutBlurView.alpha == 0) ? 1 : 0;
+    } completion:nil];
+}
+
 #pragma mark - Override Methods
 
 - (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
@@ -542,6 +567,26 @@
         self.fullMapButton.backgroundColor = [UIColor clearColor];
         [self hideFullMapView];
     }
+}
+
+- (IBAction)aboutButtonPressed:(id)sender {
+    
+    //Toggle between hidden and not.
+    [UIView animateWithDuration:0.3 animations: ^ {
+        self.aboutBlurView.alpha = (self.aboutBlurView.alpha == 0) ? 1 : 0;
+    } completion:nil];
+}
+
+- (IBAction)githubRepoButtonPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/RappidDevelopment/PhillyBikeShare-iOS"]];
+}
+
+- (IBAction)bikeShareButtonPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.rideindego.com"]];
+}
+
+- (IBAction)rappidButtonPressed:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://rappiddevelopment.com"]];
 }
 
 #pragma mark - View Animations
