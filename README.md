@@ -4,7 +4,7 @@ Bike Philly is a free iOS application that helps you locate the closest Indego d
 
 ## Build Instructions
 
-You'll need [Cocoapods](http://cocoapods.org) for most of our dependencies.
+You'll need `Cocoapods` for most of our dependencies. [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like [AFNetworking](https://github.com/AFNetworking/AFNetworking) in your projects. 
     
     $ gem install cocoapods
     
@@ -17,7 +17,13 @@ Now you'll need to build the dependencies.
     
     $ pod install
     
-*Note*: **Don't open the `.xcodeproj`** because we use Cocoapods! Use **`.xcworkspace`**
+*Note*: **Don't open the `.xcodeproj`** file because we use Cocoapods, use the **`.xcworkspace`** file.
+
+## Communication
+
+- If you **found a bug**, _and can provide steps to reliably reproduce it_, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, view our [waffle.io board](https://waffle.io/rappiddevelopment/phillybikeshare-ios) and/or submit a pull request.
 
 ## Third-party Libraries
 
@@ -46,3 +52,6 @@ Other contributors include:
 * [Rappid Development](http://rappiddevelopment.com/) - Coding and Development.
 * [Chris Ventura Art](http://chrisventuraart.com) - Graphic Design
 
+## License
+
+Bike Philly: Philly Bike Share for iOS is released under the [DBAD] (http://www.dbad-license.org) license. See the DBAD LICENSE for details.
