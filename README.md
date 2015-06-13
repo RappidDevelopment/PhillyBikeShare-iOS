@@ -31,7 +31,7 @@ This software additionally references or incorporates the following sources
 of intellectual property, the license terms for which are set forth
 in the sources themselves:
 
-The following dependencies are bundled with the Ride Philly iOS application, but are under terms of a separate license:
+The following dependencies are bundled with the Bike Philly iOS application, but are under terms of a separate license:
 
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) - A delightful iOS and OS X networking framework [![Build Status](https://travis-ci.org/AFNetworking/AFNetworking.svg)](https://travis-ci.org/AFNetworking/AFNetworking)
 
