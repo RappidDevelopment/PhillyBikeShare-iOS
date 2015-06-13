@@ -16,6 +16,10 @@
             <string>Montserrat-Bold</string>
             <string>Montserrat-Bold</string>
         </mutableArray>
+        <mutableArray key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+            <string>Montserrat-Regular</string>
+        </mutableArray>
     </customFonts>
     <scenes>
         <!--Philly Bike Share Main View Controller-->
@@ -41,13 +45,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o" userLabel="Header Location Label">
-                                        <rect key="frame" x="8" y="50" width="584" height="153"/>
+                                        <rect key="frame" x="8" y="20" width="584" height="183"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="48"/>
                                         <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKY-al-u4Y">
-                                        <rect key="frame" x="275" y="182" width="50" height="21"/>
+                                        <rect key="frame" x="276" y="183" width="50" height="21"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -58,7 +62,7 @@
                                     <constraint firstAttribute="trailing" secondItem="seL-Oa-Abi" secondAttribute="trailing" id="6qw-h6-Auw"/>
                                     <constraint firstItem="seL-Oa-Abi" firstAttribute="top" secondItem="hKY-al-u4Y" secondAttribute="bottom" constant="8" id="9c7-RA-cSS"/>
                                     <constraint firstItem="ufO-Dn-39o" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" constant="8" id="FiS-xG-b2K"/>
-                                    <constraint firstItem="ufO-Dn-39o" firstAttribute="top" secondItem="VRb-4Z-w80" secondAttribute="top" constant="50" id="L1g-el-oJ1"/>
+                                    <constraint firstItem="ufO-Dn-39o" firstAttribute="top" secondItem="VRb-4Z-w80" secondAttribute="top" constant="20" id="L1g-el-oJ1"/>
                                     <constraint firstItem="seL-Oa-Abi" firstAttribute="leading" secondItem="VRb-4Z-w80" secondAttribute="leading" id="PNt-9F-CvQ"/>
                                     <constraint firstItem="seL-Oa-Abi" firstAttribute="top" secondItem="ufO-Dn-39o" secondAttribute="bottom" constant="8" id="VYl-lT-rdy"/>
                                     <constraint firstAttribute="trailing" secondItem="ufO-Dn-39o" secondAttribute="trailing" constant="8" id="WZV-gH-0v0"/>
@@ -82,7 +86,7 @@
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-Jf-pxI">
-                                        <rect key="frame" x="17" y="62" width="66" height="20"/>
+                                        <rect key="frame" x="17" y="62" width="66" height="19.5"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -112,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="air-kr-5Gw">
-                                                <rect key="frame" x="239" y="28" width="23" height="44"/>
+                                                <rect key="frame" x="240" y="29" width="23" height="44"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -131,7 +135,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bikes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJN-I0-ltk">
-                                                <rect key="frame" x="225" y="77" width="50" height="22"/>
+                                                <rect key="frame" x="226" y="77" width="50" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -153,7 +157,7 @@
                                         <rect key="frame" x="300" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQW-AM-amj">
-                                                <rect key="frame" x="41" y="28" width="23" height="44"/>
+                                                <rect key="frame" x="42" y="29" width="23" height="44"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -195,12 +199,12 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".33 Miles Away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHY-o8-WUL">
-                                        <rect key="frame" x="212" y="25" width="176" height="29"/>
+                                        <rect key="frame" x="213" y="25" width="176" height="29"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8" userLabel="Full Map View">
                                         <rect key="frame" x="8" y="172" width="44" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -208,13 +212,7 @@
                                             <constraint firstAttribute="height" constant="44" id="Jlh-J3-J5Z"/>
                                         </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" image="Map">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
+                                        <state key="normal" image="Map"/>
                                         <connections>
                                             <action selector="fullMapButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ydc-Hs-GUl"/>
                                         </connections>
@@ -231,13 +229,16 @@
                                             <action selector="startRideButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fql-MU-gFU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYP-fw-mzZ">
-                                        <rect key="frame" x="570" y="186" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYP-fw-mzZ" userLabel="About Button">
+                                        <rect key="frame" x="563" y="184" width="22" height="22"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="aboutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WY5-Ew-6cL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.59999999999999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -245,12 +246,12 @@
                                     <constraint firstAttribute="centerX" secondItem="BHY-o8-WUL" secondAttribute="centerX" id="09Q-ze-NeS"/>
                                     <constraint firstItem="L9P-Hq-eGY" firstAttribute="width" secondItem="yHF-ba-0aF" secondAttribute="width" id="0tt-2B-axw"/>
                                     <constraint firstItem="fyD-0J-hVz" firstAttribute="height" secondItem="MN3-MU-V4U" secondAttribute="height" id="1cm-pC-0RN"/>
-                                    <constraint firstAttribute="bottom" secondItem="VYP-fw-mzZ" secondAttribute="bottom" constant="8" id="8oM-Na-sUF"/>
+                                    <constraint firstAttribute="bottom" secondItem="VYP-fw-mzZ" secondAttribute="bottom" constant="10" id="8oM-Na-sUF"/>
                                     <constraint firstAttribute="centerY" secondItem="L9P-Hq-eGY" secondAttribute="centerY" id="Ak7-rP-Kf0"/>
                                     <constraint firstItem="yHF-ba-0aF" firstAttribute="leading" secondItem="oFe-fV-zIK" secondAttribute="leading" id="D6s-b1-auo"/>
                                     <constraint firstAttribute="trailing" secondItem="WEk-dW-Kz0" secondAttribute="trailing" id="GYd-dl-VID"/>
                                     <constraint firstAttribute="bottom" secondItem="QDw-6m-5N8" secondAttribute="bottom" id="IwS-PQ-bol"/>
-                                    <constraint firstAttribute="trailing" secondItem="VYP-fw-mzZ" secondAttribute="trailing" constant="8" id="J6r-qf-Ylv"/>
+                                    <constraint firstAttribute="trailing" secondItem="VYP-fw-mzZ" secondAttribute="trailing" constant="15" id="J6r-qf-Ylv"/>
                                     <constraint firstItem="BHY-o8-WUL" firstAttribute="top" secondItem="WEk-dW-Kz0" secondAttribute="bottom" constant="20" id="MGP-Ag-fEk"/>
                                     <constraint firstAttribute="centerY" secondItem="QDw-6m-5N8" secondAttribute="centerY" priority="250" id="O1t-MC-7As"/>
                                     <constraint firstItem="WEk-dW-Kz0" firstAttribute="top" secondItem="oFe-fV-zIK" secondAttribute="top" id="Vds-eE-l5V"/>
@@ -272,21 +273,73 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bike Philly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd4-Ye-jO1">
-                                            <rect key="frame" x="204" y="136" width="193" height="44"/>
+                                            <rect key="frame" x="204" y="50" width="193" height="44"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-vZ-myV">
-                                            <rect key="frame" x="279" y="188" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-vZ-myV">
+                                            <rect key="frame" x="8" y="114" width="584" height="204"/>
+                                            <mutableString key="text">Bike Philly: Philly Bike Share for iOS helps you locate the closest Indego docking station. With one tap you can find the closest station, how far away it is, and how many bikes and open docks are available. 
+
+You can easily plan your trip in full map mode. A 30-minute ride timer helps you track your rental and prevent late fees. 
+
+Philly Bike Share for iOS is not directly affiliated with the City of Philadelphia, Independence Blue Cross or the Indego Bike Share program. All rights are reserved by their respective owners. 
+
+This application is has been open sourced. To report a bug, enhancement, or contribute, follow a link to our GitHub repository below.</mutableString>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                            <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-12-wkj">
+                                            <rect key="frame" x="250" y="542" width="100" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="9Cc-ex-UPV"/>
+                                                <constraint firstAttribute="height" constant="50" id="SeB-WR-fUm"/>
+                                            </constraints>
+                                            <state key="normal" image="RD Logo">
+                                                <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="rappidButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RjH-gv-8Ab"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-j2-9ID">
+                                            <rect key="frame" x="227" y="332" width="147" height="32"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                            <state key="normal" title="GitHub Repository">
+                                                <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="githubRepoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1kP-F7-HSG"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-ZD-2jl">
+                                            <rect key="frame" x="228" y="372" width="145" height="32"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                            <state key="normal" title="Indego Bike Share">
+                                                <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="bikeShareButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="alO-gf-PYs"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="centerX" secondItem="hd4-Ye-jO1" secondAttribute="centerX" id="8oE-5M-Hwp"/>
-                                        <constraint firstItem="hd4-Ye-jO1" firstAttribute="top" secondItem="Alf-x8-ITu" secondAttribute="top" constant="136" id="Tuf-xg-8rT"/>
+                                        <constraint firstItem="hd4-Ye-jO1" firstAttribute="top" secondItem="Alf-x8-ITu" secondAttribute="top" constant="50" id="3V7-TJ-Y4S"/>
+                                        <constraint firstItem="3Sl-vZ-myV" firstAttribute="top" secondItem="hd4-Ye-jO1" secondAttribute="bottom" constant="20" id="7ZH-eY-qUA"/>
+                                        <constraint firstAttribute="bottom" secondItem="sJm-12-wkj" secondAttribute="bottom" constant="8" id="Cl3-8y-tLr"/>
+                                        <constraint firstItem="rKi-ZD-2jl" firstAttribute="top" secondItem="9ID-j2-9ID" secondAttribute="bottom" constant="8" id="FeW-IY-2Cs"/>
+                                        <constraint firstItem="3Sl-vZ-myV" firstAttribute="leading" secondItem="Alf-x8-ITu" secondAttribute="leading" constant="8" id="Hca-Tu-RrJ"/>
+                                        <constraint firstAttribute="centerX" secondItem="sJm-12-wkj" secondAttribute="centerX" id="RxY-fC-qys"/>
+                                        <constraint firstAttribute="trailing" secondItem="3Sl-vZ-myV" secondAttribute="trailing" constant="8" id="Wgc-M9-25l"/>
+                                        <constraint firstAttribute="centerX" secondItem="rKi-ZD-2jl" secondAttribute="centerX" id="dcL-sC-sFs"/>
+                                        <constraint firstAttribute="centerX" secondItem="hd4-Ye-jO1" secondAttribute="centerX" id="f45-Ze-XhG"/>
+                                        <constraint firstAttribute="centerX" secondItem="9ID-j2-9ID" secondAttribute="centerX" id="oq0-hN-pDH"/>
+                                        <constraint firstItem="9ID-j2-9ID" firstAttribute="top" secondItem="3Sl-vZ-myV" secondAttribute="bottom" constant="15" id="s20-GN-9R9"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="light"/>
@@ -314,6 +367,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="aboutBikeShareButton" destination="rKi-ZD-2jl" id="pmQ-qh-XLV"/>
+                        <outlet property="aboutBlurView" destination="spi-YI-9mC" id="VbX-Ea-JFR"/>
+                        <outlet property="aboutButton" destination="VYP-fw-mzZ" id="DOC-12-NgW"/>
+                        <outlet property="aboutGitHubRepoButton" destination="9ID-j2-9ID" id="sCn-1i-6jA"/>
                         <outlet property="arrowHeight" destination="9vd-wD-sk0" id="GgB-qc-cBQ"/>
                         <outlet property="arrowWidth" destination="V2N-vg-2rc" id="4PG-Xp-DTx"/>
                         <outlet property="bikeView" destination="yHF-ba-0aF" id="kv1-AM-SVe"/>
@@ -338,6 +395,7 @@
                         <outlet property="milesAwayTopSpaceConstraint" destination="MGP-Ag-fEk" id="fEX-3R-gZJ"/>
                         <outlet property="numberOfBikesLabel" destination="air-kr-5Gw" id="xXj-UN-44B"/>
                         <outlet property="numberOfDocksLabel" destination="xQW-AM-amj" id="oO9-yl-1pl"/>
+                        <outlet property="rappidButton" destination="sJm-12-wkj" id="ZhE-QK-9rL"/>
                         <outlet property="startRideButton" destination="4rC-yE-iK6" id="mUF-G7-izh"/>
                         <outlet property="swipeLeftArrow" destination="fyD-0J-hVz" id="0C1-nS-TeF"/>
                         <outlet property="swipeRightArrow" destination="MN3-MU-V4U" id="bLP-KL-dMG"/>
@@ -350,6 +408,7 @@
     </scenes>
     <resources>
         <image name="Map" width="21" height="21"/>
+        <image name="RD Logo" width="200" height="100"/>
         <image name="Swipe Left Arrow" width="70" height="70"/>
         <image name="Swipe Right Arrow" width="70" height="70"/>
     </resources>
