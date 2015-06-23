@@ -2,6 +2,8 @@
 
 Bike Philly is a free iOS application that helps you locate the closest Indego docking station and how many bikes and open docks are available.
 
+The application can be downloaded in the [Apple App Store](https://itunes.apple.com/us/app/bike-philly-philly-bike-share/id998132080?mt=8).
+
 ## Build Instructions
 
 You'll need `Cocoapods` for most of our dependencies. [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like [AFNetworking](https://github.com/AFNetworking/AFNetworking) in your projects. 
