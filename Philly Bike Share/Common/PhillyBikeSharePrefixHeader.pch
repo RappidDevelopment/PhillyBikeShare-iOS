@@ -1,0 +1,106 @@
+//
+//  PhillyBikeSharePrefixHeader.pch
+//  Philly Bike Share
+//
+//  Created by Morgis, Matthew on 5/24/15.
+//  Copyright (c) 2015 Rappid Development. All rights reserved.
+//
+
+#ifndef Philly_Bike_Share_PhillyBikeSharePrefixHeader_pch
+#define Philly_Bike_Share_PhillyBikeSharePrefixHeader_pch
+
+#ifdef DEBUG
+#define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define ALog(...) [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding] file:[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lineNumber:__LINE__ description:__VA_ARGS__]
+#else
+#define DLog(...) do { } while (0)
+#define ALog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+
+#ifndef NS_BLOCK_ASSERTIONS
+#define NS_BLOCK_ASSERTIONS
+#endif
+#endif
+
+// printing out frame, bounds, and point
+#define printFrame(uiview) DLog(@"%@", [NSString stringWithFormat:@"frame: origin_x: %f, origin_y: %f  size_width: %f, size_height: %f", uiview.frame.origin.x, uiview.frame.origin.y, uiview.frame.size.width, uiview.frame.size.height])
+
+#define printRect(cgrect) DLog(@"%@", [NSString stringWithFormat:@"rect: origin_x: %f, origin_y: %f  size_width: %f, size_height: %f", cgrect.origin.x, cgrect.origin.y, cgrect.size.width, cgrect.size.height])
+
+#define printBounds(uiview) DLog(@"%@", [NSString stringWithFormat:@"frame: origin_x: %f, origin_y: %f  size_width: %f, size_height: %f", uiview.bounds.origin.x, uiview.bounds.origin.y, uiview.bounds.size.width, uiview.bounds.size.height])
+#define printPoint(cgpoint) DLog(@"%@", [NSString stringWithFormat:@"point: origin_x: %f, origin_y: %f", cgpoint.x, cgpoint.y])
+
+#define alertFeatureNotYetImplemented()     [[[UIAlertView alloc ] initWithTitle:@"Feature Not Implemented" message:@"This feature is not implemented yet." delegate:self cancelButtonTitle:@"Okay"otherButtonTitles:nil] show];
+
+#define IS_IOS_ABOVE_7 (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
+
+// when termining the platform type, use these helpers
+#define PlatformType    UI_USER_INTERFACE_IDIOM()
+#define iPad            UIUserInterfaceIdiomPad
+#define iPhone          UIUserInterfaceIdiomPhone
+
+// Object defines
+#define ApplicationDelegate                 ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define UserDefaults                        [NSUserDefaults standardUserDefaults]
+#define NotificationCenter                  [NSNotificationCenter defaultCenter]
+#define SharedApplication                   [UIApplication sharedApplication]
+#define Bundle                              [NSBundle mainBundle]
+#define MainScreen                          [UIScreen mainScreen]
+#define ShowNetworkActivityIndicator()      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
+#define HideNetworkActivityIndicator()      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO
+#define NetworkActivityIndicatorVisible(x)  [UIApplication sharedApplication].networkActivityIndicatorVisible = x
+#define NavBar                              self.navigationController.navigationBar
+#define TabBar                              self.tabBarController.tabBar
+#define NavBarHeight                        self.navigationController.navigationBar.bounds.size.height
+#define TabBarHeight                        self.tabBarController.tabBar.bounds.size.height
+#define ScreenWidth                         [[UIScreen mainScreen] bounds].size.width
+#define ScreenHeight                        [[UIScreen mainScreen] bounds].size.height
+#define TouchHeightDefault                  44
+#define TouchHeightSmall                    32
+
+// View getter functions
+#define ViewWidth(v)                        v.frame.size.width
+#define ViewHeight(v)                       v.frame.size.height
+#define ViewX(v)                            v.frame.origin.x
+#define ViewY(v)                            v.frame.origin.y
+#define SelfViewWidth                       self.view.bounds.size.width
+#define SelfViewHeight                      self.view.bounds.size.height
+
+// Frame getter functions
+#define RectX(f)                            f.origin.x
+#define RectY(f)                            f.origin.y
+#define RectWidth(f)                        f.size.width
+#define RectHeight(f)                       f.size.height
+
+// Frame settings functions
+#define RectSetWidth(f, w)                  CGRectMake(RectX(f), RectY(f), w, RectHeight(f))
+#define RectSetHeight(f, h)                 CGRectMake(RectX(f), RectY(f), RectWidth(f), h)
+#define RectShiftXBy(f, deltaX)             CGRectMake(RectX(f)+deltaX, RectY(f), RectWidth(f), RectHeight(f))
+#define RectShiftYBy(f, deltaY)             CGRectMake(RectX(f), RectY(f)+deltaY, RectWidth(f), RectHeight(f))
+#define RectSetX(f, x)                      CGRectMake(x, RectY(f), RectWidth(f), RectHeight(f))
+#define RectSetY(f, y)                      CGRectMake(RectX(f), y, RectWidth(f), RectHeight(f))
+#define RectSetSize(f, w, h)                CGRectMake(RectX(f), RectY(f), w, h)
+#define RectSetOrigin(f, x, y)              CGRectMake(x, y, RectWidth(f), RectHeight(f))
+
+// Date functions
+#define DATE_COMPONENTS                     NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit
+#define TIME_COMPONENTS                     NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit
+#define FlushPool(p)                        [p drain]; p = [[NSAutoreleasePool alloc] init]
+
+// Color functions
+#define RGB(r, g, b)                        [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define RGBA(r, g, b, a)                    [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define HEXCOLOR(c)                         [UIColor colorWithRed:((c>>16)&0xFF)/255.0 green:((c>>8)&0xFF)/255.0 blue:(c&0xFF)/255.0 alpha:1.0];
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+//Fonts
+#define MontserratBlack(s) [UIFont fontWithName:@"Montserrat-Black" size:s]
+#define MontserratBold(s) [UIFont fontWithName:@"Montserrat-Bold" size:s]
+#define MontserratHariline(s) [UIFont fontWithName:@"Montserrat-Hairline" size:s]
+#define MontserratLight(s) [UIFont fontWithName:@"Montserrat-Light" size:s]
+#define MontserratRegular(s) [UIFont fontWithName:@"Montserrat-Regular" size:s]
+
+//Colors
+#define RDLightBlue UIColorFromRGB(0x3497db)
+#define RDBlueishGrey UIColorFromRGB(0x363b47)
+
+#endif

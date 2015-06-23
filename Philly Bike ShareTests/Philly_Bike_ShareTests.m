@@ -2,7 +2,7 @@
 //  Philly_Bike_ShareTests.m
 //  Philly Bike ShareTests
 //
-//  Created by Morgis, Matthew (ELS-PHI) on 5/23/15.
+//  Created by Morgis, Matthew on 5/23/15.
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
