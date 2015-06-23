@@ -1,8 +1,8 @@
 # Change Log
 
-## [v1.0.0-rc.1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0-rc.1) (2015-06-13)
+## [v1.0.0](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0) (2015-06-23)
 
-[Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-beta.2...v1.0.0-rc.1)
+[Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-rc.1...v1.0.0)
 
 **Implemented enhancements:**
 
@@ -10,13 +10,43 @@
 
 - Create ReadMe.md file [\#25](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/25)
 
+- As a user, I can see arrows, so that I know I can swipe between stations.  [\#15](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/15)
+
 - As a user, I can see some general info about the app and the bike share program [\#14](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/14)
 
-- As a user, I can start a timer, so that I know how much time I have left before I need to dock my bike.  [\#12](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/12)
+- As a user, I am prompted with a message to use my current location, so that I can see what stations are relative to me. [\#7](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/7)
+
+- As a developer, I need to use the API to fetch and store the latest information, so that I am always up to date. [\#6](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/6)
+
+- As a user, I can click on a pin and see how many bikes and open slots are available at that location, so that I can determine if I want to visit it. [\#3](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/3)
+
+- As a user, I can see a global map view of all bike share stations, so that I can easily plan my trip. [\#2](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/2)
+
+- As a user, I can see the closest station to my current location, so that I can quickly get to the nearest station. [\#1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/1)
 
 **Fixed bugs:**
 
 - Swipe gestures are backwards [\#19](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/19)
+
+- Fix sizing issues with iPhone 4. [\#16](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/16)
+
+**Closed issues:**
+
+- Update README.md with App Store link [\#32](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/32)
+
+**Merged pull requests:**
+
+- v1.0.0 [\#34](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/34) ([MattMorgis](https://github.com/MattMorgis))
+
+- Updating README.md [\#33](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/33) ([MattMorgis](https://github.com/MattMorgis))
+
+## [v1.0.0-rc.1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0-rc.1) (2015-06-13)
+
+[Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-beta.2...v1.0.0-rc.1)
+
+**Implemented enhancements:**
+
+- As a user, I can start a timer, so that I know how much time I have left before I need to dock my bike.  [\#12](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/12)
 
 **Merged pull requests:**
 
@@ -34,18 +64,6 @@
 
 [Full Changelog](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/compare/v1.0.0-beta.1...v1.0.0-beta.2)
 
-**Implemented enhancements:**
-
-- As a user, I can see arrows, so that I know I can swipe between stations.  [\#15](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/15)
-
-- As a user, I can click on a pin and see how many bikes and open slots are available at that location, so that I can determine if I want to visit it. [\#3](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/3)
-
-- As a user, I can see a global map view of all bike share stations, so that I can easily plan my trip. [\#2](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/2)
-
-**Fixed bugs:**
-
-- Fix sizing issues with iPhone 4. [\#16](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/16)
-
 **Merged pull requests:**
 
 - Selecting a pin in the map view will set the region and active station properly. [\#18](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/18) ([MattMorgis](https://github.com/MattMorgis))
@@ -53,14 +71,6 @@
 - Feature/\#15 [\#17](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/pull/17) ([MattMorgis](https://github.com/MattMorgis))
 
 ## [v1.0.0-beta.1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/tree/v1.0.0-beta.1) (2015-05-29)
-
-**Implemented enhancements:**
-
-- As a user, I am prompted with a message to use my current location, so that I can see what stations are relative to me. [\#7](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/7)
-
-- As a developer, I need to use the API to fetch and store the latest information, so that I am always up to date. [\#6](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/6)
-
-- As a user, I can see the closest station to my current location, so that I can quickly get to the nearest station. [\#1](https://github.com/RappidDevelopment/PhillyBikeShare-iOS/issues/1)
 
 **Closed issues:**
 
