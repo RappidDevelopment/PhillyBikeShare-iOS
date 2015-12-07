@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Bold.otf">
@@ -39,6 +40,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seL-Oa-Abi" userLabel="Stripe View">
                                         <rect key="frame" x="0.0" y="211" width="600" height="5"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.16078431372549021" green="0.17254901960784313" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5" id="xKy-HZ-hnf"/>
@@ -46,17 +48,20 @@
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ufO-Dn-39o" userLabel="Header Location Label">
                                         <rect key="frame" x="8" y="20" width="584" height="183"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="48"/>
                                         <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKY-al-u4Y">
-                                        <rect key="frame" x="276" y="183" width="50" height="21"/>
+                                        <rect key="frame" x="275" y="182" width="50" height="21"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.59999999999999998" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="seL-Oa-Abi" secondAttribute="trailing" id="6qw-h6-Auw"/>
@@ -74,6 +79,7 @@
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FPW-vv-eao">
                                 <rect key="frame" x="0.0" y="216" width="600" height="168"/>
+                                <animations/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wJ3-uw-4BK"/>
                                 </connections>
@@ -83,15 +89,18 @@
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gMl-SQ-2TV">
                                         <rect key="frame" x="32" y="17" width="37" height="37"/>
+                                        <animations/>
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-Jf-pxI">
-                                        <rect key="frame" x="17" y="62" width="66" height="19.5"/>
+                                        <rect key="frame" x="17" y="62" width="66" height="20"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="gMl-SQ-2TV" secondAttribute="centerY" constant="14.5" id="Akx-nJ-47c"/>
@@ -107,6 +116,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEk-dW-Kz0" userLabel="Stripe View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="5"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="5" id="qhC-NC-g8V"/>
@@ -117,12 +127,14 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="air-kr-5Gw">
                                                 <rect key="frame" x="239" y="28" width="23" height="44"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyD-0J-hVz">
                                                 <rect key="frame" x="8" y="28" width="44" height="44"/>
+                                                <animations/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="9vd-wD-sk0"/>
                                                     <constraint firstAttribute="width" constant="44" id="V2N-vg-2rc"/>
@@ -136,11 +148,13 @@
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bikes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJN-I0-ltk">
                                                 <rect key="frame" x="225" y="77" width="50" height="22"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="IJN-I0-ltk" secondAttribute="trailing" constant="25" id="0z5-Fn-HWk"/>
@@ -157,13 +171,15 @@
                                         <rect key="frame" x="300" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQW-AM-amj">
-                                                <rect key="frame" x="42" y="29" width="23" height="43.5"/>
+                                                <rect key="frame" x="42" y="28" width="23" height="44"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN3-MU-V4U">
                                                 <rect key="frame" x="248" y="28" width="44" height="44"/>
+                                                <animations/>
                                                 <state key="normal" image="Swipe Right Arrow">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -173,11 +189,13 @@
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Docks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27Q-l7-fgZ">
                                                 <rect key="frame" x="25" y="77" width="56" height="22"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
                                                 <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="MN3-MU-V4U" secondAttribute="trailing" constant="8" id="3sp-jA-qbl"/>
@@ -199,13 +217,15 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".33 Miles Away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHY-o8-WUL">
-                                        <rect key="frame" x="212" y="25" width="175.5" height="29"/>
+                                        <rect key="frame" x="212" y="25" width="176" height="29"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDw-6m-5N8" userLabel="Full Map View">
                                         <rect key="frame" x="8" y="172" width="44" height="44"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" id="ABb-eA-jiZ"/>
@@ -219,6 +239,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rC-yE-iK6">
                                         <rect key="frame" x="264" y="179" width="72" height="29"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Start Ride">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -231,6 +252,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYP-fw-mzZ" userLabel="About Button">
                                         <rect key="frame" x="563" y="184" width="22" height="22"/>
+                                        <animations/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,6 +263,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.30196078430000001" green="0.59999999999999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="BHY-o8-WUL" secondAttribute="centerX" id="09Q-ze-NeS"/>
@@ -274,26 +297,29 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bike Philly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd4-Ye-jO1">
-                                            <rect key="frame" x="204" y="35" width="193" height="43.5"/>
+                                            <rect key="frame" x="204" y="35" width="193" height="44"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-vZ-myV">
-                                            <rect key="frame" x="8" y="98" width="584" height="203.5"/>
-                                            <mutableString key="text">Bike Philly: Philly Bike Share for iOS helps you locate the closest Indego docking station. With one tap you can find the closest station, how far away it is, and how many bikes and open docks are available. 
+                                            <rect key="frame" x="8" y="99" width="584" height="204"/>
+                                            <animations/>
+                                            <string key="text">Bike Philly: Philly Bike Share for iOS helps you locate the closest Indego docking station. With one tap you can find the closest station, how far away it is, and how many bikes and open docks are available. 
 
 You can easily plan your trip in full map mode. A 30-minute ride timer helps you track your rental and prevent late fees. 
 
 Philly Bike Share for iOS is not directly affiliated with the City of Philadelphia, Independence Blue Cross or the Indego Bike Share program. All rights are reserved by their respective owners. 
 
-This application is has been open sourced. To report a bug, enhancement, or contribute, follow the link to our GitHub repository below.</mutableString>
+This application is has been open sourced. To report a bug, enhancement, or contribute, follow the link to our GitHub repository below.</string>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJm-12-wkj">
                                             <rect key="frame" x="250" y="542" width="100" height="50"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="9Cc-ex-UPV"/>
                                                 <constraint firstAttribute="height" constant="50" id="SeB-WR-fUm"/>
@@ -307,7 +333,8 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-j2-9ID">
-                                            <rect key="frame" x="227" y="317" width="147" height="32"/>
+                                            <rect key="frame" x="227" y="318" width="147" height="32"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                             <state key="normal" title="GitHub Repository">
                                                 <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -318,7 +345,8 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-ZD-2jl">
-                                            <rect key="frame" x="228" y="357" width="145" height="32"/>
+                                            <rect key="frame" x="228" y="358" width="145" height="32"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                             <state key="normal" title="Indego Bike Share">
                                                 <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -329,6 +357,7 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="hd4-Ye-jO1" firstAttribute="top" secondItem="Alf-x8-ITu" secondAttribute="top" constant="35" id="3V7-TJ-Y4S"/>
                                         <constraint firstItem="3Sl-vZ-myV" firstAttribute="top" secondItem="hd4-Ye-jO1" secondAttribute="bottom" constant="20" id="7ZH-eY-qUA"/>
@@ -343,9 +372,11 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                         <constraint firstItem="9ID-j2-9ID" firstAttribute="top" secondItem="3Sl-vZ-myV" secondAttribute="bottom" constant="15" id="s20-GN-9R9"/>
                                     </constraints>
                                 </view>
+                                <animations/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="spi-YI-9mC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2bj-V9-QkW"/>
