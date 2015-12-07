@@ -69,6 +69,9 @@
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
+- (void)setupView;
+- (void)setupGestures;
+- (void)setupLocationManagerAndMapView;
 - (void)pinLocaitonsToMapView;
 - (void)setupViewBasedOnUsersCurrentLocation;
 - (void)revealFullMapView;
@@ -102,91 +105,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Get the user's current location.
-    self.locationManager = [[CLLocationManager alloc]init];
-    self.locationManager.delegate = self;
-    [self.locationManager requestWhenInUseAuthorization];
-    
-    // Setup the view to be displayed in thirds.
+    [self setupLocationManagerAndMapView];
     [self calculateConstraints];
-    
-    // Initally hide these elements until
-    // All of the data is loaded.
-    self.headerLocationLabel.hidden = YES;
-    self.bikeView.hidden = YES;
-    self.docksView.hidden = YES;
-    self.milesAwayLabel.hidden = YES;
-    self.fullMapButton.hidden = YES;
-    self.timerLabel.hidden = YES;
-    self.startRideButton.hidden = YES;
-    self.aboutButton.hidden = YES;
-    
-    //Using alpha so I can animate the blur.
-    self.aboutBlurView.alpha = 0;
-    
-    // Add swipe and pan gestures to the footer view.
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    UIPanGestureRecognizer *revealFullMapViewPanGestureRecognizer =
-    [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(handleRevealFullMapViewPan:)];
-    [self.footerView addGestureRecognizer:swipeRight];
-    [self.footerView addGestureRecognizer:swipeLeft];
-    [self.footerView addGestureRecognizer:revealFullMapViewPanGestureRecognizer];
-    
-    // Add a tap gesture to the about blur view.
-    UITapGestureRecognizer *aboutTapGestureRecognzier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aboutBlurViewTapped:)];
-    [self.aboutBlurView addGestureRecognizer:aboutTapGestureRecognzier];
-    
-    // This sets the pan gesture as the priority. Without they were getting all messed up.
-    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
-    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeRight];
-    
-    // Set the current place in the array to 0, the closest docking station to the user.
-    self.currentPlace = 0;
-    
-    // Remove the Y constraint on the elements in the footer.
-    // These will be added again when the full map view is displayed.
-    if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
-        [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
-    }
-    
-    if ([self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
-        [self.footerView removeConstraint:self.fullMapCenterYConstraint];
-    }
-    
-    if ([self.footerView.constraints containsObject:self.aboutButtonYConstraint]) {
-        [self.footerView removeConstraint:self.aboutButtonYConstraint];
-    }
-    
-    //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
-    if (IS_IPHONE_5) {
-        self.milesAwayTopSpaceConstraint.constant = 8;
-    } else if (IS_IPHONE_4_OR_LESS) {
-        // We just won't appeal to iPhone 4 users;
-        self.milesAwayTopSpaceConstraint.constant = 8;
-        if (IS_IPHONE_4_OR_LESS) {
-            self.rappidButton.hidden = YES;
-        }
-    }
-    
-    // Save these so we can animate back to it later.
-    _bikeViewInitialHeight = self.bikeViewHeight.constant;
-    _headerLabelBottomSpaceInitalValue = self.headerLabelBottomSpaceConstraint.constant;
-    
-    //Clip these so they animate with the parent view.
-    self.bikeView.clipsToBounds = YES;
-    self.docksView.clipsToBounds = YES;
-    
-    //Setup the map view.
-    self.mapView.mapType = MKMapTypeStandard;
-    [self.mapView setShowsUserLocation:YES];
-    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    
+    [self setupView];
+    [self setupGestures];
     //We have not displayed the out of area warning yet.
-    _displayedOutOfAreaWarning = NO;
+    self.displayedOutOfAreaWarning = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -229,7 +153,18 @@
                                                   object:nil];
 }
 
-# pragma mark - Location Manager Delegate Method
+# pragma mark - Location Manager
+
+- (void)setupLocationManagerAndMapView {
+    // Get the user's current location.
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
+    [self.locationManager requestWhenInUseAuthorization];
+    //Setup the map view.
+    self.mapView.mapType = MKMapTypeStandard;
+    [self.mapView setShowsUserLocation:YES];
+    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
@@ -595,7 +530,51 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://rappiddevelopment.com"]];
 }
 
-#pragma mark - View Animations
+#pragma mark - View Animations and Layouts
+
+- (void)setupView {
+    // Initally hide these elements until
+    // All of the data is loaded.
+    self.headerLocationLabel.hidden = YES;
+    self.bikeView.hidden = YES;
+    self.docksView.hidden = YES;
+    self.milesAwayLabel.hidden = YES;
+    self.fullMapButton.hidden = YES;
+    self.timerLabel.hidden = YES;
+    self.startRideButton.hidden = YES;
+    self.aboutButton.hidden = YES;
+    
+    //Changing the alpha so I can animate the blur.
+    self.aboutBlurView.alpha = 0;
+    // Set the current place in the array to 0, the closest docking station to the user.
+    self.currentPlace = 0;
+    
+    //Clip these so they animate with the parent view.
+    self.bikeView.clipsToBounds = YES;
+    self.docksView.clipsToBounds = YES;
+}
+
+- (void)setupGestures {
+    // Add swipe and pan gestures to the footer view.
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    UIPanGestureRecognizer *revealFullMapViewPanGestureRecognizer =
+    [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleRevealFullMapViewPan:)];
+    [self.footerView addGestureRecognizer:swipeRight];
+    [self.footerView addGestureRecognizer:swipeLeft];
+    [self.footerView addGestureRecognizer:revealFullMapViewPanGestureRecognizer];
+    
+    // Add a tap gesture to the about blur view.
+    UITapGestureRecognizer *aboutTapGestureRecognzier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(aboutBlurViewTapped:)];
+    [self.aboutBlurView addGestureRecognizer:aboutTapGestureRecognzier];
+    
+    // This sets the pan gesture as the priority. Without they were getting all messed up.
+    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeLeft];
+    [revealFullMapViewPanGestureRecognizer requireGestureRecognizerToFail:swipeRight];
+}
 
 - (void)revealFullMapView {
     self.fullMapButton.backgroundColor = RDBlueishGrey;
@@ -646,8 +625,6 @@
                          self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
                      }
      ];
-    
-    
 }
 
 - (void)hideFullMapView {
@@ -707,12 +684,41 @@
 }
 
 /*
- * Helper method to setup the header and footer
+ * Helper method to setup the constraints
  * view of the applcation.
  */
 - (void)calculateConstraints {
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
     self.bikeViewWidth.constant = floor(ScreenWidth / 2);
+    
+    // Remove the Y constraint on the elements in the footer.
+    // These will be added again when the full map view is displayed.
+    if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
+        [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.fullMapCenterYConstraint]) {
+        [self.footerView removeConstraint:self.fullMapCenterYConstraint];
+    }
+    
+    if ([self.footerView.constraints containsObject:self.aboutButtonYConstraint]) {
+        [self.footerView removeConstraint:self.aboutButtonYConstraint];
+    }
+    
+    //Handle this iPhone 4 edge case - couldn't handle the full 20 pixels.
+    if (IS_IPHONE_5) {
+        self.milesAwayTopSpaceConstraint.constant = 8;
+    } else if (IS_IPHONE_4_OR_LESS) {
+        // We just won't appeal to iPhone 4 users;
+        self.milesAwayTopSpaceConstraint.constant = 8;
+        if (IS_IPHONE_4_OR_LESS) {
+            self.rappidButton.hidden = YES;
+        }
+    }
+    
+    // Save these so we can animate back to it later.
+    self.bikeViewInitialHeight = self.bikeViewHeight.constant;
+    self.headerLabelBottomSpaceInitalValue = self.headerLabelBottomSpaceConstraint.constant;
 }
 
 @end
