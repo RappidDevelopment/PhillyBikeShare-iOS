@@ -274,6 +274,7 @@
 				2D192E781B112B170002EB0D /* Frameworks */,
 				2D192E791B112B170002EB0D /* Resources */,
 				59C3EFE43E0B17339A54F3EE /* Copy Pods Resources */,
+				1B2F6ED293C69715B8870AC1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,6 +367,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1B2F6ED293C69715B8870AC1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2EA0D3729700DB27C3A78FAD /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -565,6 +581,7 @@
 				INSTALL_OWNER = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rappiddevelopment.phillybikeshare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
