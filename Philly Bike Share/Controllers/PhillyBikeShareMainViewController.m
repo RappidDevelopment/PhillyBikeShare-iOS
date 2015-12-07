@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import <libextobjc/EXTScope.h>
+#import "PhillyBikeShareLocation.h"
 #import "PhillyBikeShareMainViewController.h"
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;

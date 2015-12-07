@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PhillyBikeShareLocation.h"
+
 @import CoreLocation;
 
 /*!

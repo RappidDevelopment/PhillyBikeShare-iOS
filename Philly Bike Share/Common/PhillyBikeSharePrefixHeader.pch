@@ -21,6 +21,8 @@
 #endif
 #endif
 
+#import <libextobjc/EXTScope.h>
+
 // printing out frame, bounds, and point
 #define printFrame(uiview) DLog(@"%@", [NSString stringWithFormat:@"frame: origin_x: %f, origin_y: %f  size_width: %f, size_height: %f", uiview.frame.origin.x, uiview.frame.origin.y, uiview.frame.size.width, uiview.frame.size.height])
 
