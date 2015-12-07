@@ -107,11 +107,6 @@
     self.locationManager.delegate = self;
     [self.locationManager requestWhenInUseAuthorization];
     
-    // Setup the view's styles.
-    self.headerLocationLabel.font = MontserratBold(48);
-    self.loadingLabel.font = MontserratBold(16);
-    self.milesAwayLabel.font = MontserratBold(24);
-    
     // Setup the view to be displayed in thirds.
     [self calculateConstraints];
     
