@@ -37,7 +37,7 @@
     NSString *url = @"https://api.phila.gov/bike-share-stations/v1";
     NSString *method = @"GET";
     
-    PhillyBikeShareNetworkCommand *command = [[PhillyBikeShareNetworkCommand alloc] initWithUrl:url andMethod:method andJsonRequest:YES andParameters:nil andSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+    PhillyBikeShareNetworkCommand *command = [[PhillyBikeShareNetworkCommand alloc] initWithUrl:url andMethod:method andJsonRequest:NO andParameters:nil andSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
         HideNetworkActivityIndicator();
         self.successHandler(operation, responseObject);
     } andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
