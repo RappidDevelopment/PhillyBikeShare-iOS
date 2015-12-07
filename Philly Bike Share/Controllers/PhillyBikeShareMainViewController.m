@@ -53,6 +53,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fullMapBottomSpaceConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutButtonYConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *aboutButtonBottomSpaceConstraint;
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *swipeRightArrow;
 @property (weak, nonatomic) IBOutlet UIButton *swipeLeftArrow;
@@ -66,6 +67,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *aboutGitHubRepoButton;
 @property (weak, nonatomic) IBOutlet UIButton *aboutBikeShareButton;
 @property (weak, nonatomic) IBOutlet UIButton *rappidButton;
+
+@property (nonatomic) NSInteger bikeViewInitialHeight;
+@property (nonatomic) NSInteger headerLabelBottomSpaceInitalValue;
+@property (nonatomic) BOOL displayedOutOfAreaWarning;
 
 - (void)checkForLocationServices;
 - (void)calculateConstraints;
@@ -93,10 +98,6 @@
 @end
 
 @implementation PhillyBikeShareMainViewController {
-    //Helper variables
-    int _bikeViewInitialHeight;
-    int _headerLabelBottomSpaceInitalValue;
-    BOOL _displayedOutOfAreaWarning;
     int _secondsLeft, _hours, _minutes, _seconds;
 }
 
@@ -219,12 +220,12 @@
     
     // If the user is more than 25 miles away, tell them the app won't be much use.
     if (self.activeBikeShareLocation.distanceFromUser > 25.0f) {
-        if (!_displayedOutOfAreaWarning) {
+        if (!self.displayedOutOfAreaWarning) {
             UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Philly Bike Share" message:@"Philly Bike Share works best when in the Philadelphia area. You will still be able to view the closest Indego docking station to you, but it might be a very long ride to get there!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
             
             // Also note that we showed them this message.
-            _displayedOutOfAreaWarning = YES;
+            self.displayedOutOfAreaWarning = YES;
         }
     }
     
@@ -476,7 +477,7 @@
 - (IBAction)startRideButtonPressed:(id)sender {
     
     if ([self.rideTimer isValid]) {
-        self.headerLabelBottomSpaceConstraint.constant = _headerLabelBottomSpaceInitalValue;
+        self.headerLabelBottomSpaceConstraint.constant = self.headerLabelBottomSpaceInitalValue;
         [self.rideTimer invalidate];
         [UIView animateWithDuration:0.5 animations:^{
             [self.startRideButton setTitle:@"Start Ride" forState:UIControlStateNormal];
@@ -631,11 +632,11 @@
     self.fullMapButton.backgroundColor = [UIColor clearColor];
     self.timerLabel.hidden = ([self.rideTimer isValid]) ? NO : YES;
     self.startRideButton.hidden = NO;
-    self.headerLabelBottomSpaceConstraint.constant = ([self.rideTimer isValid]) ? 36 : _headerLabelBottomSpaceInitalValue;
+    self.headerLabelBottomSpaceConstraint.constant = ([self.rideTimer isValid]) ? 36 : self.headerLabelBottomSpaceInitalValue;
     self.headerViewHeight.constant = floor(ScreenHeight / 3);
     self.headerLocationLabel.font = MontserratBold(48);
     self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 0.5, 0.5);
-    self.bikeViewHeight.constant = _bikeViewInitialHeight;
+    self.bikeViewHeight.constant = self.bikeViewInitialHeight;
     
     if ([self.footerView.constraints containsObject:self.milesAwayCenterYConstraint]) {
         [self.footerView removeConstraint:self.milesAwayCenterYConstraint];
@@ -677,7 +678,7 @@
 - (void)moveFooterAndHeaderViewByxOffset:(CGFloat)xOffset {
     CGFloat currentHeight = self.headerViewHeight.constant;
     currentHeight += xOffset;
-    self.bikeViewHeight.constant = (currentHeight < (ScreenHeight / 3)/1.5) ? 0 : _bikeViewInitialHeight;
+    self.bikeViewHeight.constant = (currentHeight < (ScreenHeight / 3)/1.5) ? 0 : self.bikeViewInitialHeight;
     self.headerViewHeight.constant = (currentHeight > (ScreenHeight / 3)) ? ScreenHeight / 3 : currentHeight;
     self.startRideButton.hidden = (currentHeight > ScreenHeight / 3 / 1.5) ? NO : YES;
     [self.view layoutIfNeeded];
