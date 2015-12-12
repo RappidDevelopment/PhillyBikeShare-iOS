@@ -1,14 +1,14 @@
 //
-//  PhillyBikeShareLocation.m
+//  PBSStation.m
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import "PhillyBikeShareLocation.h"
+#import "PBSStation.h"
 
-@implementation PhillyBikeShareLocation
+@implementation PBSStation
 
 - (instancetype) initWithKioskId:(NSInteger)kioskId
                          andName:(NSString *)name

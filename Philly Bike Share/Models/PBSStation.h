@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareLocation.h
+//  PBSStation.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PhillyBikeShareLocation : NSObject
+@interface PBSStation : NSObject
 
 /*!
  * @brief The id of the location.
@@ -71,7 +71,7 @@
 @property (nonatomic) float distanceFromUser;
 
 /*!
- * @discussion Public constructor of the PhillyBikeShareLocation object.
+ * @discussion Public constructor of the PBSLocation object.
  * @param kioskId The id of the station
  * @param name The name of the station
  * @param latitude The latitude of the station

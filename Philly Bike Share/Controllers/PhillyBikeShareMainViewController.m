@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import "PhillyBikeShareLocation.h"
+#import "PBSStation.h"
 #import "PhillyBikeShareMainViewController.h"
 #import "PhillyBikeShareLocationManager.h"
 @import MapKit;
@@ -19,7 +19,7 @@
 // Private Instance Variables.
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *usersCurrentLocation;
-@property (strong, nonatomic) PhillyBikeShareLocation *activeBikeShareLocation;
+@property (strong, nonatomic) PBSStation *activeBikeShareLocation;
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (strong, nonatomic) UIAlertView *needLocationAlertView;
 @property (strong, nonatomic) NSTimer *updateLocationAndBikeShareDataTimer;
@@ -185,7 +185,7 @@
         [[PhillyBikeShareLocationManager sharedInstance]sortLocationsBasedOnUsersLatitude:self.usersCurrentLocation.coordinate.latitude andLongitude:self.usersCurrentLocation.coordinate.longitude withNextBlock:^(NSArray *sortedLocations) {
             @strongify(self);
             // Set the active station to the closest one to the user.
-            PhillyBikeShareLocation *closestLocation = [sortedLocations firstObject];
+            PBSStation *closestLocation = [sortedLocations firstObject];
             self.activeBikeShareLocation = closestLocation;
             self.phillyBikeShareLocations = sortedLocations;
             if (!self.fullMapButton.selected) {
@@ -256,7 +256,7 @@
 - (void)pinLocaitonsToMapView {
     
     // Loop through each station and create a pin, add that pin to the map.
-    for (PhillyBikeShareLocation *location in self.phillyBikeShareLocations) {
+    for (PBSStation *location in self.phillyBikeShareLocations) {
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc]init];
         CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
         [annotation setCoordinate:locationCoordinate];
@@ -275,7 +275,7 @@
     // When the user selects a pin, find which station is associated with it.
     // I'm using latitude as a common property.
     for (int i = 0; i < self.phillyBikeShareLocations.count; i++) {
-        PhillyBikeShareLocation *location = [self.phillyBikeShareLocations objectAtIndex:i];
+        PBSStation *location = [self.phillyBikeShareLocations objectAtIndex:i];
         
         if (location.latitude == annotation.coordinate.latitude) {
             
@@ -446,7 +446,7 @@
 
 #pragma mark - Override Methods
 
-- (void)setActiveBikeShareLocation:(PhillyBikeShareLocation *)activeBikeShareLocation {
+- (void)setActiveBikeShareLocation:(PBSStation *)activeBikeShareLocation {
     _activeBikeShareLocation = activeBikeShareLocation;
     
     CLLocation *location = [[CLLocation alloc]initWithLatitude:self.activeBikeShareLocation.latitude longitude:self.activeBikeShareLocation.longitude];

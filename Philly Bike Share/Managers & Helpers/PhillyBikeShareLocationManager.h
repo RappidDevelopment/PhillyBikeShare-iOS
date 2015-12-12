@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// Move to private instance.
 @import CoreLocation;
 
 /*!
@@ -41,6 +42,7 @@ typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
  * @discussion A method to sort the locations based on distance from the user.
  * @param nextBlock A block that is run after successfully sorting the location data.
  */
+// Move to private instance.
 - (void)sortLocationsBasedOnUsersLatitude:(CLLocationDegrees)latitude andLongitude:(CLLocationDegrees)longitude withNextBlock:(PhillyBikeShareSuccessBlock)nextBlock;
 
 @end

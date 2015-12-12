@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import "PhillyBikeShareLocation.h"
+#import "PBSStation.h"
 #import "PhillyBikeShareLocationManager.h"
 #import "PhillyBikeShareGetAllDataCommand.h"
 
@@ -73,7 +73,7 @@
             NSInteger docksAvailable = [[properties objectForKey:@"docksAvailable"]intValue];
             NSInteger totalDocks = [[properties objectForKey:@"totalDocks"]intValue];
             
-            PhillyBikeShareLocation *phillyBikeShareLocation = [[PhillyBikeShareLocation alloc]initWithKioskId:kioskId andName:name andLatitude:latitude andLongtiude:longitude andAddressStreet:addressStreet andAddressCity:addressCity andAddressState:addressState andAddresZipCode:addressZipCode andBikesAvailable:bikesAvailable andDocksAvailable:docksAvailable andTotalDocks:totalDocks];
+            PBSStation *phillyBikeShareLocation = [[PBSStation alloc]initWithKioskId:kioskId andName:name andLatitude:latitude andLongtiude:longitude andAddressStreet:addressStreet andAddressCity:addressCity andAddressState:addressState andAddresZipCode:addressZipCode andBikesAvailable:bikesAvailable andDocksAvailable:docksAvailable andTotalDocks:totalDocks];
             
             [mutablePhillyBikeShareLocations addObject:phillyBikeShareLocation];
         }
@@ -92,7 +92,7 @@
     
     NSMutableArray *stations = [NSMutableArray arrayWithArray:self.phillyBikeShareLocations];
     
-    for (PhillyBikeShareLocation *station in stations) {
+    for (PBSStation *station in stations) {
         CLLocation *stationLocation = [[CLLocation alloc]initWithLatitude:station.latitude longitude:station.longitude];
         CLLocationDistance distanceBetweenUserandStation = [userLocation distanceFromLocation:stationLocation];
         double distanceInMiles = distanceBetweenUserandStation/1609.344;
