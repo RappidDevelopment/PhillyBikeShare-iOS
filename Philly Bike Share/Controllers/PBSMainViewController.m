@@ -7,14 +7,14 @@
 //
 
 #import "PBSStation.h"
-#import "PhillyBikeShareMainViewController.h"
+#import "PBSMainViewController.h"
 #import "PBSLocationManager.h"
 @import MapKit;
 
 #define IS_IPHONE_4_OR_LESS (ScreenHeight < 568)
 #define IS_IPHONE_5 (ScreenHeight == 568.0)
 
-@interface PhillyBikeShareMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface PBSMainViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
 
 // Private Instance Variables.
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -97,7 +97,7 @@
 
 @end
 
-@implementation PhillyBikeShareMainViewController {
+@implementation PBSMainViewController {
     int _secondsLeft, _hours, _minutes, _seconds;
 }
 
