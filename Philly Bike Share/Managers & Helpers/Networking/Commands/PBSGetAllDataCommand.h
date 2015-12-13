@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PBSNetworkCommandProtocol.h"
+#import <Foundation/Foundation.h>
 
 /*!
  * @discussion The network command to fetch all PhillyBikeShareLocation data.

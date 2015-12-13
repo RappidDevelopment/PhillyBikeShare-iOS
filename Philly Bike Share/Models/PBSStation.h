@@ -43,7 +43,7 @@
 /*!
  * @brief The state of the location.
  */
-@property (strong , nonatomic) NSString *addressState;
+@property (strong, nonatomic) NSString *addressState;
 
 /*!
  * @brief The zipcode of the location.
@@ -85,16 +85,16 @@
  * @param docksAvailable The total number of docks available at the station
  * @return A PhillyBikeShareLocation object
  */
-- (instancetype) initWithKioskId:(NSInteger)kioskId
-                         andName:(NSString *)name
-                     andLatitude:(float)latitude
-                    andLongtiude:(float)longitude
-                andAddressStreet:(NSString *)addressStreet
-                  andAddressCity:(NSString *)addressCity
-                 andAddressState:(NSString *)addressState
-                andAddresZipCode:(NSString *)addressZipCode
-               andBikesAvailable:(NSInteger)bikesAvailable
-               andDocksAvailable:(NSInteger)docksAvailable
-                   andTotalDocks:(NSInteger)totalDocs;
+- (instancetype)initWithKioskId:(NSInteger)kioskId
+                        andName:(NSString *)name
+                    andLatitude:(float)latitude
+                   andLongtiude:(float)longitude
+               andAddressStreet:(NSString *)addressStreet
+                 andAddressCity:(NSString *)addressCity
+                andAddressState:(NSString *)addressState
+               andAddresZipCode:(NSString *)addressZipCode
+              andBikesAvailable:(NSInteger)bikesAvailable
+              andDocksAvailable:(NSInteger)docksAvailable
+                  andTotalDocks:(NSInteger)totalDocs;
 
 @end

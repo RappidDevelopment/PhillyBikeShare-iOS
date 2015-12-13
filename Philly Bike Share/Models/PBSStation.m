@@ -10,20 +10,20 @@
 
 @implementation PBSStation
 
-- (instancetype) initWithKioskId:(NSInteger)kioskId
-                         andName:(NSString *)name
-                     andLatitude:(float)latitude
-                    andLongtiude:(float)longitude
-                andAddressStreet:(NSString *)addressStreet
-                  andAddressCity:(NSString *)addressCity
-                 andAddressState:(NSString *)addressState
-                andAddresZipCode:(NSString *)addressZipCode
-               andBikesAvailable:(NSInteger)bikesAvailable
-               andDocksAvailable:(NSInteger)docksAvailable
-                   andTotalDocks:(NSInteger)totalDocs {
-    
+- (instancetype)initWithKioskId:(NSInteger)kioskId
+                        andName:(NSString *)name
+                    andLatitude:(float)latitude
+                   andLongtiude:(float)longitude
+               andAddressStreet:(NSString *)addressStreet
+                 andAddressCity:(NSString *)addressCity
+                andAddressState:(NSString *)addressState
+               andAddresZipCode:(NSString *)addressZipCode
+              andBikesAvailable:(NSInteger)bikesAvailable
+              andDocksAvailable:(NSInteger)docksAvailable
+                  andTotalDocks:(NSInteger)totalDocs
+{
     self = [super init];
-    
+
     if (self) {
         self.kioskId = kioskId;
         self.name = name;
@@ -37,7 +37,7 @@
         self.docksAvailable = docksAvailable;
         self.totalDocs = totalDocs;
     }
-    
+
     return self;
 }
 

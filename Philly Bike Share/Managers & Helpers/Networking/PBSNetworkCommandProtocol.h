@@ -6,22 +6,22 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
+#import <Foundation/Foundation.h>
 
 /*!
  * @discussion A block that is run after a succesful network call.
  * @param operation A operation object contains the status codes and content types.
  * @param responseObject The data returned from the server.
  */
-typedef void (^AFHTTPRequestOperationSuccessBlock) (AFHTTPRequestOperation *operation, id responseObject);
+typedef void (^AFHTTPRequestOperationSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 
 /*!
  * @discussion A block that is run after an unsuccesful network call.
  * @param operation A operation object contains the status codes and content types.
  * @param error The error returned from the server.
  */
-typedef void (^AFHTTPRequestOperationFailureBlock) (AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^AFHTTPRequestOperationFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
 @protocol PBSNetworkCommandProtocol <NSObject>
 

@@ -9,7 +9,7 @@
 #import "PBSGetAllDataCommand.h"
 #import "PBSNetworkCommand.h"
 
-@interface PBSGetAllDataCommand()
+@interface PBSGetAllDataCommand ()
 
 @property (nonatomic, copy) AFHTTPRequestOperationSuccessBlock successHandler;
 @property (nonatomic, copy) AFHTTPRequestOperationFailureBlock failureHandler;
@@ -18,33 +18,34 @@
 
 @implementation PBSGetAllDataCommand
 
-- (instancetype)initWithSuccessBlock:(AFHTTPRequestOperationSuccessBlock)success andFailureBlock:(AFHTTPRequestOperationFailureBlock)failure {
-    
+- (instancetype)initWithSuccessBlock:(AFHTTPRequestOperationSuccessBlock)success andFailureBlock:(AFHTTPRequestOperationFailureBlock)failure
+{
     self = [super init];
-    
+
     if (!self) {
         return nil;
     }
-    
+
     self.successHandler = [success copy];
     self.failureHandler = [failure copy];
-    
+
     return self;
 }
 
-- (void)execute {
-    
+- (void)execute
+{
     NSString *url = @"https://api.phila.gov/bike-share-stations/v1";
     NSString *method = @"GET";
-    
+
     PBSNetworkCommand *command = [[PBSNetworkCommand alloc] initWithUrl:url andMethod:method andJsonRequest:NO andParameters:nil andSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
-        HideNetworkActivityIndicator();
-        self.successHandler(operation, responseObject);
-    } andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        HideNetworkActivityIndicator();
-        self.failureHandler(operation, error);
-    }];
-    
+      HideNetworkActivityIndicator();
+      self.successHandler(operation, responseObject);
+    }
+        andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+          HideNetworkActivityIndicator();
+          self.failureHandler(operation, error);
+        }];
+
     ShowNetworkActivityIndicator();
     [command execute];
 }

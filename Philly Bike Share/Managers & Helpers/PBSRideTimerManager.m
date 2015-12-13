@@ -8,7 +8,7 @@
 
 #import "PBSRideTimerManager.h"
 
-@interface PBSRideTimerManager()
+@interface PBSRideTimerManager ()
 
 @property (nonatomic, strong) NSTimer *rideTimer;
 @property (nonatomic) NSInteger secondsLeft;
@@ -20,28 +20,31 @@
 
 @implementation PBSRideTimerManager
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
-    
+
     if (self) {
-        
     }
-    
+
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     if ([self.rideTimer isValid]) {
         [self.rideTimer invalidate];
         self.rideTimer = nil;
     }
 }
 
-- (BOOL)timerIsRunning {
+- (BOOL)timerIsRunning
+{
     return self.rideTimer.isValid;
 }
 
-- (void)startRideTimer {
+- (void)startRideTimer
+{
     if ([self.rideTimer isValid]) {
         [self.rideTimer invalidate];
     }
@@ -53,13 +56,15 @@
                                                      repeats:YES];
 }
 
-- (void)resetRideTimer {
+- (void)resetRideTimer
+{
     [self.rideTimer invalidate];
     self.rideTimer = nil;
     self.secondsLeft = self.hours = self.minutes = self.seconds = 1800;
 }
 
-- (void)pauseRideTimer {
+- (void)pauseRideTimer
+{
     /*
      * Applications are allowed to run in the background for 10 minutes.
      * To keep the 30 minute timer running, I store how many seconds are left,
@@ -73,8 +78,9 @@
     }
 }
 
-- (void)resumeRideTimer {
-    /*
+- (void)resumeRideTimer
+{
+    /* 
      * If the ride timer is active,
      * calulcate how long it's been since they exited the app.
      * Update the timer accordingly.
@@ -93,7 +99,8 @@
     }
 }
 
-- (void)rideTimerUpdated {
+- (void)rideTimerUpdated
+{
     // Some magic math to count backwards from 30:00
     if (self.secondsLeft > 0) {
         self.secondsLeft--;

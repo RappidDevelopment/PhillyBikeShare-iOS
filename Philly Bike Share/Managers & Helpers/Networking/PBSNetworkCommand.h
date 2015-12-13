@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "PBSNetworkCommandProtocol.h"
+#import <Foundation/Foundation.h>
 
 /*!
  * @discussion This class handles the heavy lifting and configuration

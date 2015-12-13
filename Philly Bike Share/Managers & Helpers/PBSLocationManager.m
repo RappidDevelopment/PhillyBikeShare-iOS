@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import "PBSStation.h"
-#import "PBSLocationManager.h"
 #import "PBSGetAllDataCommand.h"
+#import "PBSLocationManager.h"
+#import "PBSStation.h"
 
-@interface PBSLocationManager()<CLLocationManagerDelegate>
+@interface PBSLocationManager () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSTimer *updateDataTimer;
@@ -23,19 +23,20 @@
 
 @implementation PBSLocationManager
 
-- (CLLocationManager *)locationManager {
-    
+- (CLLocationManager *)locationManager
+{
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
     }
-     _locationManager.delegate = self;
-    
+    _locationManager.delegate = self;
+
     return _locationManager;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
-    
+
     if (self) {
         self.updateDataTimer = [NSTimer scheduledTimerWithTimeInterval:60
                                                                 target:self
@@ -43,102 +44,112 @@
                                                               userInfo:nil
                                                                repeats:YES];
     }
-    
+
     return self;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [self.updateDataTimer invalidate];
     self.updateDataTimer = nil;
 }
 
-- (void)requestUsersCurrentLocation {
+- (void)requestUsersCurrentLocation
+{
     [self.locationManager requestWhenInUseAuthorization];
-    
+
     if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.locationManager startUpdatingLocation];
     }
 }
 
-#pragma mark - CLLocationManager Delegate 
+#pragma mark - CLLocationManager Delegate
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
     [self.delegate didUpdateUsersAuthorizationStatus:status];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
     self.usersCurrentLocation = [locations lastObject];
     [self.locationManager stopUpdatingLocation];
-    
+
     @weakify(self)
-    [self fetchAllLocationsWithCompletion:^(NSError *error) {
-        @strongify(self)
-        if (error) {
-            [self.delegate didReceiveError:error];
-        } else {
-            [self sortLocationsClosestToUser];
-            [self.delegate didUpdateLocationData];
-        }
-    }];
+        [self fetchAllLocationsWithCompletion:^(NSError *error) {
+          @strongify(self) if (error)
+          {
+              [self.delegate didReceiveError:error];
+          }
+          else
+          {
+              [self sortLocationsClosestToUser];
+              [self.delegate didUpdateLocationData];
+          }
+        }];
 }
 
-- (void)fetchAllLocationsWithCompletion:(void (^)(NSError *error))completionBlock {
+- (void)fetchAllLocationsWithCompletion:(void (^)(NSError *error))completionBlock
+{
     @weakify(self);
-    PBSGetAllDataCommand *getAllDataCommand = [[PBSGetAllDataCommand alloc]initWithSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
-        @strongify(self);
-        self.stations = [self parseData:responseObject];
-    
-        if (completionBlock) {
-            completionBlock(nil);
-        }
-    } andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"Failure");
-        DLog(@"%@", error.localizedDescription);
-        
-        if (completionBlock) {
-            completionBlock(error);
-        }
-    }];
+    PBSGetAllDataCommand *getAllDataCommand = [[PBSGetAllDataCommand alloc] initWithSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+      @strongify(self);
+      self.stations = [self parseData:responseObject];
+
+      if (completionBlock) {
+          completionBlock(nil);
+      }
+    }
+        andFailureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+          DLog(@"Failure");
+          DLog(@"%@", error.localizedDescription);
+
+          if (completionBlock) {
+              completionBlock(error);
+          }
+        }];
     [getAllDataCommand execute];
 }
 
-- (NSArray *)parseData:(id)responseObject {
+- (NSArray *)parseData:(id)responseObject
+{
     NSArray *stationsArray = [responseObject objectForKey:@"features"];
     NSMutableArray *mutableStations = [NSMutableArray array];
-    
+
     for (id stationObject in stationsArray) {
         id geometry = stationObject[@"geometry"];
         NSArray *coordinates = geometry[@"coordinates"];
         id properties = stationObject[@"properties"];
-        float longitude = [[coordinates objectAtIndex:0]floatValue];
-        float latitude = [[coordinates objectAtIndex:1]floatValue];
-        PBSStation *phillyBikeShareLocation = [[PBSStation alloc]initWithKioskId:[properties[@"kioskId"]intValue]
-                                                                         andName:properties[@"name"]
-                                                                     andLatitude:latitude
-                                                                    andLongtiude:longitude
-                                                                andAddressStreet:properties[@"addressStreet"]
-                                                                  andAddressCity:properties[@"addressCity"]
-                                                                 andAddressState:properties[@"addressState"]
-                                                                andAddresZipCode:properties[@"addressZipCode"]
-                                                               andBikesAvailable:[properties[@"bikesAvailable"]intValue]
-                                                               andDocksAvailable:[properties[@"docksAvailable"]intValue]
-                                                                   andTotalDocks:[properties[@"totalDocks"]intValue]];
+        float longitude = [[coordinates objectAtIndex:0] floatValue];
+        float latitude = [[coordinates objectAtIndex:1] floatValue];
+        PBSStation *phillyBikeShareLocation = [[PBSStation alloc] initWithKioskId:[properties[@"kioskId"] intValue]
+                                                                          andName:properties[@"name"]
+                                                                      andLatitude:latitude
+                                                                     andLongtiude:longitude
+                                                                 andAddressStreet:properties[@"addressStreet"]
+                                                                   andAddressCity:properties[@"addressCity"]
+                                                                  andAddressState:properties[@"addressState"]
+                                                                 andAddresZipCode:properties[@"addressZipCode"]
+                                                                andBikesAvailable:[properties[@"bikesAvailable"] intValue]
+                                                                andDocksAvailable:[properties[@"docksAvailable"] intValue]
+                                                                    andTotalDocks:[properties[@"totalDocks"] intValue]];
         [mutableStations addObject:phillyBikeShareLocation];
     }
-    
+
     return mutableStations;
 }
 
-- (void)sortLocationsClosestToUser {
+- (void)sortLocationsClosestToUser
+{
     NSMutableArray *stationsMutable = [NSMutableArray arrayWithArray:self.stations];
-    
+
     for (PBSStation *station in stationsMutable) {
-        CLLocation *stationLocation = [[CLLocation alloc]initWithLatitude:station.latitude longitude:station.longitude];
+        CLLocation *stationLocation = [[CLLocation alloc] initWithLatitude:station.latitude longitude:station.longitude];
         CLLocationDistance distanceBetweenUserandStation = [self.usersCurrentLocation distanceFromLocation:stationLocation];
-        double distanceInMiles = distanceBetweenUserandStation/1609.344;
+        double distanceInMiles = distanceBetweenUserandStation / 1609.344;
         station.distanceFromUser = distanceInMiles;
     }
-    [stationsMutable sortUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"distanceFromUser" ascending:YES],nil]];
+    [stationsMutable sortUsingDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"distanceFromUser" ascending:YES], nil]];
     self.stations = stationsMutable;
 }
 
