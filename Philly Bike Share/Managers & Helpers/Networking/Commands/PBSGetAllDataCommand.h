@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareGetAllDataCommand.h
+//  PBSGetAllDataCommand.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PhillyBikeShareNetworkCommandProtocol.h"
+#import "PBSNetworkCommandProtocol.h"
 
 /*!
  * @discussion The network command to fetch all PhillyBikeShareLocation data.
  *
  *
  */
-@interface PhillyBikeShareGetAllDataCommand : NSObject <PhillyBikeShareNetworkCommandProtocol>
+@interface PBSGetAllDataCommand : NSObject <PBSNetworkCommandProtocol>
 
 - (instancetype)initWithSuccessBlock:(AFHTTPRequestOperationSuccessBlock)success
                      andFailureBlock:(AFHTTPRequestOperationFailureBlock)failure;

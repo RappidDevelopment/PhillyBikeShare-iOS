@@ -8,7 +8,7 @@
 
 #import "PBSStation.h"
 #import "PhillyBikeShareLocationManager.h"
-#import "PhillyBikeShareGetAllDataCommand.h"
+#import "PBSGetAllDataCommand.h"
 
 @interface PhillyBikeShareLocationManager()
 
@@ -51,7 +51,7 @@
                      andFailureBlock:(PhillyBikeShareFailureBlock)failureBlock {
     
     @weakify(self);
-    PhillyBikeShareGetAllDataCommand *getAllDataCommand = [[PhillyBikeShareGetAllDataCommand alloc]initWithSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+    PBSGetAllDataCommand *getAllDataCommand = [[PBSGetAllDataCommand alloc]initWithSuccessBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
         @strongify(self);
         NSArray *locations = [responseObject objectForKey:@"features"];
         NSMutableArray *mutablePhillyBikeShareLocations = [NSMutableArray array];

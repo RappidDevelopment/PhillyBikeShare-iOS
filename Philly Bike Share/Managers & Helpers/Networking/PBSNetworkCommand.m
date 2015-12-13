@@ -1,16 +1,16 @@
 //
-//  PhillyBikeShareNetworkCommand.m
+//  PBSNetworkCommand.m
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
 //  Copyright (c) 2015 Rappid Development. All rights reserved.
 //
 
-#import "PhillyBikeShareNetworkCommand.h"
+#import "PBSNetworkCommand.h"
 #import <AFNetworking.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
 
-@interface PhillyBikeShareNetworkCommand()
+@interface PBSNetworkCommand()
 
 @property (nonatomic, copy) AFHTTPRequestOperationSuccessBlock successHandler;
 @property (nonatomic, copy) AFHTTPRequestOperationFailureBlock failureHandler;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation PhillyBikeShareNetworkCommand
+@implementation PBSNetworkCommand
 
 - (instancetype)initWithUrl:(NSString *)url
               andParameters:(NSDictionary *)parameters

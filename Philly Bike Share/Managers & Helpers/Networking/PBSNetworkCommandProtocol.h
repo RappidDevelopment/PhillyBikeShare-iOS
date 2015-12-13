@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareNetworkCommandProtocol.h
+//  PBSNetworkCommandProtocol.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -23,7 +23,7 @@ typedef void (^AFHTTPRequestOperationSuccessBlock) (AFHTTPRequestOperation *oper
  */
 typedef void (^AFHTTPRequestOperationFailureBlock) (AFHTTPRequestOperation *operation, NSError *error);
 
-@protocol PhillyBikeShareNetworkCommandProtocol <NSObject>
+@protocol PBSNetworkCommandProtocol <NSObject>
 
 /*!
  * @discussion The execute method must be implemented by every network command.

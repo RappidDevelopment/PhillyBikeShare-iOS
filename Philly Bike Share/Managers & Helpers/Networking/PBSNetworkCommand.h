@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareNetworkCommand.h
+//  PBSNetworkCommand.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PhillyBikeShareNetworkCommandProtocol.h"
+#import "PBSNetworkCommandProtocol.h"
 
 /*!
  * @discussion This class handles the heavy lifting and configuration
  * of making networking calls to the PhillyBikeShare API.
  *
  */
-@interface PhillyBikeShareNetworkCommand : NSObject <PhillyBikeShareNetworkCommandProtocol>
+@interface PBSNetworkCommand : NSObject <PBSNetworkCommandProtocol>
 
 - (instancetype)initWithUrl:(NSString *)url
               andParameters:(NSDictionary *)parameters
