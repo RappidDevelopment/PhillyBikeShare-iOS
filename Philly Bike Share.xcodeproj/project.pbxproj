@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23647F8F8EF06A39E0D53163 /* libPods-Philly Bike Share.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4422DC82572FB8DD5A765C64 /* libPods-Philly Bike Share.a */; };
-		2BB4E5421C1653C3006F896F /* PhillyBikeShareTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4E5411C1653C3006F896F /* PhillyBikeShareTimerManager.m */; };
+		2BB4E5421C1653C3006F896F /* PBSTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BB4E5411C1653C3006F896F /* PBSTimerManager.m */; };
 		2D192E811B112B170002EB0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E801B112B170002EB0D /* main.m */; };
 		2D192E841B112B170002EB0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D192E831B112B170002EB0D /* AppDelegate.m */; };
 		2D192E8A1B112B180002EB0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D192E881B112B180002EB0D /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 		2D4688B91B1237FD00293A09 /* PBSNetworkCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688B81B1237FD00293A09 /* PBSNetworkCommand.m */; };
 		2D4688BD1B123ADB00293A09 /* PBSGetAllDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BC1B123ADB00293A09 /* PBSGetAllDataCommand.m */; };
 		2D4688C01B1244FC00293A09 /* PBSStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688BF1B1244FC00293A09 /* PBSStation.m */; };
-		2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */; };
+		2D4688C31B12464500293A09 /* PBSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4688C21B12464500293A09 /* PBSLocationManager.m */; };
 		2D5182F11B137F7B005232D1 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182EC1B137DD4005232D1 /* Montserrat-Black.otf */; };
 		2D5182F21B137F7B005232D1 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182ED1B137DD4005232D1 /* Montserrat-Bold.otf */; };
 		2D5182F31B137F7B005232D1 /* Montserrat-Hairline.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2D5182EE1B137DD4005232D1 /* Montserrat-Hairline.otf */; };
@@ -40,8 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2BB4E5401C1653C3006F896F /* PhillyBikeShareTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareTimerManager.h; path = "Managers & Helpers/PhillyBikeShareTimerManager.h"; sourceTree = "<group>"; };
-		2BB4E5411C1653C3006F896F /* PhillyBikeShareTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareTimerManager.m; path = "Managers & Helpers/PhillyBikeShareTimerManager.m"; sourceTree = "<group>"; };
+		2BB4E5401C1653C3006F896F /* PBSTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBSTimerManager.h; path = "Managers & Helpers/PBSTimerManager.h"; sourceTree = "<group>"; };
+		2BB4E5411C1653C3006F896F /* PBSTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBSTimerManager.m; path = "Managers & Helpers/PBSTimerManager.m"; sourceTree = "<group>"; };
 		2D192E7B1B112B170002EB0D /* Philly Bike Share.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Philly Bike Share.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D192E7F1B112B170002EB0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D192E801B112B170002EB0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,8 +61,8 @@
 		2D4688BC1B123ADB00293A09 /* PBSGetAllDataCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBSGetAllDataCommand.m; path = "Managers & Helpers/Networking/Commands/PBSGetAllDataCommand.m"; sourceTree = "<group>"; };
 		2D4688BE1B1244FC00293A09 /* PBSStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBSStation.h; path = Models/PBSStation.h; sourceTree = "<group>"; };
 		2D4688BF1B1244FC00293A09 /* PBSStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBSStation.m; path = Models/PBSStation.m; sourceTree = "<group>"; };
-		2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhillyBikeShareLocationManager.h; path = "Managers & Helpers/PhillyBikeShareLocationManager.h"; sourceTree = "<group>"; };
-		2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhillyBikeShareLocationManager.m; path = "Managers & Helpers/PhillyBikeShareLocationManager.m"; sourceTree = "<group>"; };
+		2D4688C11B12464500293A09 /* PBSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PBSLocationManager.h; path = "Managers & Helpers/PBSLocationManager.h"; sourceTree = "<group>"; };
+		2D4688C21B12464500293A09 /* PBSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PBSLocationManager.m; path = "Managers & Helpers/PBSLocationManager.m"; sourceTree = "<group>"; };
 		2D5182EC1B137DD4005232D1 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Black.otf"; path = "Assets/Resources/Montserrat-Black.otf"; sourceTree = "<group>"; };
 		2D5182ED1B137DD4005232D1 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.otf"; path = "Assets/Resources/Montserrat-Bold.otf"; sourceTree = "<group>"; };
 		2D5182EE1B137DD4005232D1 /* Montserrat-Hairline.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Hairline.otf"; path = "Assets/Resources/Montserrat-Hairline.otf"; sourceTree = "<group>"; };
@@ -191,10 +191,10 @@
 			isa = PBXGroup;
 			children = (
 				2D4688B61B12377A00293A09 /* Networking */,
-				2D4688C11B12464500293A09 /* PhillyBikeShareLocationManager.h */,
-				2D4688C21B12464500293A09 /* PhillyBikeShareLocationManager.m */,
-				2BB4E5401C1653C3006F896F /* PhillyBikeShareTimerManager.h */,
-				2BB4E5411C1653C3006F896F /* PhillyBikeShareTimerManager.m */,
+				2D4688C11B12464500293A09 /* PBSLocationManager.h */,
+				2D4688C21B12464500293A09 /* PBSLocationManager.m */,
+				2BB4E5401C1653C3006F896F /* PBSTimerManager.h */,
+				2BB4E5411C1653C3006F896F /* PBSTimerManager.m */,
 			);
 			name = "Managers & Helpers";
 			sourceTree = "<group>";
@@ -428,8 +428,8 @@
 				2D4688C01B1244FC00293A09 /* PBSStation.m in Sources */,
 				2D4688B91B1237FD00293A09 /* PBSNetworkCommand.m in Sources */,
 				2D192E811B112B170002EB0D /* main.m in Sources */,
-				2BB4E5421C1653C3006F896F /* PhillyBikeShareTimerManager.m in Sources */,
-				2D4688C31B12464500293A09 /* PhillyBikeShareLocationManager.m in Sources */,
+				2BB4E5421C1653C3006F896F /* PBSTimerManager.m in Sources */,
+				2D4688C31B12464500293A09 /* PBSLocationManager.m in Sources */,
 				2D4688BD1B123ADB00293A09 /* PBSGetAllDataCommand.m in Sources */,
 				2DF251061B126BBB00E76946 /* PhillyBikeShareMainViewController.m in Sources */,
 			);

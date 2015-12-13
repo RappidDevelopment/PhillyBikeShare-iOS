@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareLocationManager.h
+//  PBSLocationManager.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -22,7 +22,7 @@ typedef void (^PhillyBikeShareSuccessBlock) (NSArray *locations);
  */
 typedef void (^PhillyBikeShareFailureBlock) (NSError *error);
 
-@interface PhillyBikeShareLocationManager : NSObject
+@interface PBSLocationManager : NSObject
 
 /*!
  * @discussion A method to return the sharedInsance of this class.

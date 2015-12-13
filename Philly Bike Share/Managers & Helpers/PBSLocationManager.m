@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareLocationManager.m
+//  PBSLocationManager.m
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -7,17 +7,17 @@
 //
 
 #import "PBSStation.h"
-#import "PhillyBikeShareLocationManager.h"
+#import "PBSLocationManager.h"
 #import "PBSGetAllDataCommand.h"
 
-@interface PhillyBikeShareLocationManager()
+@interface PBSLocationManager()
 
 @property (strong, nonatomic) NSArray *phillyBikeShareLocations;
 @property (atomic) BOOL isRefreshing;
 
 @end
 
-@implementation PhillyBikeShareLocationManager
+@implementation PBSLocationManager
 
 //Return singleton instance
 + (instancetype) sharedInstance {
@@ -31,15 +31,13 @@
 
 
 //If a programmer calls this method, scold him with an exception (use sharedInstance initializer only)
-- (instancetype)init
-{
-    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[PhillyBikeShareLocationManager sharedInstance]" userInfo:nil];
+- (instancetype)init {
+    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[PBSLocationManager sharedInstance]" userInfo:nil];
     return nil;
 }
 
 //Return privately initialized instance
-- (instancetype)initPrivate
-{
+- (instancetype)initPrivate {
     self = [super init];
     if(self) {
         self.phillyBikeShareLocations = [[NSArray alloc]init];

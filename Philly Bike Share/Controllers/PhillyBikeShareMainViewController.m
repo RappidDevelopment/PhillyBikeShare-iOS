@@ -8,7 +8,7 @@
 
 #import "PBSStation.h"
 #import "PhillyBikeShareMainViewController.h"
-#import "PhillyBikeShareLocationManager.h"
+#import "PBSLocationManager.h"
 @import MapKit;
 
 #define IS_IPHONE_4_OR_LESS (ScreenHeight < 568)
@@ -175,14 +175,14 @@
     
     // Fetch all of the PhillyBikeShareLocations.
     @weakify(self);
-    [[PhillyBikeShareLocationManager sharedInstance]fetchAllLocationsWithSuccessBlock:^(NSArray *locations) {
+    [[PBSLocationManager sharedInstance]fetchAllLocationsWithSuccessBlock:^(NSArray *locations) {
         @strongify(self);
         self.phillyBikeShareLocations = locations;
         // Pin the locations to the map now that we have them.
         [self pinLocaitonsToMapView];
         // Sort them based on the user's location.
         @weakify(self);
-        [[PhillyBikeShareLocationManager sharedInstance]sortLocationsBasedOnUsersLatitude:self.usersCurrentLocation.coordinate.latitude andLongitude:self.usersCurrentLocation.coordinate.longitude withNextBlock:^(NSArray *sortedLocations) {
+        [[PBSLocationManager sharedInstance]sortLocationsBasedOnUsersLatitude:self.usersCurrentLocation.coordinate.latitude andLongitude:self.usersCurrentLocation.coordinate.longitude withNextBlock:^(NSArray *sortedLocations) {
             @strongify(self);
             // Set the active station to the closest one to the user.
             PBSStation *closestLocation = [sortedLocations firstObject];

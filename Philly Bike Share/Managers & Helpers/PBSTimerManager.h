@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareTimerManager.h
+//  PBSTimerManager.h
 //  Philly Bike Share
 //
 //  Created by Matt Morgis on 12/7/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PhillyBikeShareTimerManager : NSObject
+@interface PBSTimerManager : NSObject
 
 + (instancetype)sharedInstance;
 

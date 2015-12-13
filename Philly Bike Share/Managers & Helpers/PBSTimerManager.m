@@ -1,14 +1,14 @@
 //
-//  PhillyBikeShareTimerManager.m
+//  PBSTimerManager.m
 //  Philly Bike Share
 //
 //  Created by Matt Morgis on 12/7/15.
 //  Copyright © 2015 Rappid Development. All rights reserved.
 //
 
-#import "PhillyBikeShareTimerManager.h"
+#import "PBSTimerManager.h"
 
-@implementation PhillyBikeShareTimerManager
+@implementation PBSTimerManager
 
 //Return singleton instance
 + (instancetype) sharedInstance {
@@ -24,7 +24,7 @@
 //If a programmer calls this method, scold him with an exception (use sharedInstance initializer only)
 - (instancetype)init
 {
-    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[PhillyBikeShareTimerManager sharedInstance]" userInfo:nil];
+    @throw [NSException exceptionWithName:@"Singleton" reason:@"Use +[PBSTimerManager sharedInstance]" userInfo:nil];
     return nil;
 }
 
