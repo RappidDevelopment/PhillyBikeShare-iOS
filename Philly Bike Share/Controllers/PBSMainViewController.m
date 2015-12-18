@@ -61,6 +61,7 @@
 @property (nonatomic) NSInteger bikeViewInitialHeight;
 @property (nonatomic) NSInteger headerLabelBottomSpaceInitalValue;
 @property (nonatomic) BOOL displayedOutOfAreaWarning;
+@property (nonatomic) BOOL displayingFullScreenMapView;
 
 - (void)revealFullMapView;
 - (void)hideFullMapView;
@@ -152,6 +153,7 @@
     self.bikeView.clipsToBounds = YES;
     self.docksView.clipsToBounds = YES;
     self.aboutBlurView.alpha = 0;
+    self.displayingFullScreenMapView = NO;
 }
 
 - (void)dealloc
@@ -249,6 +251,7 @@
         [self.outOfAreaAlertView show];
         self.displayedOutOfAreaWarning = YES;
     }
+    self.startRideButton.hidden = self.displayingFullScreenMapView;
 }
 
 - (void)registerForNotifications
@@ -549,6 +552,7 @@
 
 - (void)revealFullMapView
 {
+    self.displayingFullScreenMapView = YES;
     self.fullMapButton.backgroundColor = RDBlueishGrey;
     self.startRideButton.hidden = YES;
     self.timerLabel.hidden = YES;
@@ -601,6 +605,7 @@
 
 - (void)hideFullMapView
 {
+    self.displayingFullScreenMapView = NO;
     self.fullMapButton.backgroundColor = [UIColor clearColor];
     self.timerLabel.hidden = ([self.rideTimerManager timerIsRunning]) ? NO : YES;
     self.startRideButton.hidden = NO;
@@ -641,7 +646,6 @@
         completion:^(BOOL finished) {
           self.headerLocationLabel.font = MontserratBold(48);
           self.headerLocationLabel.transform = CGAffineTransformScale(self.headerLocationLabel.transform, 1.0, 1.0);
-          //[self setupViewBasedOnUsersCurrentLocation];
         }];
 }
 
