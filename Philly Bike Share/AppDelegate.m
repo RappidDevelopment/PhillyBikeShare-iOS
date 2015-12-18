@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Fabric with:@[[Crashlytics class]]];
+    [NewRelicAgent startWithApplicationToken:@"AA86c8f7faf7a16b56dd5b896d7fd47574e16e3582"];
     
     return YES;
 }
