@@ -5,6 +5,8 @@ target 'Philly Bike Share' do
     
 pod 'AFNetworking'
 pod 'libextobjc'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end
 
