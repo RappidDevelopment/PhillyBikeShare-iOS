@@ -22,6 +22,7 @@
 #endif
 
 #import <libextobjc/EXTScope.h>
+#import <NewRelicAgent/NewRelic.h>
 
 #define IS_IPHONE_4_OR_LESS (ScreenHeight < 568)
 #define IS_IPHONE_5 (ScreenHeight == 568.0)

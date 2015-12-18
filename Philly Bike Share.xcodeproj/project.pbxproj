@@ -280,6 +280,8 @@
 				2D192E791B112B170002EB0D /* Resources */,
 				59C3EFE43E0B17339A54F3EE /* Copy Pods Resources */,
 				1B2F6ED293C69715B8870AC1 /* Embed Pods Frameworks */,
+				2D2E1C721C247A6200B00DCC /* ShellScript */,
+				2D2E1C731C247D1A00B00DCC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -386,6 +388,32 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Philly Bike Share/Pods-Philly Bike Share-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		2D2E1C721C247A6200B00DCC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" fdfe2cce3f496b7dce6b9cac6b993b8d1eec5a06 7e07116082006f80b7e7e95d3df8e821f18dd137f7b68dd02b53ed10e5666b14";
+		};
+		2D2E1C731C247D1A00B00DCC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n\n/bin/sh \"${SCRIPT}\" \"AA86c8f7faf7a16b56dd5b896d7fd47574e16e3582\"";
 		};
 		2EA0D3729700DB27C3A78FAD /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

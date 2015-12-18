@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -17,7 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [Fabric with:@[[Crashlytics class]]];
+    [NewRelicAgent startWithApplicationToken:@"AA86c8f7faf7a16b56dd5b896d7fd47574e16e3582"];
+    
     return YES;
 }
 
