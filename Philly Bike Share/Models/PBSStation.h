@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareLocation.h
+//  PBSStation.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PhillyBikeShareLocation : NSObject
+@interface PBSStation : NSObject
 
 /*!
  * @brief The id of the location.
@@ -43,7 +43,7 @@
 /*!
  * @brief The state of the location.
  */
-@property (strong , nonatomic) NSString *addressState;
+@property (strong, nonatomic) NSString *addressState;
 
 /*!
  * @brief The zipcode of the location.
@@ -71,7 +71,7 @@
 @property (nonatomic) float distanceFromUser;
 
 /*!
- * @discussion Public constructor of the PhillyBikeShareLocation object.
+ * @discussion Public constructor of the PBSLocation object.
  * @param kioskId The id of the station
  * @param name The name of the station
  * @param latitude The latitude of the station
@@ -85,16 +85,16 @@
  * @param docksAvailable The total number of docks available at the station
  * @return A PhillyBikeShareLocation object
  */
-- (instancetype) initWithKioskId:(NSInteger)kioskId
-                         andName:(NSString *)name
-                     andLatitude:(float)latitude
-                    andLongtiude:(float)longitude
-                andAddressStreet:(NSString *)addressStreet
-                  andAddressCity:(NSString *)addressCity
-                 andAddressState:(NSString *)addressState
-                andAddresZipCode:(NSString *)addressZipCode
-               andBikesAvailable:(NSInteger)bikesAvailable
-               andDocksAvailable:(NSInteger)docksAvailable
-                   andTotalDocks:(NSInteger)totalDocs;
+- (instancetype)initWithKioskId:(NSInteger)kioskId
+                        andName:(NSString *)name
+                    andLatitude:(float)latitude
+                   andLongtiude:(float)longitude
+               andAddressStreet:(NSString *)addressStreet
+                 andAddressCity:(NSString *)addressCity
+                andAddressState:(NSString *)addressState
+               andAddresZipCode:(NSString *)addressZipCode
+              andBikesAvailable:(NSInteger)bikesAvailable
+              andDocksAvailable:(NSInteger)docksAvailable
+                  andTotalDocks:(NSInteger)totalDocs;
 
 @end

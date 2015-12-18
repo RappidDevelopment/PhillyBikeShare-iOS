@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Montserrat-Bold.otf">
@@ -22,10 +23,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Philly Bike Share Main View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PhillyBikeShareMainViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PBSMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -51,7 +52,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKY-al-u4Y">
-                                        <rect key="frame" x="276" y="183" width="50" height="21"/>
+                                        <rect key="frame" x="275" y="182" width="50" height="21"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -86,7 +87,7 @@
                                         <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKe-Jf-pxI">
-                                        <rect key="frame" x="17" y="62" width="66" height="19.5"/>
+                                        <rect key="frame" x="17" y="62" width="66" height="20"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -157,7 +158,7 @@
                                         <rect key="frame" x="300" y="58" width="300" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQW-AM-amj">
-                                                <rect key="frame" x="42" y="29" width="23" height="43.5"/>
+                                                <rect key="frame" x="42" y="28" width="23" height="44"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -199,7 +200,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".33 Miles Away" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHY-o8-WUL">
-                                        <rect key="frame" x="212" y="25" width="175.5" height="29"/>
+                                        <rect key="frame" x="212" y="25" width="176" height="29"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -274,20 +275,20 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bike Philly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd4-Ye-jO1">
-                                            <rect key="frame" x="204" y="35" width="193" height="43.5"/>
+                                            <rect key="frame" x="204" y="35" width="193" height="44"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="36"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Sl-vZ-myV">
-                                            <rect key="frame" x="8" y="98" width="584" height="203.5"/>
-                                            <mutableString key="text">Bike Philly: Philly Bike Share for iOS helps you locate the closest Indego docking station. With one tap you can find the closest station, how far away it is, and how many bikes and open docks are available. 
+                                            <rect key="frame" x="8" y="99" width="584" height="204"/>
+                                            <string key="text">Bike Philly: Philly Bike Share for iOS helps you locate the closest Indego docking station. With one tap you can find the closest station, how far away it is, and how many bikes and open docks are available. 
 
 You can easily plan your trip in full map mode. A 30-minute ride timer helps you track your rental and prevent late fees. 
 
 Philly Bike Share for iOS is not directly affiliated with the City of Philadelphia, Independence Blue Cross or the Indego Bike Share program. All rights are reserved by their respective owners. 
 
-This application is has been open sourced. To report a bug, enhancement, or contribute, follow the link to our GitHub repository below.</mutableString>
+This application is has been open sourced. To report a bug, enhancement, or contribute, follow the link to our GitHub repository below.</string>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                             <color key="textColor" red="0.16078431369999999" green="0.17254901959999999" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -307,7 +308,7 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ID-j2-9ID">
-                                            <rect key="frame" x="227" y="317" width="147" height="32"/>
+                                            <rect key="frame" x="227" y="318" width="147" height="32"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                             <state key="normal" title="GitHub Repository">
                                                 <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -318,7 +319,7 @@ This application is has been open sourced. To report a bug, enhancement, or cont
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKi-ZD-2jl">
-                                            <rect key="frame" x="228" y="357" width="145" height="32"/>
+                                            <rect key="frame" x="228" y="358" width="145" height="32"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                             <state key="normal" title="Indego Bike Share">
                                                 <color key="titleColor" red="0.2274509804" green="0.59607843140000005" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
