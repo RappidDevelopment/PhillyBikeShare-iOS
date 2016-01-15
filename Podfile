@@ -3,8 +3,11 @@
 
 target 'Philly Bike Share' do
     
-pod 'AFNetworking', '~> 2.0'
-pod 'libextobjc', '0.4.1'
+pod 'AFNetworking'
+pod 'libextobjc'
+pod 'Fabric'
+pod 'Crashlytics'
+pod 'NewRelicAgent'
 
 end
 

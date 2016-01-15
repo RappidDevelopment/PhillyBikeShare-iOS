@@ -1,5 +1,5 @@
 //
-//  PhillyBikeShareMainViewController.h
+//  PBSMainViewController.h
 //  Philly Bike Share
 //
 //  Created by Morgis, Matthew on 5/24/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhillyBikeShareMainViewController : UIViewController
+@interface PBSMainViewController : UIViewController
 
 @end
